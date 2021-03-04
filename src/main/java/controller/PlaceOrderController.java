@@ -86,6 +86,8 @@ public class PlaceOrderController extends BaseController {
         || validateName(info.get("name"))
         || validateAddress(info.get("address"))) return;
         else throw new InvalidDeliveryInfoException();
+     
+        //stamp coupling: do info có nhiều hơn 3 trường dl mà trong hàm chỉ sử dụng 3 trường name, phone, address
     }
     
     public boolean validatePhoneNumber(String phoneNumber) {
