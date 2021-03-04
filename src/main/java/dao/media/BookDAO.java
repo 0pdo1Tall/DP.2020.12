@@ -14,6 +14,7 @@ import java.util.Date;
  */
 public class BookDAO extends MediaDAO {
 
+    // Data coupling
     @Override
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM "+

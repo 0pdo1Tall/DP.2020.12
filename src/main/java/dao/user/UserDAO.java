@@ -14,6 +14,7 @@ import java.util.Date;
  */
 public class UserDAO {
 
+    // Data Coupling
     public User authenticate(String email, String encryptedPassword) throws SQLException {
         String sql = "SELECT * FROM User " +
                 "where email = '" + email + "' and encrypted_password = '" + encryptedPassword + "'";

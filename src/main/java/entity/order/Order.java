@@ -49,7 +49,7 @@ public class Order {
 
     public DeliveryInfo getDeliveryInfo() {
         return deliveryInfo;
-    }
+    }   
 
     public void setDeliveryInfo(DeliveryInfo deliveryInfo) {
         this.deliveryInfo = deliveryInfo;

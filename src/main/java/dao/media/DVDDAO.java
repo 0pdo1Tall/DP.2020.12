@@ -13,6 +13,7 @@ import java.util.Date;
  */
 public class DVDDAO extends MediaDAO {
 
+    // Data Coupling
     @Override
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM "+
