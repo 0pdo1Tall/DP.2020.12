@@ -10,6 +10,8 @@ import entity.db.AIMSDB;
 
 public class Book extends Media {
 
+   // common coupling
+
     String author;
     String coverType;
     String publisher;
