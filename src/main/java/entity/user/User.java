@@ -8,6 +8,7 @@ public class User {
     private String address;
     private String phone;
 
+    // data coupling
     public User(int id, String name, String email, String address, String phone) {
         this.id = id;
         this.name = name;
@@ -36,6 +37,7 @@ public class User {
         return this.name;
     }
 
+    // data coupling
     public void setusername(String name) {
         this.name = name;
     }
@@ -44,6 +46,7 @@ public class User {
         return this.email;
     }
 
+    // data coupling
     public void setEmail(String email) {
         this.email = email;
     }
@@ -52,6 +55,7 @@ public class User {
         return this.address;
     }
 
+    // data coupling
     public void setAddress(String address) {
         this.address = address;
     }
@@ -60,6 +64,7 @@ public class User {
         return this.phone;
     }
 
+    // data coupling
     public void setPhone(String phone) {
         this.phone = phone;
     }

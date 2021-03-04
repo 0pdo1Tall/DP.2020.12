@@ -5,6 +5,7 @@ import org.example.DistanceCalculator;
 
 public class DeliveryInfo {
 
+    //Common coupling
     protected String name;
     protected String phone;
     protected String province;
@@ -12,6 +13,7 @@ public class DeliveryInfo {
     protected String shippingInstructions;
     protected DistanceCalculator distanceCalculator;
 
+    // data coupling
     public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions, DistanceCalculator distanceCalculator) {
         this.name = name;
         this.phone = phone;
@@ -21,6 +23,7 @@ public class DeliveryInfo {
         this.distanceCalculator = distanceCalculator;
     }
 
+    // Stamp coupling: DÙng Order làm tham số truyền vào nhưng không sử dụng (hết) thuộc tính
     public int calculateShippingFee(Order order) {
         int distance = distanceCalculator.calculateDistance(address, province);
         return (int) (distance * 1.2);

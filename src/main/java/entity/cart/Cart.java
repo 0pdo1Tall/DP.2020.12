@@ -15,10 +15,12 @@ public class Cart {
         lstCartItem = new ArrayList<>();
     }
 
+    // data coupling
     public void addCartMedia(CartItem cm){
         lstCartItem.add(cm);
     }
 
+    // data coupling
     public void removeCartMedia(CartItem cm){
         lstCartItem.remove(cm);
     }
@@ -60,6 +62,7 @@ public class Cart {
         if (!allAvailable) throw new MediaNotAvailableException("Some media not available");
     }
 
+    // stamp coupling
     public CartItem checkMediaInCart(Media media){
         for (CartItem cartItem : lstCartItem) {
             if (cartItem.getMedia().getId() == media.getId()) return cartItem;

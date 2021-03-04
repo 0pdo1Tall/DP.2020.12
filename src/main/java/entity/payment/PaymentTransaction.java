@@ -8,6 +8,7 @@ public class PaymentTransaction {
 	private int amount;
 	private String createdAt;
 	
+	// data coupling
 	public PaymentTransaction(String errorCode, CreditCard card, String transactionId, String transactionContent,
                               int amount, String createdAt) {
 		super();

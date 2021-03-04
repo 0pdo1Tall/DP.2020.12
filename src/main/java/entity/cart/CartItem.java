@@ -12,6 +12,7 @@ public class CartItem {
 
     }
 
+    // data coupling
     public CartItem(Media media, Cart cart, int quantity, int price) {
         this.media = media;
         this.quantity = quantity;
@@ -22,6 +23,7 @@ public class CartItem {
         return this.media;
     }
 
+    // data coupling
     public void setMedia(Media media) {
         this.media = media;
     }
@@ -30,6 +32,7 @@ public class CartItem {
         return this.quantity;
     }
 
+    // data coupling
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
@@ -38,6 +41,7 @@ public class CartItem {
         return this.price;
     }
 
+    // data coupling
     public void setPrice(int price) {
         this.price = price;
     }

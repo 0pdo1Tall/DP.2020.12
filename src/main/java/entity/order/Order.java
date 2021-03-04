@@ -16,13 +16,16 @@ public class Order {
     private int subtotal;
     private int tax;
     private List orderMediaList;
-    protected DeliveryInfo deliveryInfo;
+    protected DeliveryInfo deliveryInfo;     // common coupling
 
     public Order() {
         this.shippingFees = 0;
         this.subtotal = 0;
         this.tax = 0;
     }
+
+
+    // Stamp coupling: chỉ lấy subtottal nhưng dùng tham số là cart
 
     public Order(Cart cart) {
         List<OrderItem> orderItems = new ArrayList<>();
@@ -51,6 +54,8 @@ public class Order {
         return deliveryInfo;
     }
 
+
+    // Data coupling
     public void setDeliveryInfo(DeliveryInfo deliveryInfo) {
         this.deliveryInfo = deliveryInfo;
         this.shippingFees = deliveryInfo.calculateShippingFee(this);
