@@ -16,6 +16,8 @@ public class MediaNotAvailableException extends AimsException {
 
 	public MediaNotAvailableException(String message) {
 		super(message);
+		
+		// Data coupling, chuyển tham số vừa đủ cho phương thức thuộc lớp cha để xử lý
 	}
 
 }

@@ -16,6 +16,8 @@ public class ViewCartController extends BaseController{
      */
     public void checkAvailabilityOfProduct() throws SQLException{
         SessionInformation.cartInstance.checkAvailabilityOfProduct();
+        
+        // Data coupling, gọi đến phương thức cần thiết để thực hiện
     }
 
     /**
@@ -25,6 +27,8 @@ public class ViewCartController extends BaseController{
     public int getCartSubtotal(){
         int subtotal = SessionInformation.cartInstance.calSubtotal();
         return subtotal;
+        
+        // Data coupling, lấy dữ liệu cần thiết thông qua phương thức được cung cấp
     }
 
 }

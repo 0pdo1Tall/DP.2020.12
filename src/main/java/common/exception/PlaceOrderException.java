@@ -16,6 +16,8 @@ public class PlaceOrderException extends AimsException {
 
 	public PlaceOrderException(String message) {
 		super(message);
+		
+		// Data coupling, do chỉ truyền tham số vừa đủ
 	}
 
 }

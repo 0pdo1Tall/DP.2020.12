@@ -48,6 +48,8 @@ public class MyMap extends LinkedHashMap<String, Object> {
 				return sb.append('}').toString();
 			sb.append(",");
 		}
+		
+		// Data coupling, chỉ nhận vào đủ dữ liệu để xử lý
 	}
 
 	/**
@@ -82,6 +84,8 @@ public class MyMap extends LinkedHashMap<String, Object> {
 			field.setAccessible(false);
 		}
 		return map;
+		
+		// Data coupling, nhận đủ dữ liệu để xử lý nghiệp vụ
 	}
 
 	private static int offset = 0; // to trace the current index when calling a function
@@ -119,6 +123,8 @@ public class MyMap extends LinkedHashMap<String, Object> {
 		String result = sb.toString();
 		offset = result.length() + 2; // update iterator with the term and the 2 double quotes
 		return sb.toString();
+		
+		// Data coupling, phương thức nhận và xử lý dữ liệu vừa đủ
 	}
 	/**
 	 * Return a {@link MyMap MyMap} that represents the interested substring in a {@link String String}.
@@ -211,6 +217,8 @@ public class MyMap extends LinkedHashMap<String, Object> {
 			throw new IllegalArgumentException("Cannot resolve the input.");
 		}
 		return root;
+		
+		// Data coupling, phương thức nhận lượng dữ liệu không dư thừa để tiến hành xử lý
 	}
 
 }

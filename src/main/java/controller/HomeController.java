@@ -19,5 +19,7 @@ public class HomeController extends BaseController {
      */
     public static List getAllMedia() throws SQLException{
         return new MediaDAO().getAllMedia();
+        
+        // Data coupling, sử dụng phương thức để lấy dữ liệu càn thiết
     }
 }

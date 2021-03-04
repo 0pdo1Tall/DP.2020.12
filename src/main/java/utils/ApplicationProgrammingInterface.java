@@ -37,6 +37,8 @@ public class ApplicationProgrammingInterface {
 		in.close();
 		LOGGER.info("Respone Info: " + respone.substring(0, respone.length() - 1).toString());
 		return respone.substring(0, respone.length() - 1).toString();
+		
+		// Data coupling, do gọi và đặt những tham số cần thiết
 	}
 
 	public static String post(String url, String data) throws IOException {
@@ -62,6 +64,8 @@ public class ApplicationProgrammingInterface {
 		in.close();
 		LOGGER.info("Respone Info: " + response.toString());
 		return response.toString();
+		
+		// Data coupling, do chỉ sử dụng tham số cần thiết để gọi và thiết lập các thuộc tính
 	}
 
 	private static HttpURLConnection setupConnection(String url) throws IOException {
@@ -70,6 +74,8 @@ public class ApplicationProgrammingInterface {
 		conn.setDoOutput(true);
 		conn.setRequestProperty("Content-Type", "application/json");
 		return conn;
+		
+		// Data coupling, do chỉ thiết đặt những thuộc tính cho phép
 	}
 
 	private static void allowMethods(String... methods) {
@@ -87,6 +93,8 @@ public class ApplicationProgrammingInterface {
 			String[] newMethods = methodsSet.toArray(new String[0]);
 
 			methodsField.set(null/* static field */, newMethods);
+			
+			// Data coupling, do cho phép chỉnh sửa các trường của một module khác hợp lệ
 		} catch (NoSuchFieldException | IllegalAccessException e) {
 			throw new IllegalStateException(e);
 		}

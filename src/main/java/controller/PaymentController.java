@@ -67,6 +67,8 @@ public class PaymentController extends BaseController {
 		}
 
 		return expirationDate;
+		
+		// Data coupling, chỉ sử dụng dữ liệu vừa đủ để xử lý kết quả
 	}
 
 	/**
@@ -101,9 +103,13 @@ public class PaymentController extends BaseController {
 			result.put("MESSAGE", ex.getMessage());
 		}
 		return result;
+		
+		// Data coupling, sử dụng tất cả dữ liệu truyền vào để xử lý quá trình
 	}
 
 	public void emptyCart(){
         SessionInformation.cartInstance.emptyCart();
+        
+        // Data coupling, sử dụng một phương thức khác để yêu cầu
     }
 }

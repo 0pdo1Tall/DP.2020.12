@@ -19,6 +19,8 @@ public class BaseController {
      */
     public CartItem checkMediaInCart(Media media){
         return SessionInformation.cartInstance.checkMediaInCart(media);
+        
+        // Data coupling, chỉ gọi phương thức cần
     }
 
     /**
@@ -27,5 +29,7 @@ public class BaseController {
      */
     public List getListCartMedia(){
         return SessionInformation.cartInstance.getListMedia();
+        
+        // Data coupling, gọi phương thức cần thiết để lấy dữ liệu
     }
 }

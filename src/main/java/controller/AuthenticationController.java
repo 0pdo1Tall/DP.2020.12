@@ -27,12 +27,16 @@ public class AuthenticationController extends BaseController {
         } catch (Exception ex) {
             return true;
         }
+        
+        // Data coupling, gọi đến phương thức khác
     }
 
     public User getMainUser() throws ExpiredSessionException {
         if (SessionInformation.mainUser == null || SessionInformation.expiredTime == null || SessionInformation.expiredTime.isBefore(LocalDateTime.now())) {
             logout();
             throw new ExpiredSessionException();
+            
+            // Data coupling, chỉ dùng dữ liệu cần thiết
         } else return SessionInformation.mainUser.cloneInformation();
     }
 
@@ -42,6 +46,8 @@ public class AuthenticationController extends BaseController {
             if (Objects.isNull(user)) throw new FailLoginException();
             SessionInformation.mainUser = user;
             SessionInformation.expiredTime = LocalDateTime.now().plusHours(24);
+            
+            // Content coupling, sửa trực tiếp vào dữ liệu của module khác
         } catch (SQLException ex) {
             throw new FailLoginException();
         }
@@ -50,6 +56,8 @@ public class AuthenticationController extends BaseController {
     public void logout() {
         SessionInformation.mainUser = null;
         SessionInformation.expiredTime = null;
+        
+        // Content coupling, sửa trực tiếp vào dữ liệu của module khác
     }
 
     /**
@@ -75,6 +83,8 @@ public class AuthenticationController extends BaseController {
             digest = "";
         }
         return digest;
+        
+        // Data coupling, chỉ truyền đủ dữ liệu vào để xử lý và trả về kết quả
     }
 
 }

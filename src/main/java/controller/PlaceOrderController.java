@@ -34,6 +34,8 @@ public class PlaceOrderController extends BaseController {
      */
     public void placeOrder() throws SQLException {
         SessionInformation.cartInstance.checkAvailabilityOfProduct();
+        
+        // Data coupling, gọi đến phương thức để lấy dữ liệu cần thiết
     }
 
     /**
@@ -43,6 +45,8 @@ public class PlaceOrderController extends BaseController {
      */
     public Order createOrder() throws SQLException {
         return new Order(SessionInformation.cartInstance);
+        
+        // Data coupling, gọi đến phương thức để lấy dữ liệu
     }
 
     /**
@@ -73,6 +77,8 @@ public class PlaceOrderController extends BaseController {
                 new DistanceCalculator());
         System.out.println(deliveryInfo.getProvince());
         return deliveryInfo;
+        
+        // Data coupling, truy cập thông tin hợp lệ
     }
     
     /**
@@ -97,6 +103,8 @@ public class PlaceOrderController extends BaseController {
             return false;
         }
         return true;
+        
+        // Data coupling, sử dụng vừa đủ dữ liệu để xử lý
     }
     
     public boolean validateName(String name) {
@@ -105,6 +113,8 @@ public class PlaceOrderController extends BaseController {
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(name);
         return matcher.matches();
+        
+        // Data coupling, sử dụng vừa đủ dữ liệu để xử lý
     }
     
     public boolean validateAddress(String address) {
@@ -113,5 +123,7 @@ public class PlaceOrderController extends BaseController {
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(address);
         return matcher.matches();
+        
+        // Data coupling, sử dụng vừa đủ dữ liệu để xử lý
     }
 }

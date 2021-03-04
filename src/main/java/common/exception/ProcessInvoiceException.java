@@ -16,6 +16,8 @@ public class ProcessInvoiceException extends AimsException {
 
 	public ProcessInvoiceException(String message) {
 		super(message);
+		
+		// Data coupling, truyền lượng tham số vừa đủ để xử lý
 	}
 
 }

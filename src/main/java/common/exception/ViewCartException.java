@@ -16,6 +16,8 @@ public class ViewCartException extends AimsException {
 
 	public ViewCartException(String message) {
 		super(message);
+		
+		// Data coupling, gọi đến phương thức khởi tạo không thừa tham số
 	}
 
 }

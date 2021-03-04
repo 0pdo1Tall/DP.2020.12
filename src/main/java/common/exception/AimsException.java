@@ -14,5 +14,7 @@ public class AimsException extends RuntimeException {
 
 	public AimsException(String message) {
 		super(message);
+		
+		// Data coupling, chỉ gọi đến phương thức khác với tham số cần thiết
 	}
 }
