@@ -92,6 +92,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         return (HomeController) super.getBController();
     }
 
+	// data coupling 
     protected void setupData(Object dto) throws Exception {
         setBController(new HomeController());
         this.authenticationController = new AuthenticationController();
@@ -159,6 +160,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         cartImage.setImage(img2);
     }
 
+    //stamp coupling 
     public void addMediaHome(List items){
         ArrayList mediaItems = (ArrayList)((ArrayList) items).clone();
         hboxMedia.getChildren().forEach(node -> {
@@ -207,7 +209,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         });
         menuButton.getItems().add(position, menuItem);
     }
-
+	// data coupling 
     @Override
     public void update(Observable observable) {
         if (observable instanceof MediaHandler) update((MediaHandler) observable);
@@ -231,6 +233,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             }
 
             // subtract the quantity and redisplay
+            
+            //content coupling 
             media.setQuantity(media.getQuantity() - requestQuantity);
             numMediaInCart.setText(cart.getTotalMedia() + " media");
             PopupScreen.success("The media " + media.getTitle() + " added to Cart");
