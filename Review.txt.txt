@@ -1,3 +1,12 @@
 Phân công công việc tìm Coupling: Thọ tìm trong Entity, Tiến tìm trong DAO + Subsystem, Thao tìm trong Entity
 
 // Review Code ở đây(Ghi rõ tên người review)
+
++ Reviewer: Le Anh Thanh
+
+/src/main/java/entity/media/ gồm các file Book.java, CD.java, DVD.java, Media.java
+/src/main/java/entity/order/ có file Order.java
+/src/main/java/entity/payment/ có file Credit.java
+/src/main/java/entity/shipping/ có file DeliveryInfo.java
+
+Toàn bộ các thuộc tính được khai báo ở đầu của lớp đều không phải là Common coupling, vì đó là thuộc tính của riêng từng đối tượng trong lớp chứ không phải là dữ liệu hoặc là cấu trúc dữ liệu toàn cục, và vì thế không có module nào cùng chia sẻ những thuộc tính này.
