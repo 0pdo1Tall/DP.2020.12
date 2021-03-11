@@ -13,8 +13,13 @@ import java.util.logging.Logger;
 /**
  * @author nguyenlm Contains helper functions
  */
+
+/*
+ * Functional conhesion, vì không rơi vào những loại khác
+ */
 public class Utils {
 
+	
 	public static DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	private static Logger LOGGER = getLogger(Utils.class.getName());
 	static {
@@ -24,5 +29,4 @@ public class Utils {
 	public static Logger getLogger(String className) {
 		return Logger.getLogger(className);
 	}
-
 }

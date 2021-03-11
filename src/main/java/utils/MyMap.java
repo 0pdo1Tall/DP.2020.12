@@ -12,6 +12,10 @@ import java.util.*;
  * @author hieud
  *
  */
+
+/*
+ * Coincidental cohesion, do phương thức getNextTerm không có chức năng theo tên class, mà chỉ hỗ trợ xử lí các hàm khác 
+ */
 public class MyMap extends LinkedHashMap<String, Object> {
 	private static final long serialVersionUID = 1L;
 
