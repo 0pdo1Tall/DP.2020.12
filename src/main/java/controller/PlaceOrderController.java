@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  * @author nguyenlm
  */
  
- // COINCIDENTAL COHESION
+ // COINCIDENTAL COHESION phan xac thuc thong tin dia chi nen de o lop khac
 public class PlaceOrderController extends BaseController {
 
     /**
