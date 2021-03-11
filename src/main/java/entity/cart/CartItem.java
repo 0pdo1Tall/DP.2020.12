@@ -54,6 +54,8 @@ public class CartItem {
             + "}";
     }
 
+    //communicational cohesion: các phương thức dùng dung thuộc tính
+
 }
 
     

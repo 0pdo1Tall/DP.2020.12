@@ -120,4 +120,6 @@ public class DVD extends Media {
                 + runtime + "'" + ", studio='" + studio + "'" + ", subtitles='" + subtitles + "'" + ", releasedDate='"
                 + releasedDate + "'" + ", filmType='" + filmType + "'" + "}";
     }
+
+    //communicational cohesion: một vài phương thức dùng dung thuộc tính
 }

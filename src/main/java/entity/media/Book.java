@@ -135,4 +135,7 @@ public class Book extends Media {
             ", bookCategory='" + bookCategory + "'" +
             "}";
     }
+
+    //communicational cohesion: một vài phương thức dùng dung thuộc tính
+   // Coincidental cohesion: các phuong thức get, set
 }

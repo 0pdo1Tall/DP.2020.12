@@ -70,4 +70,5 @@ public class Cart {
         return null;
     }
 
+    //communicational cohesion: các phương thức dùng dung thuộc tính lstCartItem
 }

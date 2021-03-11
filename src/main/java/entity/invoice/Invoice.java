@@ -33,4 +33,6 @@ public class Invoice {
     public void saveInvoice(){
         
     }
+
+    //communicational cohesion: các phương thức dùng dung thuộc tính
 }

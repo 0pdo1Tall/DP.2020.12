@@ -27,6 +27,5 @@ public class ViewCartController extends BaseController{
         return subtotal;
     }
 
-    // Local Cohision: các phương thức checkAvailabilityOfProduct() và getCartSubtotal() không liên quan 
 
 }

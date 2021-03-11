@@ -48,4 +48,6 @@ public class DeliveryInfo {
     public String getShippingInstructions() {
         return shippingInstructions;
     }
+
+    //communicational cohesion: một vài phương thức dùng dung thuộc tính
 }

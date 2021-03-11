@@ -123,4 +123,6 @@ public class Media {
         this.type = type;
         return this;
     }
+
+    //communicational cohesion: một vài phương thức dùng dung thuộc tính
 }

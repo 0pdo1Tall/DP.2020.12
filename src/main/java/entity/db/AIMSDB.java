@@ -13,7 +13,7 @@ public class AIMSDB {
 	private static Logger LOGGER = Utils.getLogger(Connection.class.getName());
 	private static Connection connect;
 	// TODO: refactor Utils -> limit connections
-    public static Connection getConnection() {
+    public static Connection //communicational cohesion: các phương thức dùng dung thuộc tính() {
         if (connect != null) return connect;
         try {
 			Class.forName("org.sqlite.JDBC");
@@ -30,4 +30,6 @@ public class AIMSDB {
     public static void main(String[] args) {
         AIMSDB.getConnection();
     }
+
+    //function cohesion do hàm main sử dụng //communicational cohesion: các phương thức dùng dung thuộc tính
 }

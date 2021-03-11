@@ -76,4 +76,7 @@ public class Order {
     public int getTotal() {
         return this.subtotal + this.tax + this.shippingFees;
     }
+
+    //communicational cohesion: một vài phương thức dùng dung thuộc tính
+    //logical cohesion: các phương thức đều liên quan đến tác vụ order
 }
