@@ -1,3 +1,15 @@
 Phân công công việc tìm Coupling: Lê Anh Thành tìm Content, Control và Data Coupling; Phạm Văn Thành tìm Common và Stamp Coupling
 Các file tìm kiếm trong: Common, Control, Utils, App.java
 // Review Code ở đây (Ghi rõ tên người review)
+
++ Reviewer: Hoang Minh Tien
+
+public class SessionInformation {
+
+    public static User mainUser;
+    public static Cart cartInstance = new Cart();
+    public static LocalDateTime expiredTime;
+}
+Ở lớp này, các member được đặt public static ==> các module # có thể thay đổi một cách tùy ý(Ex: SessionInformation.mainUser == null)
+==> Vi phạm Content Coupling ==> Cần phải tạo ra các function để check thông tin trên các thành phần, không nên lấy ra trực tiếp
+<<End
