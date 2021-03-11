@@ -21,6 +21,8 @@ import subsystem.InterbankSubsystem;
  * @author hieud
  *
  */
+
+// Logical Cohesion
 public class PaymentController extends BaseController {
 
 	/**

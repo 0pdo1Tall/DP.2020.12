@@ -18,6 +18,8 @@ import java.util.Objects;
 /**
  * @author
  */
+
+// Logical Cohesion
 public class AuthenticationController extends BaseController {
 
     public boolean isAnonymousSession() {
