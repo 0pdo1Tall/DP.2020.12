@@ -22,7 +22,13 @@ import java.util.regex.Pattern;
  * @author nguyenlm
  */
 public class PlaceOrderController extends BaseController {
-
+	
+	/**
+	 * Coincidental cohesion, do các phương thức validate không thực hiện chức năng cho PlaceOrderController
+	 * chúng nên nằm trong một module khác xử lý về kiểm tra tính hợp lệ của dữ liệu
+	 */
+	
+	
     /**
      * Just for logging purpose
      */

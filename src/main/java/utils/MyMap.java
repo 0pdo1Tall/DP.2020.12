@@ -14,7 +14,13 @@ import java.util.*;
  */
 public class MyMap extends LinkedHashMap<String, Object> {
 	private static final long serialVersionUID = 1L;
-
+	
+	/**
+	 *  Coincidental cohesion, do có sử dụng phương thức getNextTerm(String str, int idx)
+	 *  phương thức này không cùng nhóm với các phương thức trong class MyMap khi xử lý liên quan đến xâu
+	 *  không hề liên quan đến các chức năng của lớp MyMap cung cấp
+	 */
+	
 	/**
 	 * Return a {@link String String} that represents the JSON object.
 	 * 

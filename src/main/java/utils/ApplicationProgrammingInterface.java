@@ -94,7 +94,7 @@ public class ApplicationProgrammingInterface {
 
 			methodsField.set(null/* static field */, newMethods);
 			
-			// Data coupling, do cho phép chỉnh sửa các trường của một module khác hợp lệ
+			// Content coupling, do đã sửa nội dung của dữ liệu class khác thông qua việc setAccessible(true) cho thuộc tính
 		} catch (NoSuchFieldException | IllegalAccessException e) {
 			throw new IllegalStateException(e);
 		}

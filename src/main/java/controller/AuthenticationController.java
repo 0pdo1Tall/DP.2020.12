@@ -19,7 +19,13 @@ import java.util.Objects;
  * @author
  */
 public class AuthenticationController extends BaseController {
-
+	
+	/**
+	 * Coincidental cohesion, do có phương thức md5(String message) dùng để mã hóa chuỗi theo hàm băm md5
+	 * không liên quan đến các phương thức khác phục vụ cho mục đích quản lý trong lớp AuthenticationController
+	 * không phục vụ cho tính năng của lớp này
+	 */
+	
     public boolean isAnonymousSession() {
         try {
             getMainUser();
