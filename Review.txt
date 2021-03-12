@@ -29,3 +29,7 @@ src/main/java/subsystem/interbank/InterbankPayloadConverter.java
     }
     
 ==> Ở đây không phải là content coupling do không sửa trực tiếp giá trị của module khác mà chỉ gọi ra giá trị đã được định nghĩa là hằng.
+
+// Phân công công việc tìm Cohesion: Thọ tìm trong Entity, Tiến tìm trong DAO + Subsystem, Thao tìm trong Entity
+
+// Review Code ở đây(Ghi rõ tên người review)

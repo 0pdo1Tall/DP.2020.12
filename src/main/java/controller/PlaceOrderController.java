@@ -22,7 +22,6 @@ import java.util.regex.Pattern;
  * @author nguyenlm
  */
 
-// Logical Cohesion
 public class PlaceOrderController extends BaseController {
 
     /**

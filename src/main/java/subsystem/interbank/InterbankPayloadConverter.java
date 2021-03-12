@@ -50,8 +50,7 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
-
-    // Data Coupling
+    // coincidental cohesion: read the response from interbank server do not relate to InterbankConverter module
     PaymentTransaction extractPaymentTransaction(String responseText) {
         MyMap response = convertJSONResponse(responseText);
 
@@ -72,7 +71,6 @@ public class InterbankPayloadConverter {
                 Integer.parseInt((String) transaction.get("amount")),
                 (String) transaction.get("createdAt"));
 
-        // Not considering as Control Coupling Here
         switch (trans.getErrorCode()) {
             case "00":
                 break;
@@ -103,7 +101,6 @@ public class InterbankPayloadConverter {
      * @return
      */
 
-    // Data Coupling
     private MyMap convertJSONResponse(String responseText) {
         MyMap response = null;
         try {
@@ -121,7 +118,8 @@ public class InterbankPayloadConverter {
      * @author hieudm
      * @return the current time as {@link String String}.
      */
-    // None Coupling
+
+    // Coincidental Cohesion: getToday do not relate to InterbankConverter module
     private String getToday() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();
