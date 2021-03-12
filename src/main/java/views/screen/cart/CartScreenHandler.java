@@ -27,7 +27,7 @@ import views.screen.popup.PopupScreen;
 import views.screen.shipping.ShippingScreenHandler;
 
 
-// LOGICAL COHESION
+
 public class CartScreenHandler extends BaseScreenHandler {
 	private static Logger LOGGER = Utils.getLogger(CartScreenHandler.class.getName());
 
@@ -93,7 +93,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 
 		});
 	}
-
+	
 	public ViewCartController getBController(){
 		return (ViewCartController) super.getBController();
 	}
@@ -137,7 +137,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 			displayCartWithMediaAvailability();
 		}
 	}
-
+	
 	public void updateCart() throws SQLException{
 		getBController().checkAvailabilityOfProduct();
 		displayCartWithMediaAvailability();
@@ -155,7 +155,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 		labelVAT.setText(ViewsConfig.getCurrencyFormat(vat));
 		labelAmount.setText(ViewsConfig.getCurrencyFormat(amount));
 	}
-	
+	//Sequential Cohesion vi su dung du lieu dau ra cua getBController();
 	private void displayCartWithMediaAvailability(){
 		// clear all old cartMedia
 		vboxCart.getChildren().clear();
@@ -181,3 +181,4 @@ public class CartScreenHandler extends BaseScreenHandler {
 		}
 	}
 }
+//Sequential Cohesion vi 1 so method su dung du lieu dau ra cua getBController();

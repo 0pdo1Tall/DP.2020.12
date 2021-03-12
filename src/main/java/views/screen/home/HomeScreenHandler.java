@@ -35,7 +35,7 @@ import views.screen.ViewsConfig;
 import views.screen.cart.CartScreenHandler;
 import views.screen.popup.PopupScreen;
 
-// LOGICAL COHESION
+
 public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 
     public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName());
@@ -270,3 +270,5 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         }
     }
 }
+
+// Communicational Cohesion vi 1 so method su dung chung du lieuj homeItems, authenticationController

@@ -68,6 +68,7 @@ public class LoginScreenHandler extends BaseScreenHandler{
     protected void setupFunctionality() throws Exception {
     }
 
+	// Sequential Cohesion vi su dung getBController()
     @FXML
     void login(MouseEvent event) throws IOException, InterruptedException, SQLException {
         try {
@@ -84,3 +85,5 @@ public class LoginScreenHandler extends BaseScreenHandler{
         this.homeScreenHandler.show();
     }
 }
+
+
