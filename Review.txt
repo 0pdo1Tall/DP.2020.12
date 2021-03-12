@@ -33,3 +33,12 @@ src/main/java/subsystem/interbank/InterbankPayloadConverter.java
 // Phân công công việc tìm Cohesion: Thọ tìm trong Entity, Tiến tìm trong DAO + Subsystem, Thao tìm trong Entity
 
 // Review Code ở đây(Ghi rõ tên người review)
+
++ Reviewer: Le Anh Thanh
+
+/src/main/java/dao/user/UserDAO.java 
+
+--> Logical Cohesion: authenticate function must be in its own module
+
+Khi authenticate function nằm không đúng module của nó, thì nó phải thuộc về Coincidental cohesion, ngoài ra cũng không thể là logical cohesion
+vì logical cohesion là nhóm các phương thức cùng loại trong thực tế, nhưng cách thức xử lý lại khác xa trong lập trình
