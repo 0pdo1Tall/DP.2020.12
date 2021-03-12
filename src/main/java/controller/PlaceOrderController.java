@@ -75,23 +75,6 @@ public class PlaceOrderController extends BaseController {
         return deliveryInfo;
     }
     
-    /**
-   * The method validates the info
-   * @param info
-   * @throws InterruptedException
-   * @throws IOException
-   */
-    
-    // Logical Cohesion. Do có nhiều hàm validate cùng kiểu nhưng không liên quan
-    public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
-        if (validatePhoneNumber(info.get("phone"))
-        || validateName(info.get("name"))
-        || validateAddress(info.get("address"))) return;
-        else throw new InvalidDeliveryInfoException();
-     
-        //stamp coupling: do info có nhiều hơn 3 trường dl mà trong hàm chỉ sử dụng 3 trường name, phone, address
-    }
-    
     public boolean validatePhoneNumber(String phoneNumber) {
         if (phoneNumber.length() != 10) return false;
         if (!phoneNumber.startsWith("0")) return false;
@@ -102,7 +85,7 @@ public class PlaceOrderController extends BaseController {
         }
         return true;
     }
-    
+
     public boolean validateName(String name) {
         if (Objects.isNull(name)) return false;
         String patternString = "^[a-zA-Z\\s]*$";
@@ -110,12 +93,29 @@ public class PlaceOrderController extends BaseController {
         Matcher matcher = pattern.matcher(name);
         return matcher.matches();
     }
-    
+
     public boolean validateAddress(String address) {
         if (Objects.isNull(address)) return false;
         String patternString = "^[a-zA-Z\\s]*$";
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(address);
         return matcher.matches();
+    }
+
+    /**
+     * The method validates the info
+     * @param info
+     * @throws InterruptedException
+     * @throws IOException
+     */
+
+    // Logical Cohesion. Do có nhiều hàm validate cùng kiểu nhưng không liên quan
+    public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
+        if (validatePhoneNumber(info.get("phone"))
+                || validateName(info.get("name"))
+                || validateAddress(info.get("address"))) return;
+        else throw new InvalidDeliveryInfoException();
+
+        //stamp coupling: do info có nhiều hơn 3 trường dl mà trong hàm chỉ sử dụng 3 trường name, phone, address
     }
 }

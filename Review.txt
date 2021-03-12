@@ -2,3 +2,6 @@ Phân công công việc tìm Coupling: Phạm Văn Thành tìm Logical, Procedu
 Các file tìm kiếm trong: Common, Controller, Utils, App.java
 // Review Code ở đây (Ghi rõ tên người review)
 
+// Author : Hoang Minh Tien
+ Các hàm validate trong PlaceOrder không được coi là logical cohesion vì nó đang được đặt trong class PlaceOrder,
+ko phải trong class Validate riêng, do vậy đây được coi là Coincidental Cohesion(ko liên quan đến function của lớp PlaceOrder)
