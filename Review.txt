@@ -1,3 +1,8 @@
 Phân công công việc tìm Cohesion subgroup 1: Lê Anh Thành tìm Coincidental, Temporal và Communicational Cohesion; Phạm Văn Thành tìm Logical, Procedural và Functional Cohesion.
 
 // Review Code ở đây (Ghi rõ tên người review)
+
+// Author: Hoang Minh Tien
+
+Function: public String toJSON(){...} trong class MyMap chỉ đơn thuần là chuyển đổi xâu theo định dạng,
+ko có tương tác gì với tính năng trong class MyMap
