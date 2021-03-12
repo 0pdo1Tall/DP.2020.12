@@ -82,7 +82,7 @@ public class PlaceOrderController extends BaseController {
    * @throws IOException
    */
     
-    // Logical Cohesion. Do có nhiều hàm validate cùng kiểu nhưng không liên quan
+    // Coincidental Cohesion. Do các hàm validate đang được đặt trong class không liên quan đến validate, nên để trong class ở utils
     public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         if (validatePhoneNumber(info.get("phone"))
         || validateName(info.get("name"))
