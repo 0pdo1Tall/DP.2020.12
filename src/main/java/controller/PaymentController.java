@@ -44,7 +44,7 @@ public class PaymentController extends BaseController {
 	 * @throws InvalidCardException - if the string does not represent a valid date
 	 *                              in the expected format
 	 */
-	// Coincidental cohension. N�n t�ch ri�ng ra class ri�ng
+	// Coincidental cohension. Nên tách riêng ra class riêng
 	private String getExpirationDate(String date) throws InvalidCardException {
 		String[] strs = date.split("/");
 		if (strs.length != 2) {
@@ -82,6 +82,8 @@ public class PaymentController extends BaseController {
 	 * @return {@link Map Map} represent the payment result with a
 	 *         message.
 	 */
+	
+	// SOLID: Vi phạm nguyên lí OCP. Vì nếu thêm 1 phương thức thanh toán sẽ phải modify lại mã nguồn
 	public Map<String, String> payOrder(int amount, String contents, String cardNumber, String cardHolderName,
 			String expirationDate, String securityCode) {
 		Map<String, String> result = new Hashtable<String, String>();

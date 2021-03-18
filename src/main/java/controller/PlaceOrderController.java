@@ -60,6 +60,8 @@ public class PlaceOrderController extends BaseController {
      * @throws InterruptedException
      * @throws IOException
      */
+    
+    // SOLID: Vi phạm nguyên lí OCP. Vì nếu thêm một kiểu vận chuyển khác thì sẽ phải modify code
     public DeliveryInfo processDeliveryInfo(HashMap info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         LOGGER.info("Process Delivery Info");
         LOGGER.info(info.toString());
@@ -82,6 +84,7 @@ public class PlaceOrderController extends BaseController {
    * @throws IOException
    */
     
+    // SOLID: Vi phạm nguyên lí OCP. Vì nếu muốn thay đổi hoặc thêm dữ liệu validate thì sẽ phải modify code 
     // Coincidental Cohesion. Do các hàm validate đang được đặt trong class không liên quan đến validate, nên để trong class ở utils
     public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         if (validatePhoneNumber(info.get("phone"))
