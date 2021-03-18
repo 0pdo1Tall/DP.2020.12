@@ -10,3 +10,30 @@ Phân công công việc tìm Coupling: Thọ tìm trong Entity, Tiến tìm tro
 /src/main/java/entity/shipping/ có file DeliveryInfo.java
 
 Toàn bộ các thuộc tính được khai báo ở đầu của lớp đều không phải là Common coupling, vì đó là thuộc tính của riêng từng đối tượng trong lớp chứ không phải là dữ liệu hoặc là cấu trúc dữ liệu toàn cục, và vì thế không có module nào cùng chia sẻ những thuộc tính này.
+
+
+
+// Phân công công việc tìm Cohesion: Thọ tìm trong Entity, Tiến tìm trong DAO + Subsystem, Thao tìm trong Entity
+
+// Review Code ở đây(Ghi rõ tên người review)
+
++ Reviewer: Le Anh Thanh
+
+/src/main/java/entity/cart/ gồm các file Cart.java, CartItem.java
+/src/main/java/entity/db/ có file AIMSDB.java
+/src/main/java/entity/invoice/ có file Invoice.java
+/src/main/java/entity/media/ gồm các file Book.java, DVD.java, Media.java
+/src/main/java/entity/order/ có file Order.java
+/src/main/java/entity/shipping/ có file DeliveryInfo.java
+
+Tất cả các class trong này đều không phải là Communicational cohesion, vì mặc dù các phương thức sử dụng chung dữ liệu, nhưng chúng đều nhằm mục đích cung cấp các chức năng cần thiết cho hoạt động của lớp đó.
+
+/src/main/java/entity/cart/Cart.java
+Class này có phương thức checkAvailabilityOfProduct(), không thuộc nghiệp vụ của giỏ hàng, khi còn trực tiếp truy cập vào database
+Phương thức này nên chuyển giao cho lớp khác --> Coincidental cohesion
+
+/src/main/java/entity/media/Book.java
+Các phương thức get, set là cần thiết --> không phải là Coincidental cohesion
+
+/src/main/java/entity/order/Order.java
+Các phương thức thực hiện tác vụ cho lớp Order --> không phải là Logical cohesion, vì logical cohesion phải là thực hiện cùng một loại nhiệm vụ nhưng cách thức xử lý khác xa nhau.
