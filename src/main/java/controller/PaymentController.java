@@ -24,10 +24,20 @@ import subsystem.InterbankSubsystem;
 public class PaymentController extends BaseController {
 	
 	/**
+	 * SOLID: Vi phạm nguyên lý SRP. Do class thực hiện nhiều hơn một nhiệm vụ.
+	 * Cụ thể nó vừa thực hiện kiểm tra hạn qua phương thức getExpirationDate, vừa thực hiện thanh toán qua phương thức payOrder.
+	 * Cũng vừa làm rỗng giỏ hàng qua phương thức emptyCart()
+	 */
+	
+	/**
 	 * SOLID: Vi phạm OCP. Do payOrder chỉ có thanh toán theo Credit Card.
 	 * Do đó nếu thêm phương thức thanh toán thì phải sửa code phần này.
 	 */
 	
+	/**
+	 * SOLID: Vi phạm nguyên lý DIP. Do phương thức payOrder() phụ thuộc vào một lớp cài đặt cụ thể là CreditCard.
+	 * Vì thế nếu như thêm một phương thức thanh toán khác, thẻ nội địa Domestic Card thì phải cài đặt lại hàm này.
+	 */
 	
 	/**
 	 * Coincidental cohesion, lớp PaymentController có 3 phương thức không liên quan tới nhau,

@@ -18,7 +18,14 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 public class ApplicationProgrammingInterface {
-
+	
+	/**
+	 * SOLID: Vi phạm nguyên tắc SRP. Vì thực hiện đến nhiều hơn một chức năng.
+	 * Một chức năng là thực hiện get, post các đường dẫn url.
+	 * Hai là tạo ra kết nối HTTP thông qua phương thức setupConnection.
+	 */
+	
+	
 	public static DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	private static Logger LOGGER = Utils.getLogger(Utils.class.getName());
 
