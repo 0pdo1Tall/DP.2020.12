@@ -1,7 +1,3 @@
-Phân công công việc tìm Coupling: Phạm Văn Thành tìm Logical, Procedural, Functional; Lê Anh Thành: Coincidental, Temporal, Communicational
-Các file tìm kiếm trong: Common, Controller, Utils, App.java
-// Review Code ở đây (Ghi rõ tên người review)
+Phân công công việc tìm vi phạm nguyên lý S.O.L.I.D subgroup 1: Lê Anh Thành tìm SRP, LSP, DIP; Phạm Văn Thành tìm OCP, ISP.
 
-// Author : Hoang Minh Tien
- Các hàm validate trong PlaceOrder không được coi là logical cohesion vì nó đang được đặt trong class PlaceOrder,
-ko phải trong class Validate riêng, do vậy đây được coi là Coincidental Cohesion(ko liên quan đến function của lớp PlaceOrder)
+// Review Code ở đây (Ghi rõ tên người review)
