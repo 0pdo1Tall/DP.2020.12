@@ -21,6 +21,11 @@ import java.util.Objects;
 public class AuthenticationController extends BaseController {
 	
 	/**
+	 * 	SOLID: Vi phạm nguyên lý SRP. Thực hiện hai nhiệm vụ, một nhiệm vụ là điều hướng Authentication.
+	 * 	Một nhiệm vụ là mã hóa md5.
+	 */
+	
+	/**
 	 * Coincidental cohesion, do có phương thức md5(String message) dùng để mã hóa chuỗi theo hàm băm md5
 	 * không liên quan đến các phương thức khác phục vụ cho mục đích quản lý trong lớp AuthenticationController
 	 * không phục vụ cho tính năng của lớp này

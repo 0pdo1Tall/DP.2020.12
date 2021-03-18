@@ -16,6 +16,12 @@ public class MyMap extends LinkedHashMap<String, Object> {
 	private static final long serialVersionUID = 1L;
 	
 	/**
+	 *  SOLID: Vi phạm nguyên lý SRP, do thực hiện đến hai nhiệm vụ. Một nhiệm vụ liên quan đến xử lý chức năng MyMap.
+	 *  Một nhiệm vụ liên quan tới sử dụng phương thức getNextTerm để tìm cụm tiếp theo trong xâu.
+	 */
+	
+	
+	/**
 	 *  Coincidental cohesion, do có sử dụng phương thức getNextTerm(String str, int idx)
 	 *  phương thức này không cùng nhóm với các phương thức trong class MyMap khi xử lý liên quan đến xâu
 	 *  không hề liên quan đến các chức năng của lớp MyMap cung cấp

@@ -24,6 +24,11 @@ import java.util.regex.Pattern;
 public class PlaceOrderController extends BaseController {
 	
 	/**
+	 * SOLID: Vi phạm nguyên lý OCP. Phương thức validateDeliveryInfo sẽ phải thay đổi code khi thêm các
+	 * thuộc tính cần phải validate.
+	 */
+	
+	/**
 	 * Coincidental cohesion, do các phương thức validate không thực hiện chức năng cho PlaceOrderController
 	 * chúng nên nằm trong một module khác xử lý về kiểm tra tính hợp lệ của dữ liệu
 	 */
