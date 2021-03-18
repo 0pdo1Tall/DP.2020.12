@@ -21,6 +21,9 @@ import subsystem.InterbankSubsystem;
  * @author hieud
  *
  */
+
+//SOLID: vi phạm nguyên lí ISP, vì nó kế thừa lớp BaseController nhưng không dùng lại các hàm trong lớp đó 
+
 public class PaymentController extends BaseController {
 
 	/**
@@ -84,6 +87,7 @@ public class PaymentController extends BaseController {
 	 */
 	
 	// SOLID: Vi phạm nguyên lí OCP. Vì nếu thêm 1 phương thức thanh toán sẽ phải modify lại mã nguồn
+	// SOLID: Vi phạm nguyên lí DIP. Vì nó phụ thuộc vào lớp chi tiết InterbankSubsystem
 	public Map<String, String> payOrder(int amount, String contents, String cardNumber, String cardHolderName,
 			String expirationDate, String securityCode) {
 		Map<String, String> result = new Hashtable<String, String>();

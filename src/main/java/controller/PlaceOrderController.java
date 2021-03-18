@@ -21,6 +21,8 @@ import java.util.regex.Pattern;
  * This class controls the flow of place order usecase in our AIMS project
  * @author nguyenlm
  */
+
+//SOLID: vi phạm nguyên lí ISP, vì nó kế thừa lớp BaseController nhưng không dùng lại các hàm trong lớp đó 
 public class PlaceOrderController extends BaseController {
 
     /**
@@ -62,6 +64,7 @@ public class PlaceOrderController extends BaseController {
      */
     
     // SOLID: Vi phạm nguyên lí OCP. Vì nếu thêm một kiểu vận chuyển khác thì sẽ phải modify code
+    // SOLID: Vi phạm nguyên lí DIP. Vì nó phụ thuộc vào lớp chi tiết DistanceCalculator
     public DeliveryInfo processDeliveryInfo(HashMap info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         LOGGER.info("Process Delivery Info");
         LOGGER.info(info.toString());

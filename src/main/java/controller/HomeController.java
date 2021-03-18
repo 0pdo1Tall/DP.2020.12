@@ -9,6 +9,8 @@ import dao.media.MediaDAO;
  * This class controls the flow of events in homescreen
  * @author nguyenlm
  */
+
+//SOLID: vi phạm nguyên lí ISP, vì nó kế thừa lớp BaseController nhưng không dùng lại các hàm trong lớp đó 
 public class HomeController extends BaseController {
 
 

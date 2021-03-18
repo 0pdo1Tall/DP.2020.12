@@ -18,6 +18,9 @@ import java.util.Objects;
 /**
  * @author
  */
+
+//SOLID: vi phạm nguyên lí ISP, vì nó kế thừa lớp BaseController nhưng không dùng lại các hàm trong lớp đó 
+
 public class AuthenticationController extends BaseController {
 
     public boolean isAnonymousSession() {
