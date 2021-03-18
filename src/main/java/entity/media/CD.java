@@ -79,4 +79,6 @@ public class CD extends Media {
                 + "'" + ", musicType='" + musicType + "'" + ", releasedDate='"
                 + releasedDate + "'" + "}";
     }
+
+    //communicational cohesion: một vài phương thức dùng dung thuộc tính
 }

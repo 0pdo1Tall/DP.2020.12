@@ -113,6 +113,7 @@ public class Book extends Media {
         return this;
     }
 
+
     @Override
     public String toString() {
         String basicInformation = "{" +
@@ -137,5 +138,4 @@ public class Book extends Media {
     }
 
     //communicational cohesion: một vài phương thức dùng dung thuộc tính
-   // Coincidental cohesion: các phuong thức get, set
 }

@@ -51,6 +51,7 @@ public class Cart {
         return total;
     }
 
+    //SRP: Phương thức này có thể chia ra một class khác
     public void checkAvailabilityOfProduct() throws SQLException{
         boolean allAvailable = true;
         for (Object object : lstCartItem) {
