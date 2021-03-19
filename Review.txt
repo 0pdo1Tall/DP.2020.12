@@ -1,2 +1,26 @@
 // Review Code ở đây(Ghi rõ tên người review)
 
++ Reviewer: Le Anh Thanh
+
+/src/main/java/controller/AuthenticationController.java
+Vi phạm SRP --> Đúng --> Ngoài ra còn chỉ rõ thêm là có cả phương thức mã hóa nữa md5.
+Vi phạm OCP --> Một lần nữa lại liên quan đến mã hóa, nếu dùng phương thức mã hóa khác thì trong login phải sửa phần code md5(password).
+Vi phạm DIP --> Phụ thuộc vào phương thức mã hóa là md5, là phương thức cụ thể, không phải là lớp trừu tượng.
+Vi phạm ISP --> Kế thừa lớp BaseController nhưng lại không dùng các phương thức mà BaseController cung cấp. (Nghiệp vụ cũng không dùng)
+
+/src/main/java/controller/PaymentController.java
+Vi phạm SRP, OCP --> Đúng
+Vi phạm DIP --> Do phụ thuộc vào phương thức thanh toán cụ thể CreditCard mà không phải là lớp abstract đại diện cho các phương thức thanh toán.
+Vi phạm ISP --> Lý do giống ISP bên AuthenticationController
+
+/src/main/java/controller/PlaceOrderController.java
+Vi phạm SRP, OCP --> Đúng
+Ngoài ra method validateDeliveryInfo cũng vi phạm OCP --> phải sửa code nếu tiêu chí validate thay đổi.
+Vi phạm DIP --> ở các vị trí vi phạm OCP
+Vi phạm ISP --> giống hai lớp trên
+
+/src/main/java/entity/order/Order.java
+Tôi cho rằng không vi phạm DIP --> khi có thay đổi thì cũng chỉ thay đổi bên trong cấu trúc của DeliveryInfo, có lẽ nên bàn thêm.
+
+/src/main/java/subsystem/InterbankSubsystem.java
+Vi phạm cả OCP nữa --> Khi có thay đổi hay thêm mới phương tiện thanh toán (ví dụ thay vì dùng CreditCard --> chuyển sang dùng DomesticCard), thì phải sửa lại phần mã nguồn của method payOrder.
