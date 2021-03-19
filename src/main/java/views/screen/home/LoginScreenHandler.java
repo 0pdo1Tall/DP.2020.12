@@ -34,6 +34,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 
+// SRP vi class vua thuc hien kiem tra khi nguoi dung login, vua chuyen huong den homescreen 
+
 public class LoginScreenHandler extends BaseScreenHandler{
 
     public static Logger LOGGER = Utils.getLogger(LoginScreenHandler.class.getName());
