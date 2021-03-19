@@ -12,6 +12,8 @@ public class DeliveryInfo {
     protected String shippingInstructions;
     protected DistanceCalculator distanceCalculator;
 
+    // SOLID : ODP do khi can mo rong Calculator phai chinh sua truc tiep o day
+    // SOLID: DIP do DeliveryInfo phu thuoc vao DistanceCalculator
     public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions, DistanceCalculator distanceCalculator) {
         this.name = name;
         this.phone = phone;

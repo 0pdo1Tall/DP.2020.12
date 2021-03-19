@@ -51,6 +51,7 @@ public class Order {
         return deliveryInfo;
     }   
 
+    // SOLID: DIP do phu thuoc vao deliveryInfo khong phai la Abstract/Interface
     public void setDeliveryInfo(DeliveryInfo deliveryInfo) {
         this.deliveryInfo = deliveryInfo;
         this.shippingFees = deliveryInfo.calculateShippingFee(this);

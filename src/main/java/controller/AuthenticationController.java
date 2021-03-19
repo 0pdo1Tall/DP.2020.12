@@ -18,7 +18,7 @@ import java.util.Objects;
 /**
  * @author
  */
-
+// SOLID: SRP do chua cac chuc nang lien quan den ca authentication va login/logout
 public class AuthenticationController extends BaseController {
 
     public boolean isAnonymousSession() {
