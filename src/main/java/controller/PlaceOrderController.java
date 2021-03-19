@@ -31,6 +31,9 @@ public class PlaceOrderController extends BaseController {
 	/**
 	 * SOLID: Vi phạm nguyên lý OCP. Phương thức validateDeliveryInfo sẽ phải thay đổi code khi thêm các
 	 * thuộc tính cần phải validate.
+	 * 
+	 * Ngoài ra trong phương thức processDeliveryInfo cũng vi phạm OCP do có phụ thuộc trực tiếp vào cấu trúc
+	 * của info. Nếu tương lai cấu trúc info thay đổi, cũng sẽ dẫn tới phải modify lại phương thức của class này.
 	 */
 	
 	/**
@@ -38,6 +41,9 @@ public class PlaceOrderController extends BaseController {
 	 * Phương thức cụ thể đó là DistanceCalculator(). Nếu sau này có thay đổi cách thức tính khoảng cách,
 	 * ví dụ như sử dụng thư viện Alternative Distance Calculator, ta lại phải thay đổi do tính khoảng cách
 	 * tại đang phụ thuộc vào một lớp được cài đặt cụ thể mà không phải là lớp trừu tượng.
+	 * 
+	 * Vi phạm DIP còn phụ thuộc thêm vào info trong processDeliveryInfo. Do phụ thuộc trực tiếp vào cấu trúc của
+	 * info chứ không phải một class info trừu tượng hơn.
 	 */
 	
 	/**

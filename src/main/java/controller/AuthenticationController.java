@@ -26,6 +26,15 @@ public class AuthenticationController extends BaseController {
 	 */
 	
 	/**
+	 *  SOLID: Vi phạm nguyên lý DIP. Có phụ thuộc vào phương thức mã hóa md5.
+	 *  Đáng lẽ nên phụ thuộc vào một lớp abstract để thực hiện nhiệm vụ mã hóa, sau đó cho kế thừa và md5 là một
+	 *  các lớp kế thừa để trong tương lai nếu có thay đổi phương thức mã hóa thì cũng không ảnh hướng đến class này
+	 *  
+	 *  Vì cùng lý do như trên
+	 *  SOLID: Vi phạm nguyên lý OCP.
+	 */
+	
+	/**
 	 * Coincidental cohesion, do có phương thức md5(String message) dùng để mã hóa chuỗi theo hàm băm md5
 	 * không liên quan đến các phương thức khác phục vụ cho mục đích quản lý trong lớp AuthenticationController
 	 * không phục vụ cho tính năng của lớp này
