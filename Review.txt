@@ -1,0 +1,4 @@
+Reviewer: Phạm Văn Thành
+-File: src/main/java/views/screen/shipping/ShippingScreenHandler.java
+=> OCP ở đây ko đúng vì nó gọi tới hàm preprocessDeliveryInfo nhưng mà xử lí ở hết class khác,
+nên class đó sẽ vi phạm OCP chứ ko phải class ShippingScreenHandler
