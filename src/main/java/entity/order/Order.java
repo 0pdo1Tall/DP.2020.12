@@ -17,7 +17,6 @@ public class Order {
     private int tax;
     private List orderMediaList;
 
-    //OCP: Phụ thuộc Trực tiếp vào DeliveryInfo
     protected DeliveryInfo deliveryInfo;     // common coupling
 
     public Order() {
@@ -29,7 +28,6 @@ public class Order {
 
     // Stamp coupling: chỉ lấy subtottal nhưng dùng tham số là cart
 
-    //DIP/OCP: Phụ thuộc trực tiếp vào class Card
 
     public Order(Cart cart) {
         List<OrderItem> orderItems = new ArrayList<>();

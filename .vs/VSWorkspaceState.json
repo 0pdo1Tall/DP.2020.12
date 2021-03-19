@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\main",
+    "\\src\\main\\java",
+    "\\src\\main\\java\\entity",
+    "\\src\\main\\java\\entity\\cart",
+    "\\src\\main\\java\\entity\\media",
+    "\\src\\main\\java\\entity\\order",
+    "\\src\\main\\java\\entity\\payment",
+    "\\src\\main\\java\\entity\\shipping"
+  ],
+  "SelectedNode": "\\src\\main\\java\\entity\\media\\Media.java",
+  "PreviewInSolutionExplorer": false
+}

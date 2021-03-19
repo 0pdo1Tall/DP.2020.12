@@ -11,10 +11,13 @@ public class DeliveryInfo {
     protected String province;
     protected String address;
     protected String shippingInstructions;
-    protected DistanceCalculator distanceCalculator;   // OCP: Phụ thuộc trực tiếp vào class DistanceCalculator
+    protected DistanceCalculator distanceCalculator;  
 
     // data coupling
 
+    //SOLID: Vi phạm nguyên lí OCP: vì nếu mở rộng theo yêu cầu, ta sẽ phải đổi phương thức tính khoảng cách khác, và như thế phải modify lại phần mã nguồn của class này
+	//SOLID: Vi phạm nguyên lí DIP: Phụ thuộc vào DistanceCalculator
+	
     
     public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions, DistanceCalculator distanceCalculator) {
         this.name = name;

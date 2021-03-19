@@ -51,7 +51,7 @@ public class Media {
         this.imageURL = imageUrl;
     }
 
-    //OCP: Phụ thuộc vào MediaDAO
+   
     public int getQuantity() throws SQLException {
         int updated_quantity = new MediaDAO().getMediaById(id).quantity;
         this.quantity = updated_quantity;
