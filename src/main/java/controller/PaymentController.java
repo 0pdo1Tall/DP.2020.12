@@ -21,6 +21,8 @@ import subsystem.InterbankSubsystem;
  * @author hieud
  *
  */
+
+// SOLID: ISP do lop con(Payment Controller) ko lien quan den nghiep vu cua lop cha(BaseController)
 public class PaymentController extends BaseController {
 
 	/**
@@ -83,6 +85,7 @@ public class PaymentController extends BaseController {
 	 *         message.
 	 */
 	// SOLID: OCP vi khi thay doi phuong thuc thanh toan se phai them moi phuong thuc
+	// SOLID: DIP do phu thuoc vaf CreditCard ko phai la Abstract/Interface
 	public Map<String, String> payOrder(int amount, String contents, String cardNumber, String cardHolderName,
 			String expirationDate, String securityCode) {
 		Map<String, String> result = new Hashtable<String, String>();

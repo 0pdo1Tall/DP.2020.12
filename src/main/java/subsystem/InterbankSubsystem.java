@@ -32,6 +32,7 @@ public class InterbankSubsystem implements InterbankInterface {
 	 */
 	// Data Coupling
 	// SOLID: DIP do phu thuoc vao Credit Card
+	// SOLID: OCP do phai modify khi thay doi phuong thuc thuc thanh toan
 	public PaymentTransaction payOrder(CreditCard card, int amount, String contents) {
 		PaymentTransaction transaction = ctrl.payOrder(card, amount, contents);
 		return transaction;

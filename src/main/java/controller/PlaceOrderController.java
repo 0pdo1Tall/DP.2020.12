@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
  * @author nguyenlm
  */
 
+// SOLID: ISP do lop con PlaceOrderController ko lien quan den nghiep vu cua lop cha BaseController
 public class PlaceOrderController extends BaseController {
 
     /**
@@ -62,6 +63,7 @@ public class PlaceOrderController extends BaseController {
      * @throws IOException
      */
     // SOLID: OCP do khi info thay doi dan toi phai modify lai function
+    // SOLID: DIP do phu thuoc deliveryInfo khong phai Abstraction/Interface
     public DeliveryInfo processDeliveryInfo(HashMap info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         LOGGER.info("Process Delivery Info");
         LOGGER.info(info.toString());
@@ -84,6 +86,7 @@ public class PlaceOrderController extends BaseController {
    * @throws IOException
    */
     // SOLID: SRP do validate khong phai nhiem vu cua PlaceOrderController
+    // SOLID: OCP do khi info thay doi se phai modify lai function
     public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         if (validatePhoneNumber(info.get("phone"))
         || validateName(info.get("name"))

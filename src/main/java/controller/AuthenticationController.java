@@ -13,12 +13,11 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-
-
 /**
  * @author
  */
-// SOLID: SRP do chua cac chuc nang lien quan den ca authentication va login/logout
+// SOLID: SRP do chua cac chuc nang lien quan den ca authentication, login/logout va md5
+// SOLID: ISP do lop con khong lien quan den nghiep vu cua lop cha
 public class AuthenticationController extends BaseController {
 
     public boolean isAnonymousSession() {
@@ -36,7 +35,8 @@ public class AuthenticationController extends BaseController {
             throw new ExpiredSessionException();
         } else return SessionInformation.mainUser.cloneInformation();
     }
-
+    // SOLID: OCP do khi thay doi ham ma hoa can sua lai ham md5
+    // SOLID: DIP do phu thuoc vao ham ma hoa khong phai la Abstract/Interface
     public void login(String email, String password) throws Exception {
         try {
             User user = new UserDAO().authenticate(email, md5(password));
