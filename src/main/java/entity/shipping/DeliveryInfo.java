@@ -11,9 +11,11 @@ public class DeliveryInfo {
     protected String province;
     protected String address;
     protected String shippingInstructions;
-    protected DistanceCalculator distanceCalculator;
+    protected DistanceCalculator distanceCalculator;   // OCP: Phụ thuộc trực tiếp vào class DistanceCalculator
 
     // data coupling
+
+    
     public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions, DistanceCalculator distanceCalculator) {
         this.name = name;
         this.phone = phone;

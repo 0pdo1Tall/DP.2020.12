@@ -1,4 +1,4 @@
-package entity.payment;
+﻿package entity.payment;
 
 public class PaymentTransaction {
 	private String errorCode;
@@ -8,7 +8,7 @@ public class PaymentTransaction {
 	private int amount;
 	private String createdAt;
 	
-	// data coupling
+	// DIP vì khi có loại card mới sẽ phải sửa 
 	public PaymentTransaction(String errorCode, CreditCard card, String transactionId, String transactionContent,
                               int amount, String createdAt) {
 		super();
