@@ -1,3 +1,7 @@
 Phân công công việc tìm vi phạm nguyên lý S.O.L.I.D subgroup 1: Lê Anh Thành tìm SRP, LSP, DIP; Phạm Văn Thành tìm OCP, ISP.
 
 // Review Code ở đây (Ghi rõ tên người review)
+
+Reviewer: Đặng Đình Thọ
+
+Đã review, Không thấy có vấn đề gì
