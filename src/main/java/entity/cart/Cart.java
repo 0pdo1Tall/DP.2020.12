@@ -7,13 +7,30 @@ import java.util.List;
 import common.exception.MediaNotAvailableException;
 import entity.media.Media;
 
+// Card  là đối tượng duy nhất nên ta có thê áp dụng singleton cho nó như sau:
+
 public class Cart {
     
+    private static Cart instance;
+
     private List<CartItem> lstCartItem;
 
-    public Cart() {
-        lstCartItem = new ArrayList<>();
+private Cart(){
+    lstCartItem = new ArrayList<>();
+};
+
+public static Cart getCard(){
+    if(instance == null){
+        instance = new Cart();
     }
+    
+    return instance;
+}
+
+    // public Cart() {
+    //     lstCartItem = new ArrayList<>();
+    // }
+
 
     // data coupling
     public void addCartMedia(CartItem cm){
