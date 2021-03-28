@@ -17,7 +17,7 @@ public class MediaDAO {
 
     // None Coupling
     public List getAllMedia() throws SQLException {
-        Statement stm = AIMSDB.getConnection().createStatement();
+        Statement stm = AIMSDB.getInstance().getConnection().createStatement();
         ResultSet res = stm.executeQuery("select * from Media");
         ArrayList medium = new ArrayList<>();
         while (res.next()) {
@@ -37,7 +37,7 @@ public class MediaDAO {
     // Data Coupling
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM Media ;";
-        Statement stm = AIMSDB.getConnection().createStatement();
+        Statement stm = AIMSDB.getInstance().getConnection().createStatement();
         ResultSet res = stm.executeQuery(sql);
 
         if (res.next()) {
@@ -55,7 +55,7 @@ public class MediaDAO {
 
     // Control Coupling + Stamp Coupling
     public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
-        Statement stm = AIMSDB.getConnection().createStatement();
+        Statement stm = AIMSDB.getInstance().getConnection().createStatement();
         // Control Coupling Here(if value is a string -> update value, else do nothing)
         if (value instanceof String){
             value = "\"" + value + "\"";

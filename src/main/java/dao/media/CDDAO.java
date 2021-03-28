@@ -22,7 +22,7 @@ public class CDDAO extends MediaDAO {
                 "ON Media.id = CD.id " +
                 "where Media.id = " + id + ";";
 
-        ResultSet res = AIMSDB.getConnection().createStatement().executeQuery(sql);
+        ResultSet res = AIMSDB.getInstance().getConnection().createStatement().executeQuery(sql);
         if(res.next()) {
 
             // from media table

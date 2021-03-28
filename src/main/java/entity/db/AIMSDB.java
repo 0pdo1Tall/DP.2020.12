@@ -11,6 +11,13 @@ import utils.*;
 // Singleton: DB duoc coi nhu mot doi tuong lon, duy nhat, global(dung de tao connection) nen duoc dat la Singleton
 public class AIMSDB {
 
+    private static AIMSDB db;
+    private AIMSDB(){}
+    public static AIMSDB getInstance() {
+        if(db == null) db = new AIMSDB();
+        return db;
+    }
+
 	private static Logger LOGGER = Utils.getLogger(Connection.class.getName());
 	private static Connection connect;
 	// TODO: refactor Utils -> limit connections
@@ -29,7 +36,7 @@ public class AIMSDB {
 
 
     public static void main(String[] args) {
-        AIMSDB.getConnection();
+        AIMSDB.getInstance().getConnection();
     }
 
     //function cohesion do hàm main sử dụng //communicational cohesion: các phương thức dùng dung thuộc tính
