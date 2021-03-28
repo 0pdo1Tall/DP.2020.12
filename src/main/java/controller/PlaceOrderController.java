@@ -24,7 +24,36 @@ import java.util.regex.Pattern;
 
 //SOLID: vi phạm nguyên lí ISP, vì nó kế thừa lớp BaseController nhưng không dùng lại các hàm trong lớp đó 
 public class PlaceOrderController extends BaseController {
-
+	
+	/**
+	 * SOLID: Vi phạm nguyên lý SRP. Do class PlaceOrderController thực hiện nhiều hơn một nhiệm vụ.
+	 * Class này vừa thực hiện chức năng đặt hàng placeOrder(), vừa thực hiện kiểm tra tính hợp lệ của dữ liệu validateDeliveryInfo.
+	 */
+	
+	/**
+	 * SOLID: Vi phạm nguyên lý OCP. Phương thức validateDeliveryInfo sẽ phải thay đổi code khi thêm các
+	 * thuộc tính cần phải validate.
+	 * 
+	 * Ngoài ra trong phương thức processDeliveryInfo cũng vi phạm OCP do có phụ thuộc trực tiếp vào cấu trúc
+	 * của info. Nếu tương lai cấu trúc info thay đổi, cũng sẽ dẫn tới phải modify lại phương thức của class này.
+	 */
+	
+	/**
+	 * SOLID: Vi phạm nguyên lý DIP. Phương thức processDeliveryInfo có phụ thuộc vào một phương thức.
+	 * Phương thức cụ thể đó là DistanceCalculator(). Nếu sau này có thay đổi cách thức tính khoảng cách,
+	 * ví dụ như sử dụng thư viện Alternative Distance Calculator, ta lại phải thay đổi do tính khoảng cách
+	 * tại đang phụ thuộc vào một lớp được cài đặt cụ thể mà không phải là lớp trừu tượng.
+	 * 
+	 * Vi phạm DIP còn phụ thuộc thêm vào info trong processDeliveryInfo. Do phụ thuộc trực tiếp vào cấu trúc của
+	 * info chứ không phải một class info trừu tượng hơn.
+	 */
+	
+	/**
+	 * Coincidental cohesion, do các phương thức validate không thực hiện chức năng cho PlaceOrderController
+	 * chúng nên nằm trong một module khác xử lý về kiểm tra tính hợp lệ của dữ liệu
+	 */
+	
+	
     /**
      * Just for logging purpose
      */
@@ -49,6 +78,8 @@ public class PlaceOrderController extends BaseController {
     
     public void placeOrder() throws SQLException {
         SessionInformation.cartInstance.checkAvailabilityOfProduct();
+        
+        // Data coupling, gọi đến phương thức để lấy dữ liệu cần thiết
     }
 
     /**
@@ -58,6 +89,8 @@ public class PlaceOrderController extends BaseController {
      */
     public Order createOrder() throws SQLException {
         return new Order(SessionInformation.cartInstance);
+        
+        // Data coupling, gọi đến phương thức để lấy dữ liệu
     }
 
     /**
@@ -91,6 +124,8 @@ public class PlaceOrderController extends BaseController {
                 new DistanceCalculator());
         System.out.println(deliveryInfo.getProvince());
         return deliveryInfo;
+        
+        // Data coupling, truy cập thông tin hợp lệ
     }
     
     /**
@@ -120,6 +155,8 @@ public class PlaceOrderController extends BaseController {
             return false;
         }
         return true;
+        
+        // Data coupling, sử dụng vừa đủ dữ liệu để xử lý
     }
 
     public boolean validateName(String name) {
@@ -128,6 +165,8 @@ public class PlaceOrderController extends BaseController {
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(name);
         return matcher.matches();
+        
+        // Data coupling, sử dụng vừa đủ dữ liệu để xử lý
     }
 
     public boolean validateAddress(String address) {
@@ -136,5 +175,7 @@ public class PlaceOrderController extends BaseController {
         Pattern pattern = Pattern.compile(patternString);
         Matcher matcher = pattern.matcher(address);
         return matcher.matches();
+        
+        // Data coupling, sử dụng vừa đủ dữ liệu để xử lý
     }
 }

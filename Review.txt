@@ -1,3 +1,26 @@
 Phân công công việc tìm vi phạm nguyên lý S.O.L.I.D subgroup 1: Lê Anh Thành tìm SRP, LSP, DIP; Phạm Văn Thành tìm OCP, ISP.
 
 // Review Code ở đây (Ghi rõ tên người review)
+
+Reviewer: Đặng Đình Thọ
+
+Đã review, Không thấy có vấn đề gì
+
+Reviewer: Hoang Minh Tien
+
+Trong File AuthenticationController.java: Lop con AuthenticationController ke thua lop cha BaseController,nhung chuc nang cua
+chung thi hoan toan # nhau(Authentication: md5, authentication, login/logout | BaseController: checkMedia,getMedia) -> DIP
+Ngoai ra cac ham login/logout su dung ham ma hoa md5, se phai modify function neu muon thay doi kieu ma hoa -> OCP
+
+Trong File PaymentController.java: Payment controller phu thuoc vao 2 thanh phan la Card va Interbank Interface
+trong do Interbank Interface la mot Interface, Card thi lai thuoc kieu class. Do vay can phai chuyen doi Card thanh Abstract Class
+hoac Interface de ko vi pham DIP
+
+Trong File PlaceOrderController.java: DIP con the hien o viec Info duoc truyen vao trong processDeliveryInfo va validateDeliveryInfo
+khong thuoc kieu Abstract hay Interface.
+
+
+Mẫu thiết kế: Singleton -- Subteam 1: Lê Anh Thành - Phạm Văn Thành
+
+// Review:
+

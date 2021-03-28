@@ -16,6 +16,8 @@ public class PlaceRushOrderException extends AimsException {
 
 	public PlaceRushOrderException(String message) {
 		super(message);
+		
+		// Data coupling, truyền tham số cần thiết đến phương thức khởi tạo
 	}
 
 }

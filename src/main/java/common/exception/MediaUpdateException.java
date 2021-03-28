@@ -16,6 +16,8 @@ public class MediaUpdateException extends AimsException {
 
 	public MediaUpdateException(String message) {
 		super(message);
+		
+		// Data coupling, truyền tham số đến phương thức cần thiết để thiết lập
 	}
 
 }
