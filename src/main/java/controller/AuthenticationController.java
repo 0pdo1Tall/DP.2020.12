@@ -21,6 +21,24 @@ import java.util.Objects;
 public class AuthenticationController extends BaseController {
 	
 	/**
+	 * Singleton: lý do quản lý mainUser, expiredTime,... chỉ có duy nhất một đối tượng (khai báo static bên SessionInformation),
+	 *  nên chỉ cần 1 controller để quản lý, tạo thêm cũng không thể tăng hiệu suất sử dụng
+	 */
+	
+	private static AuthenticationController _authenticationControllerInstance;
+	
+	private AuthenticationController() {
+
+	}
+	
+	public static synchronized AuthenticationController getInstance() {
+		if (_authenticationControllerInstance == null) {
+			_authenticationControllerInstance = new AuthenticationController();
+		}
+		return _authenticationControllerInstance;
+	}
+	
+	/**
 	 * 	SOLID: Vi phạm nguyên lý SRP. Thực hiện hai nhiệm vụ, một nhiệm vụ là điều hướng Authentication.
 	 * 	Một nhiệm vụ là mã hóa md5.
 	 */

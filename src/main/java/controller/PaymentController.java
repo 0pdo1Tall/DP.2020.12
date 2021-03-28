@@ -24,6 +24,24 @@ import subsystem.InterbankSubsystem;
 public class PaymentController extends BaseController {
 	
 	/**
+	 * Singleton: liên quan đến thanh toán --> chỉ cần 1 controller như vậy để sử dụng trong quá trình tạo hóa đơn và thanh toán
+	 * mỗi hóa đơn và thanh toán là hoàn toàn riêng biệt, chỉ cần sử dụng một controller để giải quyết
+	 */
+	
+	private static PaymentController _paymentControllerInstance;
+	
+	private PaymentController() {
+		
+	}
+	
+	public static synchronized PaymentController getInstance() {
+		if (_paymentControllerInstance == null) {
+			_paymentControllerInstance = new PaymentController();
+		}
+		return _paymentControllerInstance;
+	}
+	
+	/**
 	 * SOLID: Vi phạm nguyên lý SRP. Do class thực hiện nhiều hơn một nhiệm vụ.
 	 * Cụ thể nó vừa thực hiện kiểm tra hạn qua phương thức getExpirationDate, vừa thực hiện thanh toán qua phương thức payOrder.
 	 * Cũng vừa làm rỗng giỏ hàng qua phương thức emptyCart()

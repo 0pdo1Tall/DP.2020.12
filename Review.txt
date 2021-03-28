@@ -19,3 +19,10 @@ hoac Interface de ko vi pham DIP
 
 Trong File PlaceOrderController.java: DIP con the hien o viec Info duoc truyen vao trong processDeliveryInfo va validateDeliveryInfo
 khong thuoc kieu Abstract hay Interface.
+
+
+
+----------
+Mẫu thiết kế: Singleton -- Subteam 1: Lê Anh Thành - Phạm Văn Thành
+
+// Review:
