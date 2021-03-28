@@ -11,6 +11,7 @@ public class Invoice {
 
     }
 
+    // data coupling
     public Invoice(Order order){
         this.order = order;
         this.amount = order.getTotal();
@@ -20,6 +21,7 @@ public class Invoice {
         return order;
     }
 
+    // data coupling
     public void setAmount(int amount) {
         this.amount = amount;
     }
@@ -31,4 +33,6 @@ public class Invoice {
     public void saveInvoice(){
         
     }
+
+    //communicational cohesion: các phương thức dùng dung thuộc tính
 }

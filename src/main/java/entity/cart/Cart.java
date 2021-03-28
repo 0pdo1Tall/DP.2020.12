@@ -7,18 +7,37 @@ import java.util.List;
 import common.exception.MediaNotAvailableException;
 import entity.media.Media;
 
+// Card  là đối tượng duy nhất nên ta có thê áp dụng singleton cho nó như sau:
+
 public class Cart {
     
+    private static Cart instance;
+
     private List<CartItem> lstCartItem;
 
-    public Cart() {
-        lstCartItem = new ArrayList<>();
-    }
+private Cart(){
+    lstCartItem = new ArrayList<>();
+};
 
+public static Cart getCard(){
+    if(instance == null){
+        instance = new Cart();
+    }
+    
+    return instance;
+}
+
+    // public Cart() {
+    //     lstCartItem = new ArrayList<>();
+    // }
+
+
+    // data coupling
     public void addCartMedia(CartItem cm){
         lstCartItem.add(cm);
     }
 
+    // data coupling
     public void removeCartMedia(CartItem cm){
         lstCartItem.remove(cm);
     }
@@ -49,6 +68,7 @@ public class Cart {
         return total;
     }
 
+    //SRP: Phương thức này có thể chia ra một class khác
     public void checkAvailabilityOfProduct() throws SQLException{
         boolean allAvailable = true;
         for (Object object : lstCartItem) {
@@ -60,6 +80,7 @@ public class Cart {
         if (!allAvailable) throw new MediaNotAvailableException("Some media not available");
     }
 
+    // stamp coupling
     public CartItem checkMediaInCart(Media media){
         for (CartItem cartItem : lstCartItem) {
             if (cartItem.getMedia().getId() == media.getId()) return cartItem;
@@ -67,4 +88,5 @@ public class Cart {
         return null;
     }
 
+    //communicational cohesion: các phương thức dùng dung thuộc tính lstCartItem
 }

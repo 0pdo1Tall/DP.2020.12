@@ -1,4 +1,4 @@
-package entity.payment;
+﻿package entity.payment;
 
 public class PaymentTransaction {
 	private String errorCode;
@@ -8,8 +8,9 @@ public class PaymentTransaction {
 	private int amount;
 	private String createdAt;
 
-	// SOLID: OCP do khi mo rong phuong thuc thanh toan phai chinh sua truc tiep o day
-	// SOLID: DIP phu thuoc truc tiep vao CreditCard khong phai la Abstract/Interface
+	//SOLID: Vi phạm nguyên lí OCP: Vì khi có loại Card mới thì phải sửa
+	//SOLID: Vi phạm nguyên lí DIP: Bởi vì nó phụ thuộc vào một lớp cài đặt cụ thể là CreditCard chứ không phải là một abstract class đại diện cho mọi phương tiện thanh toán.
+
 	public PaymentTransaction(String errorCode, CreditCard card, String transactionId, String transactionContent,
                               int amount, String createdAt) {
 		super();
