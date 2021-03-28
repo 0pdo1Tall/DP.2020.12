@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Review Code ở đây(Ghi rõ tên người review)
 
 + Reviewer: Le Anh Thanh
@@ -24,3 +25,9 @@ Tôi cho rằng không vi phạm DIP --> khi có thay đổi thì cũng chỉ th
 
 /src/main/java/subsystem/InterbankSubsystem.java
 Vi phạm cả OCP nữa --> Khi có thay đổi hay thêm mới phương tiện thanh toán (ví dụ thay vì dùng CreditCard --> chuyển sang dùng DomesticCard), thì phải sửa lại phần mã nguồn của method payOrder.
+=======
+Reviewer: Phạm Văn Thành
+-File: src/main/java/views/screen/shipping/ShippingScreenHandler.java
+=> OCP ở đây ko đúng vì nó gọi tới hàm preprocessDeliveryInfo nhưng mà xử lí ở hết class khác,
+nên class đó sẽ vi phạm OCP chứ ko phải class ShippingScreenHandler
+>>>>>>> thaoBranch

@@ -21,8 +21,8 @@ import java.util.regex.Pattern;
  * This class controls the flow of place order usecase in our AIMS project
  * @author nguyenlm
  */
-
-// SOLID: ISP do lop con PlaceOrderController ko lien quan den nghiep vu cua lop cha BaseController
+    // SOLID: ISP do lop con PlaceOrderController ko lien quan den nghiep vu cua lop cha BaseController
+    // COINCIDENTAL COHESION phan xac thuc thong tin dia chi nen de o lop khac
 public class PlaceOrderController extends BaseController {
 
     /**
