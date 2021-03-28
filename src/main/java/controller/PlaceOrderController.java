@@ -28,12 +28,25 @@ public class PlaceOrderController extends BaseController {
     /**
      * Just for logging purpose
      */
-    private static Logger LOGGER = utils.Utils.getLogger(PlaceOrderController.class.getName());
-
+	private static Logger LOGGER = utils.Utils.getLogger(PlaceOrderController.class.getName());
+	
+	/** 
+	 * Singleton:  Vì: mỗi lần đặt hàng thì mới sử dụng đến đối tượng của lớp này, 
+	 * không cần thiết dùng tới nhiều đối tượng của lớp 
+	 */
+	private static PlaceOrderController placeOrderController = new PlaceOrderController();
+    
+	private PlaceOrderController() {}
+    public static PlaceOrderController getInstance() {
+    	return placeOrderController;
+    }
+    
+    
     /**
      * This method checks the availability of product when user click PlaceOrder button
      * @throws SQLException
      */
+    
     public void placeOrder() throws SQLException {
         SessionInformation.cartInstance.checkAvailabilityOfProduct();
     }
