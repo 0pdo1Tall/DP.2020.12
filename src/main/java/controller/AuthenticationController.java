@@ -18,6 +18,7 @@ import java.util.Objects;
  */
 // SOLID: SRP do chua cac chuc nang lien quan den ca authentication, login/logout va md5
 // SOLID: ISP do lop con khong lien quan den nghiep vu cua lop cha
+// Singleton: AuthenticationController la lop xu ly den cac dang xac thuc, nen duoc tao 1 Single Instance duy nhat va dc xu dung nhu 1 global object
 public class AuthenticationController extends BaseController {
 
     public boolean isAnonymousSession() {

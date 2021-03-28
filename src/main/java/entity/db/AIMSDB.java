@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import java.sql.Connection;
 import utils.*;
 
+// Singleton: DB duoc coi nhu mot doi tuong lon, duy nhat, global(dung de tao connection) nen duoc dat la Singleton
 public class AIMSDB {
 
 	private static Logger LOGGER = Utils.getLogger(Connection.class.getName());

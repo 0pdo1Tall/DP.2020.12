@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * @author
  */
+// Singleton: MediaDAO quan ly cac products,va cac nghiep vu lien quan, do vay no len dc dat la Singleton
 public class MediaDAO {
 
     // None Coupling
