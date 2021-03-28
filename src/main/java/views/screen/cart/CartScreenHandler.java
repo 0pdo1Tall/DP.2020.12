@@ -56,7 +56,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 	@FXML
 	private Button btnPlaceOrder;
 
-
+	
 	public CartScreenHandler(Stage stage, String screenPath) throws IOException {
 		super(stage, screenPath);
 		try {
@@ -69,7 +69,11 @@ public class CartScreenHandler extends BaseScreenHandler {
 			PopupScreen.error(ex.getMessage());
 		}
 	}
+	
 
+	
+	
+	
 	protected void setupFunctionality() throws Exception {
 		// fix relative image path caused by fxml
 		File file = new File(ViewsConfig.IMAGE_PATH + "/Logo.png");

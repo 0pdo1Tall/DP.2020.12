@@ -54,7 +54,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 	private ComboBox<String> province;
 
 	private Order order;
-
+	
 	public ShippingScreenHandler(Stage stage, String screenPath, Order order) throws IOException {
 		super(stage, screenPath);
 		try {
@@ -69,6 +69,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 		}
 	}
 
+	
 
 	protected void setupData(Object dto) throws Exception {
 		this.order = (Order) dto;
