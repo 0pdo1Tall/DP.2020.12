@@ -36,6 +36,8 @@ import views.screen.cart.CartScreenHandler;
 import views.screen.popup.PopupScreen;
 
 
+// SRP class hien thi san pham, update 
+
 public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 
     public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName());
@@ -92,6 +94,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         return (HomeController) super.getBController();
     }
 
+	// data coupling 
     protected void setupData(Object dto) throws Exception {
         setBController(HomeController.getInstance());
         this.authenticationController = AuthenticationController.getInstance();
@@ -144,7 +147,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             btnLogin.setOnMouseClicked(event -> {});
         }
 
-        numMediaInCart.setText(String.valueOf(SessionInformation.cartInstance.getListMedia().size()) + " media");
+        numMediaInCart.setText(String.valueOf(Cart.getCard().getListMedia().size()) + " media");
         super.show();
     }
 
@@ -159,6 +162,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         cartImage.setImage(img2);
     }
 
+    //stamp coupling 
     public void addMediaHome(List items){
         ArrayList mediaItems = (ArrayList)((ArrayList) items).clone();
         hboxMedia.getChildren().forEach(node -> {
@@ -207,7 +211,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         });
         menuButton.getItems().add(position, menuItem);
     }
-
+	// data coupling 
     @Override
     public void update(Observable observable) {
         if (observable instanceof MediaHandler) update((MediaHandler) observable);
@@ -219,7 +223,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 
         try {
             if (requestQuantity > media.getQuantity()) throw new MediaNotAvailableException();
-            Cart cart = SessionInformation.cartInstance;
+            Cart cart = Cart.getCard();
             // if media already in cart then we will increase the quantity by 1 instead of create the new cartMedia
             CartItem mediaInCart = getBController().checkMediaInCart(media);
             if (mediaInCart != null) {
@@ -231,6 +235,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             }
 
             // subtract the quantity and redisplay
+            
+            //content coupling 
             media.setQuantity(media.getQuantity() - requestQuantity);
             numMediaInCart.setText(cart.getTotalMedia() + " media");
             PopupScreen.success("The media " + media.getTitle() + " added to Cart");
@@ -266,3 +272,5 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         }
     }
 }
+
+// Communicational Cohesion vi 1 so method su dung chung du lieuj homeItems, authenticationController

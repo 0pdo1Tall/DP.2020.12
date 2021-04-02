@@ -21,8 +21,8 @@ import java.util.regex.Pattern;
  * This class controls the flow of place order usecase in our AIMS project
  * @author nguyenlm
  */
+    // COINCIDENTAL COHESION phan xac thuc thong tin dia chi nen de o lop khac
 
-//SOLID: vi phạm nguyên lí ISP, vì nó kế thừa lớp BaseController nhưng không dùng lại các hàm trong lớp đó 
 public class PlaceOrderController extends BaseController {
 	
 	/**
@@ -77,7 +77,7 @@ public class PlaceOrderController extends BaseController {
      */
     
     public void placeOrder() throws SQLException {
-        SessionInformation.cartInstance.checkAvailabilityOfProduct();
+        Cart.getCard().checkAvailabilityOfProduct();
         
         // Data coupling, gọi đến phương thức để lấy dữ liệu cần thiết
     }
@@ -88,7 +88,7 @@ public class PlaceOrderController extends BaseController {
      * @throws SQLException
      */
     public Order createOrder() throws SQLException {
-        return new Order(SessionInformation.cartInstance);
+        return new Order(Cart.getCard());
         
         // Data coupling, gọi đến phương thức để lấy dữ liệu
     }
@@ -111,6 +111,7 @@ public class PlaceOrderController extends BaseController {
     
     // SOLID: Vi phạm nguyên lí OCP. Vì nếu thêm một kiểu vận chuyển khác thì sẽ phải modify code
     // SOLID: Vi phạm nguyên lí DIP. Vì nó phụ thuộc vào lớp chi tiết DistanceCalculator
+    // SOLID: DIP do phu thuoc deliveryInfo khong phai Abstraction/Interface
     public DeliveryInfo processDeliveryInfo(HashMap info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         LOGGER.info("Process Delivery Info");
         LOGGER.info(info.toString());
@@ -137,6 +138,8 @@ public class PlaceOrderController extends BaseController {
     
     // SOLID: Vi phạm nguyên lí OCP. Vì nếu muốn thay đổi hoặc thêm dữ liệu validate thì sẽ phải modify code 
     // Coincidental Cohesion. Do các hàm validate đang được đặt trong class không liên quan đến validate, nên để trong class ở utils
+    // SOLID: SRP do validate khong phai nhiem vu cua PlaceOrderController
+
     public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         if (validatePhoneNumber(info.get("phone"))
         || validateName(info.get("name"))
@@ -178,4 +181,5 @@ public class PlaceOrderController extends BaseController {
         
         // Data coupling, sử dụng vừa đủ dữ liệu để xử lý
     }
+
 }

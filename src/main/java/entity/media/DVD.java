@@ -7,6 +7,9 @@ import java.util.List;
 
 public class DVD extends Media {
 
+
+    // common coupling
+
     String discType;
     String director;
     int runtime;
@@ -19,6 +22,7 @@ public class DVD extends Media {
 
     }
 
+    // Data coupling
     public DVD(int id, String title, String category, int price, int quantity, String type, String discType,
             String director, int runtime, String studio, String subtitles, Date releasedDate, String filmType) throws SQLException{
         super(id, title, category, price, quantity, type);
@@ -35,6 +39,7 @@ public class DVD extends Media {
         return this.discType;
     }
 
+    // Data coupling
     public DVD setDiscType(String discType) {
         this.discType = discType;
         return this;
@@ -44,6 +49,7 @@ public class DVD extends Media {
         return this.director;
     }
 
+    // Data coupling
     public DVD setDirector(String director) {
         this.director = director;
         return this;
@@ -53,6 +59,7 @@ public class DVD extends Media {
         return this.runtime;
     }
 
+    // Data coupling
     public DVD setRuntime(int runtime) {
         this.runtime = runtime;
         return this;
@@ -62,6 +69,7 @@ public class DVD extends Media {
         return this.studio;
     }
 
+    // Data coupling
     public DVD setStudio(String studio) {
         this.studio = studio;
         return this;
@@ -71,6 +79,7 @@ public class DVD extends Media {
         return this.subtitles;
     }
 
+    // Data coupling
     public DVD setSubtitles(String subtitles) {
         this.subtitles = subtitles;
         return this;
@@ -80,6 +89,7 @@ public class DVD extends Media {
         return this.releasedDate;
     }
 
+    // Data coupling
     public DVD setReleasedDate(Date releasedDate) {
         this.releasedDate = releasedDate;
         return this;
@@ -89,6 +99,7 @@ public class DVD extends Media {
         return this.filmType;
     }
 
+    // Data coupling
     public DVD setFilmType(String filmType) {
         this.filmType = filmType;
         return this;
@@ -109,4 +120,6 @@ public class DVD extends Media {
                 + runtime + "'" + ", studio='" + studio + "'" + ", subtitles='" + subtitles + "'" + ", releasedDate='"
                 + releasedDate + "'" + ", filmType='" + filmType + "'" + "}";
     }
+
+    //communicational cohesion: một vài phương thức dùng dung thuộc tính
 }

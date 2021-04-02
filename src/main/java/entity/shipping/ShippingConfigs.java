@@ -4,6 +4,9 @@ package entity.shipping;
  * @author
  */
 public class ShippingConfigs {
+ 
+
+// Common coupling: mảng provinces để public
 
     public static String[] PROVINCES = {
             "Bắc Giang", 	"Bắc Kạn", 			"Cao Bằng", 	"Hà Giang", 	"Lạng Sơn", 	"Phú Thọ",

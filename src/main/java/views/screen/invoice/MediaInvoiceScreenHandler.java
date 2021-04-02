@@ -43,7 +43,7 @@ public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
     public MediaInvoiceScreenHandler(String screenPath) throws IOException{
         super(screenPath);
     }
-
+	// data coupling 
     public void setOrderItem(OrderItem orderItem) throws SQLException{
         this.orderItem = orderItem;
         setMediaInfo();

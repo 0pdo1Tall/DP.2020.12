@@ -1,4 +1,4 @@
--- Creator:       MySQL Workbench 8.0.21/ExportSQLite Plugin 0.1.0
+s-- Creator:       MySQL Workbench 8.0.21/ExportSQLite Plugin 0.1.0
 -- Author:        nguyenlm
 -- Caption:       New Model
 -- Project:       Name of the project

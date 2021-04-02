@@ -26,6 +26,9 @@ import views.screen.ViewsConfig;
 import views.screen.popup.PopupScreen;
 import views.screen.shipping.ShippingScreenHandler;
 
+
+// SRP class hien thi, update san pham trong cart
+
 public class CartScreenHandler extends BaseScreenHandler {
 	private static Logger LOGGER = Utils.getLogger(CartScreenHandler.class.getName());
 
@@ -53,6 +56,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 	@FXML
 	private Button btnPlaceOrder;
 
+	
 	public CartScreenHandler(Stage stage, String screenPath) throws IOException {
 		super(stage, screenPath);
 		try {
@@ -65,7 +69,11 @@ public class CartScreenHandler extends BaseScreenHandler {
 			PopupScreen.error(ex.getMessage());
 		}
 	}
+	
 
+	
+	
+	
 	protected void setupFunctionality() throws Exception {
 		// fix relative image path caused by fxml
 		File file = new File(ViewsConfig.IMAGE_PATH + "/Logo.png");
@@ -90,7 +98,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 
 		});
 	}
-
+	
 	public ViewCartController getBController(){
 		return (ViewCartController) super.getBController();
 	}
@@ -134,7 +142,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 			displayCartWithMediaAvailability();
 		}
 	}
-
+	
 	public void updateCart() throws SQLException{
 		getBController().checkAvailabilityOfProduct();
 		displayCartWithMediaAvailability();
@@ -152,7 +160,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 		labelVAT.setText(ViewsConfig.getCurrencyFormat(vat));
 		labelAmount.setText(ViewsConfig.getCurrencyFormat(amount));
 	}
-	
+	//Sequential Cohesion vi su dung du lieu dau ra cua getBController();
 	private void displayCartWithMediaAvailability(){
 		// clear all old cartMedia
 		vboxCart.getChildren().clear();
@@ -178,3 +186,4 @@ public class CartScreenHandler extends BaseScreenHandler {
 		}
 	}
 }
+//Sequential Cohesion vi 1 so method su dung du lieu dau ra cua getBController();

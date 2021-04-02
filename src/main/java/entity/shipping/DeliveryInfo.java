@@ -5,12 +5,18 @@ import org.example.DistanceCalculator;
 
 public class DeliveryInfo {
 
+    //Common coupling
     protected String name;
     protected String phone;
     protected String province;
     protected String address;
     protected String shippingInstructions;
-    protected DistanceCalculator distanceCalculator;
+    protected DistanceCalculator distanceCalculator;  
+
+
+    // data coupling
+    //SOLID: Vi phạm nguyên lí OCP: vì nếu mở rộng theo yêu cầu, ta sẽ phải đổi phương thức tính khoảng cách khác, và như thế phải modify lại phần mã nguồn của class này
+	//SOLID: Vi phạm nguyên lí DIP: Phụ thuộc vào DistanceCalculator
 
     public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions, DistanceCalculator distanceCalculator) {
         this.name = name;
@@ -21,6 +27,7 @@ public class DeliveryInfo {
         this.distanceCalculator = distanceCalculator;
     }
 
+    // Stamp coupling: DÙng Order làm tham số truyền vào nhưng không sử dụng (hết) thuộc tính
     public int calculateShippingFee(Order order) {
         int distance = distanceCalculator.calculateDistance(address, province);
         return (int) (distance * 1.2);
@@ -45,4 +52,6 @@ public class DeliveryInfo {
     public String getShippingInstructions() {
         return shippingInstructions;
     }
+
+    //communicational cohesion: một vài phương thức dùng dung thuộc tính
 }

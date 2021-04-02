@@ -28,6 +28,9 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+
+// OCP vi se phai sua doi phuong thuc preprocessDeliveryInfo neu muon them thong tin  
+
 public class ShippingScreenHandler extends BaseScreenHandler {
 
 	private static final Logger LOGGER = Utils.getLogger(ShippingScreenHandler.class.getName());
@@ -51,7 +54,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 	private ComboBox<String> province;
 
 	private Order order;
-
+	
 	public ShippingScreenHandler(Stage stage, String screenPath, Order order) throws IOException {
 		super(stage, screenPath);
 		try {
@@ -65,6 +68,8 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 			PopupScreen.error(ex.getMessage());
 		}
 	}
+
+	
 
 	protected void setupData(Object dto) throws Exception {
 		this.order = (Order) dto;

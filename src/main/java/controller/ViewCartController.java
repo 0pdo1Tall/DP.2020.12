@@ -8,6 +8,8 @@ import entity.cart.Cart;
  * This class controls the flow of events when users view the Cart
  * @author nguyenlm
  */
+
+
 public class ViewCartController extends BaseController{
     
     /**
@@ -28,9 +30,9 @@ public class ViewCartController extends BaseController{
     }
     
     public void checkAvailabilityOfProduct() throws SQLException{
-        SessionInformation.cartInstance.checkAvailabilityOfProduct();
-        
+        //SessionInformation.cartInstance.checkAvailabilityOfProduct();     
         // Data coupling, gọi đến phương thức cần thiết để thực hiện
+        Cart.getCard().checkAvailabilityOfProduct();
     }
 
     /**
@@ -38,10 +40,11 @@ public class ViewCartController extends BaseController{
      * @return subtotal
      */
     public int getCartSubtotal(){
-        int subtotal = SessionInformation.cartInstance.calSubtotal();
+        int subtotal = Cart.getCard().calSubtotal();
         return subtotal;
         
         // Data coupling, lấy dữ liệu cần thiết thông qua phương thức được cung cấp
     }
+
 
 }

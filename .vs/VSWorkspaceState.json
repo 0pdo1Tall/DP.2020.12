@@ -4,8 +4,19 @@
     "\\src",
     "\\src\\main",
     "\\src\\main\\java",
+<<<<<<< HEAD
     "\\src\\main\\java\\controller"
   ],
   "SelectedNode": "\\src\\main\\java\\controller\\HomeController.java",
+=======
+    "\\src\\main\\java\\entity",
+    "\\src\\main\\java\\entity\\cart",
+    "\\src\\main\\java\\entity\\media",
+    "\\src\\main\\java\\entity\\order",
+    "\\src\\main\\java\\entity\\payment",
+    "\\src\\main\\java\\entity\\shipping"
+  ],
+  "SelectedNode": "\\src\\main\\java\\entity\\media\\Media.java",
+>>>>>>> 7cd4fea9967704893f62ee99a2f51a369e1159ec
   "PreviewInSolutionExplorer": false
 }

@@ -10,12 +10,14 @@ public class CD extends Media {
     String artist;
     String recordLabel;
     String musicType;
-    Date releasedDate;
+    Date releasedDate;          // common coupling
 
     public CD() throws SQLException{
 
     }
 
+    
+    // data coupling
     public CD(int id, String title, String category, int price, int quantity, String type, String artist,
             String recordLabel, String musicType, Date releasedDate) throws SQLException{
         super(id, title, category, price, quantity, type);
@@ -56,6 +58,7 @@ public class CD extends Media {
         return this.releasedDate;
     }
 
+    // data coupling
     public CD setReleasedDate(Date releasedDate) {
         this.releasedDate = releasedDate;
         return this;
@@ -76,4 +79,6 @@ public class CD extends Media {
                 + "'" + ", musicType='" + musicType + "'" + ", releasedDate='"
                 + releasedDate + "'" + "}";
     }
+
+    //communicational cohesion: một vài phương thức dùng dung thuộc tính
 }

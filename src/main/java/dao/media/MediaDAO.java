@@ -12,10 +12,12 @@ import java.util.List;
 /**
  * @author
  */
+// Singleton: MediaDAO quan ly cac products,va cac nghiep vu lien quan, do vay no len dc dat la Singleton
 public class MediaDAO {
 
+    // None Coupling
     public List getAllMedia() throws SQLException {
-        Statement stm = AIMSDB.getConnection().createStatement();
+        Statement stm = AIMSDB.getInstance().getConnection().createStatement();
         ResultSet res = stm.executeQuery("select * from Media");
         ArrayList medium = new ArrayList<>();
         while (res.next()) {
@@ -32,9 +34,10 @@ public class MediaDAO {
         return medium;
     }
 
+    // Data Coupling
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM Media ;";
-        Statement stm = AIMSDB.getConnection().createStatement();
+        Statement stm = AIMSDB.getInstance().getConnection().createStatement();
         ResultSet res = stm.executeQuery(sql);
 
         if (res.next()) {
@@ -50,12 +53,15 @@ public class MediaDAO {
         return null;
     }
 
-
+    // Control Coupling + Stamp Coupling
     public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
-        Statement stm = AIMSDB.getConnection().createStatement();
+        Statement stm = AIMSDB.getInstance().getConnection().createStatement();
+        // Control Coupling Here(if value is a string -> update value, else do nothing)
         if (value instanceof String){
             value = "\"" + value + "\"";
         }
+
+        // Stamp coupling here(not use of tbname but still passing it)
         stm.executeUpdate(" update Media set" + " "
                 + field + "=" + value + " "
                 + "where id=" + id + ";");

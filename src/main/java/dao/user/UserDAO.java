@@ -14,10 +14,12 @@ import java.util.Date;
  */
 public class UserDAO {
 
+    // Data Coupling
+    // Coincidental Cohesion: authenticate function must be in its own module
     public User authenticate(String email, String encryptedPassword) throws SQLException {
         String sql = "SELECT * FROM User " +
                 "where email = '" + email + "' and encrypted_password = '" + encryptedPassword + "'";
-        ResultSet res =  AIMSDB.getConnection().createStatement().executeQuery(sql);
+        ResultSet res =  AIMSDB.getInstance().getConnection().createStatement().executeQuery(sql);
         if(res.next()) {
             return new User(
                     res.getInt("id"),

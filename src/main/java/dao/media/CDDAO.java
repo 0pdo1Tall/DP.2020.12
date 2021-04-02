@@ -13,6 +13,7 @@ import java.util.Date;
  */
 public class CDDAO extends MediaDAO {
 
+    // Data Coupling
     @Override
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM "+
@@ -21,7 +22,7 @@ public class CDDAO extends MediaDAO {
                 "ON Media.id = CD.id " +
                 "where Media.id = " + id + ";";
 
-        ResultSet res = AIMSDB.getConnection().createStatement().executeQuery(sql);
+        ResultSet res = AIMSDB.getInstance().getConnection().createStatement().executeQuery(sql);
         if(res.next()) {
 
             // from media table
