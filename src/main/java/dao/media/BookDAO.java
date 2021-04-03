@@ -14,6 +14,7 @@ import java.util.Date;
  */
 public class BookDAO extends MediaDAO {
 
+    // Data coupling
     @Override
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM "+
@@ -21,7 +22,7 @@ public class BookDAO extends MediaDAO {
                 "INNER JOIN aims.Media " +
                 "ON Media.id = Book.id " +
                 "where Media.id = " + id + ";";
-        Statement stm = AIMSDB.getConnection().createStatement();
+        Statement stm = AIMSDB.getInstance().getConnection().createStatement();
         ResultSet res = stm.executeQuery(sql);
         if(res.next()) {
 

@@ -84,11 +84,13 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
         setImage(mediaImage, media.getImageURL());
     }
 
+	// data coupling 
     @Override
     public void attach(Observer observer) {
         observerList.add(observer);
     }
 
+	// data coupling 
     @Override
     public void remove(Observer observer) {
         observerList.remove(observer);

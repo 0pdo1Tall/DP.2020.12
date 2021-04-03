@@ -22,6 +22,7 @@ import subsystem.InterbankSubsystem;
  *
  */
 
+
 //SOLID: vi phạm nguyên lí ISP, vì nó kế thừa lớp BaseController nhưng không dùng lại các hàm trong lớp đó 
 
 public class PaymentController extends BaseController {
@@ -89,6 +90,7 @@ public class PaymentController extends BaseController {
 	 *                              in the expected format
 	 */
 	// Coincidental cohension. Nên tách riêng ra class riêng
+	// SOLID: SRP ko lien quan den chuc nang cua Payment Controller
 	private String getExpirationDate(String date) throws InvalidCardException {
 		String[] strs = date.split("/");
 		if (strs.length != 2) {
@@ -131,6 +133,7 @@ public class PaymentController extends BaseController {
 	
 	// SOLID: Vi phạm nguyên lí OCP. Vì nếu thêm 1 phương thức thanh toán sẽ phải modify lại mã nguồn
 	// SOLID: Vi phạm nguyên lí DIP. Vì nó phụ thuộc vào lớp chi tiết InterbankSubsystem
+	// SOLID: DIP do phu thuoc vaf CreditCard ko phai la Abstract/Interface
 	public Map<String, String> payOrder(int amount, String contents, String cardNumber, String cardHolderName,
 			String expirationDate, String securityCode) {
 		Map<String, String> result = new Hashtable<String, String>();
@@ -156,8 +159,8 @@ public class PaymentController extends BaseController {
 	}
 
 	public void emptyCart(){
-        SessionInformation.cartInstance.emptyCart();
-        
+        //SessionInformation.cartInstance.emptyCart();
         // Data coupling, sử dụng một phương thức khác để yêu cầu
+        Cart.getCard().emptyCart();
     }
 }

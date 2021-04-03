@@ -5,6 +5,7 @@ import utils.ApplicationProgrammingInterface;
 
 public class InterbankBoundary {
 
+	// Data Coupling
 	String query(String url, String data) {
 		String response = null;
 		try {

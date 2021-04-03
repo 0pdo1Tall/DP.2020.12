@@ -22,6 +22,8 @@ public class InterbankPayloadConverter {
      * @param contents
      * @return
      */
+
+    // Content Coupling
     String convertToRequestPayload(CreditCard card, int amount, String contents) {
         Map<String, Object> transaction = new MyMap();
 
@@ -31,13 +33,13 @@ public class InterbankPayloadConverter {
             // TODO Auto-generated catch block
             throw new InvalidCardException();
         }
-        transaction.put("command", InterbankConfigs.PAY_COMMAND);
+        transaction.put("command", InterbankConfigs.PAY_COMMAND); // Content Coupling Here(cannot access PAY_COMMAND private member)
         transaction.put("transactionContent", contents);
         transaction.put("amount", amount);
         transaction.put("createdAt", getToday());
 
         Map<String, Object> requestMap = new MyMap();
-        requestMap.put("version", InterbankConfigs.VERSION);
+        requestMap.put("version", InterbankConfigs.VERSION); // Content Coupling Here(cannot access VERSION private member)
         requestMap.put("transaction", transaction);
 
         return ((MyMap) requestMap).toJSON();
@@ -48,6 +50,7 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
+    // coincidental cohesion: read the response from interbank server do not relate to InterbankConverter module
     PaymentTransaction extractPaymentTransaction(String responseText) {
         MyMap response = convertJSONResponse(responseText);
 
@@ -97,6 +100,7 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
+
     private MyMap convertJSONResponse(String responseText) {
         MyMap response = null;
         try {
@@ -114,6 +118,8 @@ public class InterbankPayloadConverter {
      * @author hieudm
      * @return the current time as {@link String String}.
      */
+
+    // Coincidental Cohesion: getToday do not relate to InterbankConverter module
     private String getToday() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();

@@ -8,6 +8,7 @@ public class OrderItem {
     private int price;
     private int quantity;
 
+    //Data coupling
     public OrderItem(Media media, int quantity, int price) {
         this.media = media;
         this.quantity = quantity;
@@ -27,6 +28,7 @@ public class OrderItem {
         return this.media;
     }
 
+    //Data coupling
     public void setMedia(Media media) {
         this.media = media;
     }
@@ -35,6 +37,7 @@ public class OrderItem {
         return this.quantity;
     }
 
+    //Data coupling
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
@@ -43,6 +46,7 @@ public class OrderItem {
         return this.price;
     }
 
+    //Data coupling
     public void setPrice(int price) {
         this.price = price;
     }

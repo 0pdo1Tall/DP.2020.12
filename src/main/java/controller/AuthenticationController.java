@@ -13,14 +13,12 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-
-
 /**
  * @author
  */
 
-//SOLID: vi phạm nguyên lí ISP, vì nó kế thừa lớp BaseController nhưng không dùng lại các hàm trong lớp đó 
-
+// SOLID: SRP do chua cac chuc nang lien quan den ca authentication, login/logout va md5
+// Singleton: AuthenticationController la lop xu ly den cac dang xac thuc, nen duoc tao 1 Single Instance duy nhat va dc xu dung nhu 1 global object
 public class AuthenticationController extends BaseController {
 	
 	/**
@@ -80,7 +78,8 @@ public class AuthenticationController extends BaseController {
             // Data coupling, chỉ dùng dữ liệu cần thiết
         } else return SessionInformation.mainUser.cloneInformation();
     }
-
+    // SOLID: OCP do khi thay doi ham ma hoa can sua lai ham md5
+    // SOLID: DIP do phu thuoc vao ham ma hoa khong phai la Abstract/Interface
     public void login(String email, String password) throws Exception {
         try {
             User user = new UserDAO().authenticate(email, md5(password));

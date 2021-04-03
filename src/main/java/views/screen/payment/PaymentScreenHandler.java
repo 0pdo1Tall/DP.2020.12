@@ -43,19 +43,11 @@ public class PaymentScreenHandler extends BaseScreenHandler {
 
 	@FXML
 	private TextField securityCode;
-
+	
+		// data coupling 
 	public PaymentScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
 		super(stage, screenPath);
-		try {
-			setupData(invoice);
-			setupFunctionality();
-		} catch (IOException ex) {
-			LOGGER.info(ex.getMessage());
-			PopupScreen.error("Error when loading resources.");
-		} catch (Exception ex) {
-			LOGGER.info(ex.getMessage());
-			PopupScreen.error(ex.getMessage());
-		}
+		setupScreen(invoice);
 	}
 
 	protected void setupData(Object dto) throws Exception {

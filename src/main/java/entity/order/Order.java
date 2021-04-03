@@ -16,7 +16,8 @@ public class Order {
     private int subtotal;
     private int tax;
     private List orderMediaList;
-    protected DeliveryInfo deliveryInfo;
+
+    protected DeliveryInfo deliveryInfo;     // common coupling
 
     public Order() {
         this.shippingFees = 0;
@@ -24,9 +25,13 @@ public class Order {
         this.tax = 0;
     }
 
+
+    // Stamp coupling: chỉ lấy subtottal nhưng dùng tham số là cart
+
+
     public Order(Cart cart) {
         List<OrderItem> orderItems = new ArrayList<>();
-        for (Object object : SessionInformation.cartInstance.getListMedia()) {
+        for (Object object : Cart.getCard().getListMedia()) {
             CartItem cartItem = (CartItem) object;
             OrderItem orderItem = new OrderItem(cartItem.getMedia(),
                     cartItem.getQuantity(),
@@ -49,8 +54,10 @@ public class Order {
 
     public DeliveryInfo getDeliveryInfo() {
         return deliveryInfo;
-    }
+    }   
 
+    // SOLID: DIP do phu thuoc vao deliveryInfo khong phai la Abstract/Interface
+    // Data coupling
     public void setDeliveryInfo(DeliveryInfo deliveryInfo) {
         this.deliveryInfo = deliveryInfo;
         this.shippingFees = deliveryInfo.calculateShippingFee(this);
@@ -71,4 +78,7 @@ public class Order {
     public int getTotal() {
         return this.subtotal + this.tax + this.shippingFees;
     }
+
+    //communicational cohesion: một vài phương thức dùng dung thuộc tính
+    //logical cohesion: các phương thức đều liên quan đến tác vụ order
 }

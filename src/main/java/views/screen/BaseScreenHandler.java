@@ -14,6 +14,8 @@ import utils.Utils;
 import views.screen.home.HomeScreenHandler;
 import views.screen.popup.PopupScreen;
 
+
+
 public abstract class BaseScreenHandler extends FXMLScreenHandler {
 
 	private static final Logger LOGGER = Utils.getLogger(BaseScreenHandler.class.getName());
@@ -30,7 +32,35 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
 		super(screenPath);
 		this.stage = stage;
 	}
-
+	
+	/**
+	 * Design Pattern: Template Method
+	 */
+	public void setupScreen(Object object) throws IOException {
+		try {
+            setupData(object);
+            setupFunctionality();
+        } catch (IOException ex) {
+            LOGGER.info(ex.getMessage());
+            PopupScreen.error("Error when loading resources.");
+        } catch (Exception ex) {
+            LOGGER.info(ex.getMessage());
+            PopupScreen.error(ex.getMessage());
+        }
+	}
+	
+	protected void setupData(Object object) throws Exception{
+		
+	}
+	
+	protected void setupFunctionality() throws Exception{
+		
+	}
+	
+	/*
+	 * 
+	 */
+	
 	public void setPreviousScreen(BaseScreenHandler prev) {
 		this.prev = prev;
 	}
