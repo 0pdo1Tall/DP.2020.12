@@ -3,3 +3,7 @@
 Áp dụng Singleton cho các class: AuthenticationController, HomeController, PaymentController, PlaceOrderController, ViewCartController (package controller)
 - Subteam 2: Ngô Huy Thao, Đặng Đình Thọ, Hoàng Minh Tiến:
 Áp dụng Singleton cho các class: AuthenticationController (package controller), AIMSDB (package entity.db), Cart (package entity.cart), Utils (package utils)
+
+### Bài 5: Design Pattern - Template Method + Factory Method
+- Subteam 1: Lê Anh Thành, Phạm Văn Thành:
+Áp dụng Template Method cho các class: CartScreenHandler, HomeScreenHandler, LoginScreenHandler, IntroScreenHandler, InvoiceScreenHandler, PaymentScreenHandler, ResultScreenHandler, ShippingScreenHandler với lớp cha là BaseScreenHandler.
