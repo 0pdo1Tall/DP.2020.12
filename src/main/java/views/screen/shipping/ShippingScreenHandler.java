@@ -115,7 +115,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 		DeliveryInfo deliveryInfo;
 		try {
 			// process and validate delivery info
-			deliveryInfo = getBCont	roller().processDeliveryInfo(messages);
+			deliveryInfo = getBController().processDeliveryInfo(messages);
 		} catch (InvalidDeliveryInfoException e) {
 			// TODO: implement pop up screen
 			throw new InvalidDeliveryInfoException(e.getMessage());

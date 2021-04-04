@@ -3,17 +3,18 @@ package entity.payment;
 /**
  * @author
  */
-public class CreditCard {
+public class CreditCard extends PaymentMethod{
 
-    private String cardCode;
-    private String owner;
+//    private String cardCode;
+//    private String owner;
+//    private String dateExpired;
+//    protected int cvvCode;           //common coupling
     private String dateExpired;
-    protected int cvvCode;           //common coupling
+    protected int cvvCode;
 
     // data coupling
     public CreditCard(String cardCode, String owner, String dateExpired, int cvvCode) {
-        this.cardCode = cardCode;
-        this.owner = owner;
+        super("Credit Card",cardCode,owner);
         this.dateExpired = dateExpired;
         this.cvvCode = cvvCode;
     }

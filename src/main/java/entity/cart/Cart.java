@@ -1,4 +1,4 @@
-Spackage entity.cart;
+package entity.cart;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

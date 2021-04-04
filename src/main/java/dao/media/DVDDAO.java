@@ -2,6 +2,7 @@ package dao.media;
 
 import entity.db.AIMSDB;
 import entity.media.DVD;
+import entity.media.DVDFactory;
 import entity.media.Media;
 
 import java.sql.ResultSet;
@@ -40,7 +41,7 @@ public class DVDDAO extends MediaDAO {
             Date releasedDate = res.getDate("releasedDate");
             String filmType = res.getString("filmType");
 
-            return new DVD(id, title, category, price, quantity, type, discType, director, runtime, studio, subtitles, releasedDate, filmType);
+            return DVDFactory.getInstance().createMedia(id, title, category, price, quantity, type, discType, director, runtime, studio, subtitles, releasedDate, filmType);
 
         } else {
             throw new SQLException();

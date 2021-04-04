@@ -2,6 +2,7 @@ package dao.media;
 
 import entity.db.AIMSDB;
 import entity.media.CD;
+import entity.media.CDFactory;
 import entity.media.Media;
 
 import java.sql.ResultSet;
@@ -38,7 +39,7 @@ public class CDDAO extends MediaDAO {
             String musicType = res.getString("musicType");
             Date releasedDate = res.getDate("releasedDate");
 
-            return new CD(id, title, category, price, quantity, type,
+            return CDFactory.getInstance().createMedia(id, title, category, price, quantity, type,
                     artist, recordLabel, musicType, releasedDate);
 
         } else {

@@ -21,7 +21,7 @@ public class AIMSDB {
 	private static Logger LOGGER = Utils.getLogger(Connection.class.getName());
 	private static Connection connect;
 	// TODO: refactor Utils -> limit connections
-    public static Connection //communicational cohesion: các phương thức dùng dung thuộc tính() {
+    public static Connection getConnection(){ //communicational cohesion: các phương thức dùng dung thuộc tính() {
         if (connect != null) return connect;
         try {
 			Class.forName("org.sqlite.JDBC");
