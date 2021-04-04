@@ -13,7 +13,11 @@ import java.util.logging.Logger;
 /**
  * @author nguyenlm Contains helper functions
  */
- 
+
+/*
+ * Functional conhesion, vì không rơi vào những loại khác
+ */
+
  // vi Utils chi la duy nhat 
 public class Utils {
 	
@@ -35,5 +39,4 @@ public class Utils {
 	public static Logger getLogger(String className) {
 		return Logger.getLogger(className);
 	}
-
 }

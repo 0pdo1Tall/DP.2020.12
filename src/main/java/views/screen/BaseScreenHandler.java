@@ -32,7 +32,29 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
 		super(screenPath);
 		this.stage = stage;
 	}
-
+	
+	/**
+	 * Design Pattern: Template Method
+	 */
+	public void setupScreen(Object object) throws IOException {
+		try {
+            setupData(object);
+            setupFunctionality();
+        } catch (IOException ex) {
+            LOGGER.info(ex.getMessage());
+            PopupScreen.error("Error when loading resources.");
+        } catch (Exception ex) {
+            LOGGER.info(ex.getMessage());
+            PopupScreen.error(ex.getMessage());
+        }
+	}
+	
+	abstract protected void setupData(Object object) throws Exception;
+	abstract protected void setupFunctionality() throws Exception;
+	/*
+	 * 
+	 */
+	
 	public void setPreviousScreen(BaseScreenHandler prev) {
 		this.prev = prev;
 	}

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // Review Code ở đây(Ghi rõ tên người review)
 
 + Reviewer: Le Anh Thanh
@@ -25,9 +24,65 @@ Tôi cho rằng không vi phạm DIP --> khi có thay đổi thì cũng chỉ th
 
 /src/main/java/subsystem/InterbankSubsystem.java
 Vi phạm cả OCP nữa --> Khi có thay đổi hay thêm mới phương tiện thanh toán (ví dụ thay vì dùng CreditCard --> chuyển sang dùng DomesticCard), thì phải sửa lại phần mã nguồn của method payOrder.
-=======
 Reviewer: Phạm Văn Thành
 -File: src/main/java/views/screen/shipping/ShippingScreenHandler.java
 => OCP ở đây ko đúng vì nó gọi tới hàm preprocessDeliveryInfo nhưng mà xử lí ở hết class khác,
 nên class đó sẽ vi phạm OCP chứ ko phải class ShippingScreenHandler
->>>>>>> thaoBranch
+Phân công công việc tìm vi phạm nguyên lý S.O.L.I.D subgroup 1: Lê Anh Thành tìm SRP, LSP, DIP; Phạm Văn Thành tìm OCP, ISP.
+
+// Review Code ở đây (Ghi rõ tên người review)
+
+Reviewer: Đặng Đình Thọ
+
+Đã review, Không thấy có vấn đề gì
+
+Reviewer: Hoang Minh Tien
+
+Trong File AuthenticationController.java: Lop con AuthenticationController ke thua lop cha BaseController,nhung chuc nang cua
+chung thi hoan toan # nhau(Authentication: md5, authentication, login/logout | BaseController: checkMedia,getMedia) -> DIP
+Ngoai ra cac ham login/logout su dung ham ma hoa md5, se phai modify function neu muon thay doi kieu ma hoa -> OCP
+
+Trong File PaymentController.java: Payment controller phu thuoc vao 2 thanh phan la Card va Interbank Interface
+trong do Interbank Interface la mot Interface, Card thi lai thuoc kieu class. Do vay can phai chuyen doi Card thanh Abstract Class
+hoac Interface de ko vi pham DIP
+
+Trong File PlaceOrderController.java: DIP con the hien o viec Info duoc truyen vao trong processDeliveryInfo va validateDeliveryInfo
+khong thuoc kieu Abstract hay Interface.
+
+
+Mẫu thiết kế: Singleton -- Subteam 1: Lê Anh Thành - Phạm Văn Thành
+
+// Review:
+
+// Review Code ở đây(Ghi rõ tên người review)
+
++ Reviewer: Le Anh Thanh
+
+/src/main/java/controller/AuthenticationController.java
+Vi phạm SRP --> Đúng --> Ngoài ra còn chỉ rõ thêm là có cả phương thức mã hóa nữa md5.
+Vi phạm OCP --> Một lần nữa lại liên quan đến mã hóa, nếu dùng phương thức mã hóa khác thì trong login phải sửa phần code md5(password).
+Vi phạm DIP --> Phụ thuộc vào phương thức mã hóa là md5, là phương thức cụ thể, không phải là lớp trừu tượng.
+Vi phạm ISP --> Kế thừa lớp BaseController nhưng lại không dùng các phương thức mà BaseController cung cấp. (Nghiệp vụ cũng không dùng)
+
+/src/main/java/controller/PaymentController.java
+Vi phạm SRP, OCP --> Đúng
+Vi phạm DIP --> Do phụ thuộc vào phương thức thanh toán cụ thể CreditCard mà không phải là lớp abstract đại diện cho các phương thức thanh toán.
+Vi phạm ISP --> Lý do giống ISP bên AuthenticationController
+
+/src/main/java/controller/PlaceOrderController.java
+Vi phạm SRP, OCP --> Đúng
+Ngoài ra method validateDeliveryInfo cũng vi phạm OCP --> phải sửa code nếu tiêu chí validate thay đổi.
+Vi phạm DIP --> ở các vị trí vi phạm OCP
+Vi phạm ISP --> giống hai lớp trên
+
+/src/main/java/entity/order/Order.java
+Tôi cho rằng không vi phạm DIP --> khi có thay đổi thì cũng chỉ thay đổi bên trong cấu trúc của DeliveryInfo, có lẽ nên bàn thêm.
+
+/src/main/java/subsystem/InterbankSubsystem.java
+Vi phạm cả OCP nữa --> Khi có thay đổi hay thêm mới phương tiện thanh toán (ví dụ thay vì dùng CreditCard --> chuyển sang dùng DomesticCard), thì phải sửa lại phần mã nguồn của method payOrder.
+
+Reviewer: Phạm Văn Thành
+-File: src/main/java/views/screen/shipping/ShippingScreenHandler.java
+=> OCP ở đây ko đúng vì nó gọi tới hàm preprocessDeliveryInfo nhưng mà xử lí ở hết class khác,
+nên class đó sẽ vi phạm OCP chứ ko phải class ShippingScreenHandler
+

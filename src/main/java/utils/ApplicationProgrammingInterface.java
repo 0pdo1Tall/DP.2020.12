@@ -17,8 +17,18 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
+/*
+ * Functional Programming, vì không rơi vào những loại khác
+ */
 public class ApplicationProgrammingInterface {
-
+	
+	/**
+	 * SOLID: Vi phạm nguyên tắc SRP. Vì thực hiện đến nhiều hơn một chức năng.
+	 * Một chức năng là thực hiện get, post các đường dẫn url.
+	 * Hai là tạo ra kết nối HTTP thông qua phương thức setupConnection.
+	 */
+	
+	
 	public static DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	private static Logger LOGGER = Utils.getLogger(Utils.class.getName());
 
@@ -37,6 +47,8 @@ public class ApplicationProgrammingInterface {
 		in.close();
 		LOGGER.info("Respone Info: " + respone.substring(0, respone.length() - 1).toString());
 		return respone.substring(0, respone.length() - 1).toString();
+		
+		// Data coupling, do gọi và đặt những tham số cần thiết
 	}
 
 	public static String post(String url, String data) throws IOException {
@@ -62,6 +74,8 @@ public class ApplicationProgrammingInterface {
 		in.close();
 		LOGGER.info("Respone Info: " + response.toString());
 		return response.toString();
+		
+		// Data coupling, do chỉ sử dụng tham số cần thiết để gọi và thiết lập các thuộc tính
 	}
 
 	private static HttpURLConnection setupConnection(String url) throws IOException {
@@ -70,6 +84,8 @@ public class ApplicationProgrammingInterface {
 		conn.setDoOutput(true);
 		conn.setRequestProperty("Content-Type", "application/json");
 		return conn;
+		
+		// Data coupling, do chỉ thiết đặt những thuộc tính cho phép
 	}
 
 	private static void allowMethods(String... methods) {
@@ -87,6 +103,8 @@ public class ApplicationProgrammingInterface {
 			String[] newMethods = methodsSet.toArray(new String[0]);
 
 			methodsField.set(null/* static field */, newMethods);
+			
+			// Content coupling, do đã sửa nội dung của dữ liệu class khác thông qua việc setAccessible(true) cho thuộc tính
 		} catch (NoSuchFieldException | IllegalAccessException e) {
 			throw new IllegalStateException(e);
 		}

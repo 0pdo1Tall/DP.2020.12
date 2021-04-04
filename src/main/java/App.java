@@ -22,6 +22,12 @@ public class App extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			
+			/**
+			 * 	Temporal cohesion, do các thành ph?n fadeIn, fadeOut không liên quan, th?c hi?n theo trình t? th?i gian
+			 *  nên ???c tách ra ph??ng th?c riêng ?? g?i ??n
+			 */
+			
 
 			// initialize the scene
 			BaseScreenHandler introScreen = new IntroScreenHandler(primaryStage, ViewsConfig.INTRO_SCREEN_PATH);
@@ -31,13 +37,17 @@ public class App extends Application {
 			FadeTransition fadeIn = new FadeTransition(Duration.seconds(2), introScreen.getContent());
 			fadeIn.setFromValue(0);
 			fadeIn.setToValue(1);
-			fadeIn.setCycleCount(1);
+			fadeIn.setCycleCount(1);		
+			
+			// Data coupling, do ch? truy?n ?úng tham s? c?n thi?t ?? ho?t ??ng
 
 			// Finish splash with fade out effect
 			FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), introScreen.getContent());
 			fadeOut.setFromValue(1);
 			fadeOut.setToValue(0);
-			fadeOut.setCycleCount(1);
+			fadeOut.setCycleCount(1);		
+			
+			// Data coupling, do truy?n tham s? c?n thi?t ?? ho?t ??ng
 
 			// After fade in, start fade out
 			fadeIn.play();
@@ -52,6 +62,8 @@ public class App extends Application {
 					homeHandler.setScreenTitle("Home Screen");
 					homeHandler.setImage();
 					homeHandler.show();
+					
+					// Data coupling, do ch? g?i các ph??ng th?c và truy?n tham s? v?a ??
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}

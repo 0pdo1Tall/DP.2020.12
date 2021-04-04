@@ -8,8 +8,8 @@ public class PaymentTransaction {
 	private int amount;
 	private String createdAt;
 
-	//SOLID: Vi pham nguyen lí OCP: Vi khi co loai Card moi can chinh sua code
-	//SOLID: Vi pham nguyen li DIP: Boi vi no phu thuoc vao mot lop cai dat cu the la CreditCard chu khong phai la mot Abstract Class dai dien cho phuong thuc thanh toan
+	//SOLID: Vi ph?m nguyên lí OCP: Vì khi có lo?i Card m?i thì ph?i s?a
+	//SOLID: Vi ph?m nguyên lí DIP: B?i vì nó ph? thu?c vào m?t l?p cài ??t c? th? là CreditCard ch? không ph?i là m?t abstract class ??i di?n cho m?i ph??ng ti?n thanh toán.
 
 	public PaymentTransaction(String errorCode, PaymentMethod paymentMethod, String transactionId, String transactionContent,
                               int amount, String createdAt) {

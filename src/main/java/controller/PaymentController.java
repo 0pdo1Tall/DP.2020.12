@@ -22,9 +22,52 @@ import subsystem.InterbankSubsystem;
  *
  */
 
-// SOLID: ISP do lop con(Payment Controller) ko lien quan den nghiep vu cua lop cha(BaseController)
-public class PaymentController extends BaseController {
 
+//SOLID: vi phạm nguyên lí ISP, vì nó kế thừa lớp BaseController nhưng không dùng lại các hàm trong lớp đó 
+
+public class PaymentController extends BaseController {
+	
+	/**
+	 * Singleton: liên quan đến thanh toán --> chỉ cần 1 controller như vậy để sử dụng trong quá trình tạo hóa đơn và thanh toán
+	 * mỗi hóa đơn và thanh toán là hoàn toàn riêng biệt, chỉ cần sử dụng một controller để giải quyết
+	 */
+	
+	private static PaymentController _paymentControllerInstance;
+	
+	private PaymentController() {
+		
+	}
+	
+	public static synchronized PaymentController getInstance() {
+		if (_paymentControllerInstance == null) {
+			_paymentControllerInstance = new PaymentController();
+		}
+		return _paymentControllerInstance;
+	}
+	
+	/**
+	 * SOLID: Vi phạm nguyên lý SRP. Do class thực hiện nhiều hơn một nhiệm vụ.
+	 * Cụ thể nó vừa thực hiện kiểm tra hạn qua phương thức getExpirationDate, vừa thực hiện thanh toán qua phương thức payOrder.
+	 * Cũng vừa làm rỗng giỏ hàng qua phương thức emptyCart()
+	 */
+	
+	/**
+	 * SOLID: Vi phạm OCP. Do payOrder chỉ có thanh toán theo Credit Card.
+	 * Do đó nếu thêm phương thức thanh toán thì phải sửa code phần này.
+	 */
+	
+	/**
+	 * SOLID: Vi phạm nguyên lý DIP. Do phương thức payOrder() phụ thuộc vào một lớp cài đặt cụ thể là CreditCard.
+	 * Vì thế nếu như thêm một phương thức thanh toán khác, thẻ nội địa Domestic Card thì phải cài đặt lại hàm này.
+	 */
+	
+	/**
+	 * Coincidental cohesion, lớp PaymentController có 3 phương thức không liên quan tới nhau,
+	 * phương thức getExpirationDate(Date date) nên được để sang một lớp khác vì chỉ xử lý đến kiểm tra ngày tháng
+	 * phương thức emptyCart() thì nên để bên ViewCartController xử lý, vì chỉ có Cart mới có quyền quản lý việc làm trống giỏ hàng
+	 */
+	
+	
 	/**
 	 * Represent the card used for payment
 	 */
@@ -46,6 +89,7 @@ public class PaymentController extends BaseController {
 	 * @throws InvalidCardException - if the string does not represent a valid date
 	 *                              in the expected format
 	 */
+	// Coincidental cohension. Nên tách riêng ra class riêng
 	// SOLID: SRP ko lien quan den chuc nang cua Payment Controller
 	private String getExpirationDate(String date) throws InvalidCardException {
 		String[] strs = date.split("/");
@@ -70,6 +114,8 @@ public class PaymentController extends BaseController {
 		}
 
 		return expirationDate;
+		
+		// Data coupling, chỉ sử dụng dữ liệu vừa đủ để xử lý kết quả
 	}
 
 	/**
@@ -84,7 +130,9 @@ public class PaymentController extends BaseController {
 	 * @return {@link Map Map} represent the payment result with a
 	 *         message.
 	 */
-	// SOLID: OCP vi khi thay doi phuong thuc thanh toan se phai them moi phuong thuc
+	
+	// SOLID: Vi phạm nguyên lí OCP. Vì nếu thêm 1 phương thức thanh toán sẽ phải modify lại mã nguồn
+	// SOLID: Vi phạm nguyên lí DIP. Vì nó phụ thuộc vào lớp chi tiết InterbankSubsystem
 	// SOLID: DIP do phu thuoc vaf CreditCard ko phai la Abstract/Interface
 	public Map<String, String> payOrder(int amount, String contents, String cardNumber, String cardHolderName,
 			String expirationDate, String securityCode) {
@@ -106,9 +154,13 @@ public class PaymentController extends BaseController {
 			result.put("MESSAGE", ex.getMessage());
 		}
 		return result;
+		
+		// Data coupling, sử dụng tất cả dữ liệu truyền vào để xử lý quá trình
 	}
 
 	public void emptyCart(){
+        //SessionInformation.cartInstance.emptyCart();
+        // Data coupling, sử dụng một phương thức khác để yêu cầu
         Cart.getCard().emptyCart();
     }
 }

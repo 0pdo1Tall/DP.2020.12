@@ -12,9 +12,25 @@ import java.util.*;
  * @author hieud
  *
  */
+
+/*
+ * Coincidental cohesion, do phương thức getNextTerm không có chức năng theo tên class, mà chỉ hỗ trợ xử lí các hàm khác 
+ */
 public class MyMap extends LinkedHashMap<String, Object> {
 	private static final long serialVersionUID = 1L;
-
+	
+	/**
+	 *  SOLID: Vi phạm nguyên lý SRP, do thực hiện đến hai nhiệm vụ. Một nhiệm vụ liên quan đến xử lý chức năng MyMap.
+	 *  Một nhiệm vụ liên quan tới sử dụng phương thức getNextTerm để tìm cụm tiếp theo trong xâu.
+	 */
+	
+	
+	/**
+	 *  Coincidental cohesion, do có sử dụng phương thức getNextTerm(String str, int idx)
+	 *  phương thức này không cùng nhóm với các phương thức trong class MyMap khi xử lý liên quan đến xâu
+	 *  không hề liên quan đến các chức năng của lớp MyMap cung cấp
+	 */
+	
 	/**
 	 * Return a {@link String String} that represents the JSON object.
 	 * 
@@ -48,6 +64,8 @@ public class MyMap extends LinkedHashMap<String, Object> {
 				return sb.append('}').toString();
 			sb.append(",");
 		}
+		
+		// Data coupling, chỉ nhận vào đủ dữ liệu để xử lý
 	}
 
 	/**
@@ -82,6 +100,8 @@ public class MyMap extends LinkedHashMap<String, Object> {
 			field.setAccessible(false);
 		}
 		return map;
+		
+		// Data coupling, nhận đủ dữ liệu để xử lý nghiệp vụ
 	}
 
 	private static int offset = 0; // to trace the current index when calling a function
@@ -119,6 +139,8 @@ public class MyMap extends LinkedHashMap<String, Object> {
 		String result = sb.toString();
 		offset = result.length() + 2; // update iterator with the term and the 2 double quotes
 		return sb.toString();
+		
+		// Data coupling, phương thức nhận và xử lý dữ liệu vừa đủ
 	}
 	/**
 	 * Return a {@link MyMap MyMap} that represents the interested substring in a {@link String String}.
@@ -211,6 +233,8 @@ public class MyMap extends LinkedHashMap<String, Object> {
 			throw new IllegalArgumentException("Cannot resolve the input.");
 		}
 		return root;
+		
+		// Data coupling, phương thức nhận lượng dữ liệu không dư thừa để tiến hành xử lý
 	}
 
 }

@@ -74,16 +74,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 
     public HomeScreenHandler(Stage stage, String screenPath) throws IOException{
         super(stage, screenPath);
-        try {
-            setupData(null);
-            setupFunctionality();
-        } catch (IOException ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error("Error when loading resources.");
-        } catch (Exception ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error(ex.getMessage());
-        }
+        setupScreen(null);
     }
 
     public Label getNumMediaCartLabel(){
@@ -96,8 +87,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 
 	// data coupling 
     protected void setupData(Object dto) throws Exception {
-        setBController(new HomeController());
-        this.authenticationController = new AuthenticationController();
+        setBController(HomeController.getInstance());
+        this.authenticationController = AuthenticationController.getInstance();
         try{
             List medium = getBController().getAllMedia();
             this.homeItems = new ArrayList<>();
@@ -125,7 +116,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
                 LOGGER.info("User clicked to view cart");
                 cartScreen = new CartScreenHandler(this.stage, ViewsConfig.CART_SCREEN_PATH);
                 cartScreen.setHomeScreenHandler(this);
-                cartScreen.setBController(new ViewCartController());
+                cartScreen.setBController(ViewCartController.getInstance());
                 cartScreen.requestToViewCart(this);
             } catch (IOException | SQLException e1) {
                 throw new ViewCartException(Arrays.toString(e1.getStackTrace()).replaceAll(", ", "\n"));
@@ -147,7 +138,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             btnLogin.setOnMouseClicked(event -> {});
         }
 
-        numMediaInCart.setText(String.valueOf(SessionInformation.cartInstance.getListMedia().size()) + " media");
+        numMediaInCart.setText(String.valueOf(Cart.getCard().getListMedia().size()) + " media");
         super.show();
     }
 
@@ -223,7 +214,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 
         try {
             if (requestQuantity > media.getQuantity()) throw new MediaNotAvailableException();
-            Cart cart = SessionInformation.cartInstance;
+            Cart cart = Cart.getCard();
             // if media already in cart then we will increase the quantity by 1 instead of create the new cartMedia
             CartItem mediaInCart = getBController().checkMediaInCart(media);
             if (mediaInCart != null) {

@@ -59,20 +59,10 @@ public class CartScreenHandler extends BaseScreenHandler {
 	
 	public CartScreenHandler(Stage stage, String screenPath) throws IOException {
 		super(stage, screenPath);
-		try {
-			setupFunctionality();
-		} catch (IOException ex) {
-			LOGGER.info(ex.getMessage());
-			PopupScreen.error("Error when loading resources.");
-		} catch (Exception ex) {
-			LOGGER.info(ex.getMessage());
-			PopupScreen.error(ex.getMessage());
-		}
+		setupScreen(null);
 	}
-	
 
-	
-	
+	protected void setupData(Object object) throws Exception{}
 	
 	protected void setupFunctionality() throws Exception {
 		// fix relative image path caused by fxml
@@ -114,7 +104,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 	public void requestToPlaceOrder() throws SQLException, IOException {
 		try {
 			// create placeOrderController and process the order
-			PlaceOrderController placeOrderController = new PlaceOrderController();
+			PlaceOrderController placeOrderController = PlaceOrderController.getInstance();
 			if (placeOrderController.getListCartMedia().size() == 0){
 				PopupScreen.error("You don't have anything to place");
 				return;
