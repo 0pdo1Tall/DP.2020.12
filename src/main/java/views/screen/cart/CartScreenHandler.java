@@ -61,10 +61,8 @@ public class CartScreenHandler extends BaseScreenHandler {
 		super(stage, screenPath);
 		setupScreen(null);
 	}
-	
 
-	
-	
+	protected void setupData(Object object) throws Exception{}
 	
 	protected void setupFunctionality() throws Exception {
 		// fix relative image path caused by fxml

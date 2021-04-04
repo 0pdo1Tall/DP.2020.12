@@ -49,14 +49,8 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
         }
 	}
 	
-	protected void setupData(Object object) throws Exception{
-		
-	}
-	
-	protected void setupFunctionality() throws Exception{
-		
-	}
-	
+	abstract protected void setupData(Object object) throws Exception;
+	abstract protected void setupFunctionality() throws Exception;
 	/*
 	 * 
 	 */
