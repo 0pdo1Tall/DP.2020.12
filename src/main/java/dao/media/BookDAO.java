@@ -2,7 +2,9 @@ package dao.media;
 
 import entity.db.AIMSDB;
 import entity.media.Book;
+import entity.media.BookFactory;
 import entity.media.Media;
+import entity.media.MediaFactory;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -42,8 +44,8 @@ public class BookDAO extends MediaDAO {
             String language = res.getString("language");
             String bookCategory = res.getString("bookCategory");
 
-            return new Book(id, title, category, price, quantity, type,
-                    author, coverType, publisher, publishDate, numOfPages, language, bookCategory);
+           return BookFactory.getInstance().createMedia(id, title, category, price, quantity, type,
+                   author, coverType, publisher, publishDate, numOfPages, language, bookCategory);
 
         } else {
             throw new SQLException();

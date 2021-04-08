@@ -2,7 +2,7 @@ package entity.payment;
 
 public class PaymentTransaction {
 	private String errorCode;
-	private CreditCard card;
+	private PaymentMethod paymentMethod;
 	private String transactionId;
 	private String transactionContent;
 	private int amount;
@@ -11,11 +11,11 @@ public class PaymentTransaction {
 	//SOLID: Vi ph?m nguyên lí OCP: Vì khi có lo?i Card m?i thì ph?i s?a
 	//SOLID: Vi ph?m nguyên lí DIP: B?i vì nó ph? thu?c vào m?t l?p cài ??t c? th? là CreditCard ch? không ph?i là m?t abstract class ??i di?n cho m?i ph??ng ti?n thanh toán.
 
-	public PaymentTransaction(String errorCode, CreditCard card, String transactionId, String transactionContent,
+	public PaymentTransaction(String errorCode, PaymentMethod paymentMethod, String transactionId, String transactionContent,
                               int amount, String createdAt) {
 		super();
 		this.errorCode = errorCode;
-		this.card = card;
+		this.paymentMethod = paymentMethod;
 		this.transactionId = transactionId;
 		this.transactionContent = transactionContent;
 		this.amount = amount;
