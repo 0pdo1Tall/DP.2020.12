@@ -40,13 +40,13 @@ public class ApplicationProgrammingInterface {
 		conn.setRequestProperty("Authorization", "Bearer " + token);
 		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		String inputLine;
-		StringBuilder respone = new StringBuilder(); // ising StringBuilder for the sake of memory and performance
+		StringBuilder response = new StringBuilder(); // ising StringBuilder for the sake of memory and performance
 		while ((inputLine = in.readLine()) != null)
 			System.out.println(inputLine);
-		respone.append(inputLine + "\n");
+		response.append(inputLine + "\n");
 		in.close();
-		LOGGER.info("Respone Info: " + respone.substring(0, respone.length() - 1).toString());
-		return respone.substring(0, respone.length() - 1).toString();
+		LOGGER.info("Respone Info: " + response.substring(0, response.length() - 1).toString());
+		return response.substring(0, response.length() - 1).toString();
 		
 		// Data coupling, do gọi và đặt những tham số cần thiết
 	}
