@@ -44,7 +44,16 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
 
     @FXML
     protected Button addToCartBtn;
-
+    
+    /*
+     * Clean code: replace number constant --> final constant variable
+     */
+    private static final int FIT_HEIGHT = 160;
+    private static final int FIT_WIDTH = 120;
+    private static final int MIN = 0;
+    private static final int MAX = 100;
+    private static final int INITIAL_VALUE = 1;
+    
     private static Logger LOGGER = Utils.getLogger(MediaHandler.class.getName());
     private Media media;
     private List<Observer> observerList;
@@ -70,15 +79,15 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
         // set the cover image of media
         File file = new File(media.getImageURL());
         Image image = new Image(file.toURI().toString());
-        mediaImage.setFitHeight(160);
-        mediaImage.setFitWidth(152);
+        mediaImage.setFitHeight(FIT_HEIGHT);
+        mediaImage.setFitWidth(FIT_WIDTH);
         mediaImage.setImage(image);
 
         mediaTitle.setText(media.getTitle());
         mediaPrice.setText(ViewsConfig.getCurrencyFormat(media.getPrice()));
         mediaAvail.setText(Integer.toString(media.getQuantity()));
         spinnerChangeNumber.setValueFactory(
-            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 1)
+            new SpinnerValueFactory.IntegerSpinnerValueFactory(MIN, MAX, INITIAL_VALUE)
         );
 
         setImage(mediaImage, media.getImageURL());

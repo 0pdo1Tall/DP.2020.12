@@ -65,10 +65,14 @@ public class PaymentScreenHandler extends BaseScreenHandler {
 		});
 	}
 
+	/*
+	 * Clean code: rename ctrl --> paymentController
+	 */
+	
 	void confirmToPayOrder() throws IOException{
 		String contents = "pay order";
-		PaymentController ctrl = (PaymentController) getBController();
-		Map<String, String> response = ctrl.payOrder(invoice.getAmount(), contents, cardNumber.getText(), holderName.getText(),
+		PaymentController paymentController = (PaymentController) getBController();
+		Map<String, String> response = paymentController.payOrder(invoice.getAmount(), contents, cardNumber.getText(), holderName.getText(),
 				expirationDate.getText(), securityCode.getText());
 
 		BaseScreenHandler resultScreen = new ResultScreenHandler(this.stage, ViewsConfig.RESULT_SCREEN_PATH, response);

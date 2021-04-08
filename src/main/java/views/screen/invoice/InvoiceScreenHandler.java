@@ -61,6 +61,10 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 		super(stage, screenPath);
 		setupScreen(invoice);
 	}
+	
+	/*
+	 * Clean code: rename MediaInvoiceScreenHandler object: mis --> mediaInvoiceScreenHandler
+	 */
 	// stamp coupling
 	protected void setupData(Object dto) throws Exception {
 		this.invoice = (Invoice) dto;
@@ -79,9 +83,9 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 
 		invoice.getOrder().getListOrderMedia().forEach(orderMedia -> {
 			try {
-				MediaInvoiceScreenHandler mis = new MediaInvoiceScreenHandler(ViewsConfig.INVOICE_MEDIA_SCREEN_PATH);
-				mis.setOrderItem((OrderItem) orderMedia);
-				vboxItems.getChildren().add(mis.getContent());
+				MediaInvoiceScreenHandler mediaInvoiceScreenHandler = new MediaInvoiceScreenHandler(ViewsConfig.INVOICE_MEDIA_SCREEN_PATH);
+				mediaInvoiceScreenHandler.setOrderItem((OrderItem) orderMedia);
+				vboxItems.getChildren().add(mediaInvoiceScreenHandler.getContent());
 			} catch (IOException | SQLException e) {
 				System.err.println("errors: " + e.getMessage());
 				throw new ProcessInvoiceException(e.getMessage());

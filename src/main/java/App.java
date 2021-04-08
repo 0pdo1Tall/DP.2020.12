@@ -18,14 +18,26 @@ public class App extends Application {
 
 	@FXML
 	ImageView logo;
+	
+	/*
+	 * Clean code: add variable for constant
+	 */
+	
+	private static final int DURATION_TIME_FADEIN = 2;
+	private static final int DURATION_TIME_FADEOUT = 1;
+	private static final int CYCLE_COUNT = 1;
+	private static final int START_VALUE_FADEIN = 0;
+	private static final int STOP_VALUE_FADEIN = 1;
+	private static final int START_VALUE_FADEOUT = 1;
+	private static final int STOP_VALUE_FADEOUT = 0;
 
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			
 			/**
-			 * 	Temporal cohesion, do các thành ph?n fadeIn, fadeOut không liên quan, th?c hi?n theo trình t? th?i gian
-			 *  nên ???c tách ra ph??ng th?c riêng ?? g?i ??n
+			 * 	Temporal cohesion, do cï¿½c thï¿½nh ph?n fadeIn, fadeOut khï¿½ng liï¿½n quan, th?c hi?n theo trï¿½nh t? th?i gian
+			 *  nï¿½n ???c tï¿½ch ra ph??ng th?c riï¿½ng ?? g?i ??n
 			 */
 			
 
@@ -34,18 +46,18 @@ public class App extends Application {
 			introScreen.show();
 
 			// Load splash screen with fade in effect
-			FadeTransition fadeIn = new FadeTransition(Duration.seconds(2), introScreen.getContent());
-			fadeIn.setFromValue(0);
-			fadeIn.setToValue(1);
-			fadeIn.setCycleCount(1);		
+			FadeTransition fadeIn = new FadeTransition(Duration.seconds(DURATION_TIME_FADEIN), introScreen.getContent());
+			fadeIn.setFromValue(START_VALUE_FADEIN);
+			fadeIn.setToValue(STOP_VALUE_FADEIN);
+			fadeIn.setCycleCount(CYCLE_COUNT);		
 			
-			// Data coupling, do ch? truy?n ?úng tham s? c?n thi?t ?? ho?t ??ng
+			// Data coupling, do ch? truy?n ?ï¿½ng tham s? c?n thi?t ?? ho?t ??ng
 
 			// Finish splash with fade out effect
-			FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), introScreen.getContent());
-			fadeOut.setFromValue(1);
-			fadeOut.setToValue(0);
-			fadeOut.setCycleCount(1);		
+			FadeTransition fadeOut = new FadeTransition(Duration.seconds(DURATION_TIME_FADEOUT), introScreen.getContent());
+			fadeOut.setFromValue(START_VALUE_FADEOUT);
+			fadeOut.setToValue(STOP_VALUE_FADEOUT);
+			fadeOut.setCycleCount(CYCLE_COUNT);		
 			
 			// Data coupling, do truy?n tham s? c?n thi?t ?? ho?t ??ng
 
@@ -63,7 +75,7 @@ public class App extends Application {
 					homeHandler.setImage();
 					homeHandler.show();
 					
-					// Data coupling, do ch? g?i các ph??ng th?c và truy?n tham s? v?a ??
+					// Data coupling, do ch? g?i cï¿½c ph??ng th?c vï¿½ truy?n tham s? v?a ??
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}

@@ -40,6 +40,12 @@ public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
 
     private OrderItem orderItem;
 
+    /*
+     * Clean code: replace number constant --> final constant variable
+     */
+    private static final int FIT_HEIGHT = 90;
+    private static final int FIT_WIDTH = 83;
+    
     public MediaInvoiceScreenHandler(String screenPath) throws IOException{
         super(screenPath);
     }
@@ -55,8 +61,8 @@ public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
         numOfProd.setText(String.valueOf(orderItem.getQuantity()));
         setImage(image, orderItem.getMedia().getImageURL());
 		image.setPreserveRatio(false);
-		image.setFitHeight(90);
-		image.setFitWidth(83);
+		image.setFitHeight(FIT_HEIGHT);
+		image.setFitWidth(FIT_WIDTH);
     }
 
 }

@@ -150,6 +150,10 @@ public class CartScreenHandler extends BaseScreenHandler {
 		labelVAT.setText(ViewsConfig.getCurrencyFormat(vat));
 		labelAmount.setText(ViewsConfig.getCurrencyFormat(amount));
 	}
+	
+	/*
+	 * Clean Code: rename Object cm --> Object object
+	 */
 	//Sequential Cohesion vi su dung du lieu dau ra cua getBController();
 	private void displayCartWithMediaAvailability(){
 		// clear all old cartMedia
@@ -159,10 +163,10 @@ public class CartScreenHandler extends BaseScreenHandler {
 		List lstMedia = getBController().getListCartMedia();
 
 		try {
-			for (Object cm : lstMedia) {
+			for (Object object : lstMedia) {
 
 				// display the attribute of vboxCart media
-				CartItem cartItem = (CartItem) cm;
+				CartItem cartItem = (CartItem) object;
 				MediaHandler mediaCartScreen = new MediaHandler(ViewsConfig.CART_MEDIA_PATH, this);
 				mediaCartScreen.setCartItem(cartItem);
 

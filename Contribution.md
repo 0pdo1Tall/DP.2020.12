@@ -10,3 +10,7 @@
 - Subteam 2: Hoàng Minh Tiến,Đặng Đình Thọ,Ngô Huy Thao
 Áp dụng Factory Method cho Media và các lớp con: Book,CD,DVD
 Tạo lớp cha PaymentMethod của CreditCard trong payment,tạo lớp cha PaymentMethodFactory và lớp con CreditCardFactory ứng với PaymentMethod và CreditCard
+
+### Bài 6: Clean Code - Meaningful Names
+- Subteam 1: Lê Anh Thành, Phạm Văn Thành:
+Áp dụng Meaningful Names cho các class: AuthenticationController, PaymentController (package controller); Cart (entity.cart); DeliveryInfo (entity.shipping); InterbankSubsystem (interbank); CartScreenHandler (views.screen.cart); MediaHandler (views.screen.home); InvoiceScreenHandler, MediaInvoiceScreenHandler (views.screen.invoice); PaymentScreenHandler (views.screen.payment); App (default package).
