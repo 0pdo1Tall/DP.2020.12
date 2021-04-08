@@ -16,14 +16,17 @@ public class InterbankSubsystem implements InterbankInterface {
 	/**
 	 * Represent the controller of the subsystem
 	 */
-	private InterbankSubsystemController ctrl;
+	/*
+	 * Clean code. sửa ctrl => interbankSubsystemController
+	 */
+	private InterbankSubsystemController interbankSubsystemController;
 
 	/**
 	 * Initializes a newly created {@code InterbankSubsystem} object so that it
 	 * represents an Interbank subsystem.
 	 */
 	public InterbankSubsystem() {
-		this.ctrl = new InterbankSubsystemController();
+		this.interbankSubsystemController = new InterbankSubsystemController();
 	}
 
 	/**
@@ -34,7 +37,7 @@ public class InterbankSubsystem implements InterbankInterface {
 	// SOLID: DIP do phu thuoc vao Credit Card
 	// SOLID: OCP do phai modify khi thay doi phuong thuc thuc thanh toan
 	public PaymentTransaction payOrder(CreditCard card, int amount, String contents) {
-		PaymentTransaction transaction = ctrl.payOrder(card, amount, contents);
+		PaymentTransaction transaction = interbankSubsystemController.payOrder(card, amount, contents);
 		return transaction;
 	}
 
@@ -44,7 +47,7 @@ public class InterbankSubsystem implements InterbankInterface {
 	 */
 	// Data Coupling
 	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
-		PaymentTransaction transaction = ctrl.refund(card, amount, contents);
+		PaymentTransaction transaction = interbankSubsystemController.refund(card, amount, contents);
 		return transaction;
 	}
 }

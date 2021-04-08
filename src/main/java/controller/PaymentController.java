@@ -91,9 +91,13 @@ public class PaymentController extends BaseController {
 	 */
 	// Coincidental cohension. Nên tách riêng ra class riêng
 	// SOLID: SRP ko lien quan den chuc nang cua Payment Controller
+	
+	/*
+	 * Clean code: Cần thay đổi strs => dateSplit
+	 */
 	private String getExpirationDate(String date) throws InvalidCardException {
-		String[] strs = date.split("/");
-		if (strs.length != 2) {
+		String[] dateSplit = date.split("/");
+		if (dateSplit.length != 2) {
 			throw new InvalidCardException();
 		}
 
@@ -102,12 +106,12 @@ public class PaymentController extends BaseController {
 		int year = -1;
 
 		try {
-			month = Integer.parseInt(strs[0]);
-			year = Integer.parseInt(strs[1]);
+			month = Integer.parseInt(dateSplit[0]);
+			year = Integer.parseInt(dateSplit[1]);
 			if (month < 1 || month > 12 || year < Calendar.getInstance().get(Calendar.YEAR) % 100 || year > 100) {
 				throw new InvalidCardException();
 			}
-			expirationDate = strs[0] + strs[1];
+			expirationDate = dateSplit[0] + dateSplit[1];
 
 		} catch (Exception ex) {
 			throw new InvalidCardException();

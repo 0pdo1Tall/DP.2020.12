@@ -7,7 +7,7 @@ import java.util.List;
 import common.exception.MediaNotAvailableException;
 import entity.media.Media;
 
-// Card  là đối tượng duy nhất nên ta có thê áp dụng singleton cho nó như sau:
+// Card  lÃ  Ä‘á»‘i tÆ°á»£ng duy nháº¥t nÃªn ta cÃ³ thÃª Ã¡p dá»¥ng singleton cho nÃ³ nhÆ° sau:
 
 public class Cart {
     
@@ -15,17 +15,17 @@ public class Cart {
 
     private List<CartItem> lstCartItem;
 
-private Cart(){
-    lstCartItem = new ArrayList<>();
-};
-
-public static Cart getCard(){
-    if(instance == null){
-        instance = new Cart();
-    }
-    
-    return instance;
-}
+	private Cart(){
+	    lstCartItem = new ArrayList<>();
+	};
+	
+	public static Cart getCard(){
+	    if(instance == null){
+	        instance = new Cart();
+	    }
+	    
+	    return instance;
+	}
 
     // public Cart() {
     //     lstCartItem = new ArrayList<>();
@@ -33,13 +33,16 @@ public static Cart getCard(){
 
 
     // data coupling
-    public void addCartMedia(CartItem cm){
-        lstCartItem.add(cm);
+	/*
+	 * Clean code. sửa biến cm => cartItem
+	 */
+    public void addCartMedia(CartItem cartItem){
+        lstCartItem.add(cartItem);
     }
 
     // data coupling
-    public void removeCartMedia(CartItem cm){
-        lstCartItem.remove(cm);
+    public void removeCartMedia(CartItem cartItem){
+        lstCartItem.remove(cartItem);
     }
 
     public List getListMedia(){
@@ -53,8 +56,8 @@ public static Cart getCard(){
     public int getTotalMedia(){
         int total = 0;
         for (Object obj : lstCartItem) {
-            CartItem cm = (CartItem) obj;
-            total += cm.getQuantity();
+            CartItem cartItem = (CartItem) obj;
+            total += cartItem.getQuantity();
         }
         return total;
     }
@@ -62,13 +65,13 @@ public static Cart getCard(){
     public int calSubtotal(){
         int total = 0;
         for (Object obj : lstCartItem) {
-            CartItem cm = (CartItem) obj;
-            total += cm.getPrice()*cm.getQuantity();
+            CartItem cartItem = (CartItem) obj;
+            total += cartItem.getPrice()*cm.getQuantity();
         }
         return total;
     }
 
-    //SRP: Phương thức này có thể chia ra một class khác
+    //SRP: PhÆ°Æ¡ng thá»©c nÃ y cÃ³ thá»ƒ chia ra má»™t class khÃ¡c
     public void checkAvailabilityOfProduct() throws SQLException{
         boolean allAvailable = true;
         for (Object object : lstCartItem) {
@@ -88,5 +91,5 @@ public static Cart getCard(){
         return null;
     }
 
-    //communicational cohesion: các phương thức dùng dung thuộc tính lstCartItem
+    //communicational cohesion: cÃ¡c phÆ°Æ¡ng thá»©c dÃ¹ng dung thuá»™c tÃ­nh lstCartItem
 }

@@ -5,6 +5,10 @@ import org.example.DistanceCalculator;
 
 public class DeliveryInfo {
 
+	/*
+	 * Clean code. Định nghĩa hệ số nhân MULTIPLIER
+	 */
+	static final double MULTIPLIER = 1,2;
     //Common coupling
     protected String name;
     protected String phone;
@@ -15,8 +19,8 @@ public class DeliveryInfo {
 
 
     // data coupling
-    //SOLID: Vi phạm nguyên lí OCP: vì nếu mở rộng theo yêu cầu, ta sẽ phải đổi phương thức tính khoảng cách khác, và như thế phải modify lại phần mã nguồn của class này
-	//SOLID: Vi phạm nguyên lí DIP: Phụ thuộc vào DistanceCalculator
+    //SOLID: Vi pháº¡m nguyÃªn lÃ­ OCP: vÃ¬ náº¿u má»Ÿ rá»™ng theo yÃªu cáº§u, ta sáº½ pháº£i Ä‘á»•i phÆ°Æ¡ng thá»©c tÃ­nh khoáº£ng cÃ¡ch khÃ¡c, vÃ  nhÆ° tháº¿ pháº£i modify láº¡i pháº§n mÃ£ nguá»“n cá»§a class nÃ y
+	//SOLID: Vi pháº¡m nguyÃªn lÃ­ DIP: Phá»¥ thuá»™c vÃ o DistanceCalculator
 
     public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions, DistanceCalculator distanceCalculator) {
         this.name = name;
@@ -27,10 +31,11 @@ public class DeliveryInfo {
         this.distanceCalculator = distanceCalculator;
     }
 
-    // Stamp coupling: DÙng Order làm tham số truyền vào nhưng không sử dụng (hết) thuộc tính
+    // Stamp coupling: DÃ™ng Order lÃ m tham sá»‘ truyá»�n vÃ o nhÆ°ng khÃ´ng sá»­ dá»¥ng (háº¿t) thuá»™c tÃ­nh
     public int calculateShippingFee(Order order) {
+    	
         int distance = distanceCalculator.calculateDistance(address, province);
-        return (int) (distance * 1.2);
+        return (int) (distance * MULTIPLIER);
     }
 
     public String getName() {
@@ -53,5 +58,5 @@ public class DeliveryInfo {
         return shippingInstructions;
     }
 
-    //communicational cohesion: một vài phương thức dùng dung thuộc tính
+    //communicational cohesion: má»™t vÃ i phÆ°Æ¡ng thá»©c dÃ¹ng dung thuá»™c tÃ­nh
 }

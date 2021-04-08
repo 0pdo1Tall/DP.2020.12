@@ -82,7 +82,7 @@ public class AuthenticationController extends BaseController {
     // SOLID: DIP do phu thuoc vao ham ma hoa khong phai la Abstract/Interface
     public void login(String email, String password) throws Exception {
         try {
-            User user = new UserDAO().authenticate(email, md5(password));
+            User user = new UserDAO().authenticate(email, encryptMd5(password));
             if (Objects.isNull(user)) throw new FailLoginException();
             SessionInformation.mainUser = user;
             SessionInformation.expiredTime = LocalDateTime.now().plusHours(24);
@@ -107,7 +107,11 @@ public class AuthenticationController extends BaseController {
      * @param message - plain text as {@link String String}.
      * @return cipher text as {@link String String}.
      */
-    private String md5(String message) {
+    
+    /**
+     *  Clean Code: Cần thay đổi tên md5 => encryptMd5 
+     */
+    private String encryptMd5(String message) {
         String digest = null;
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
