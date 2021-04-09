@@ -39,30 +39,30 @@ public class MyMap extends LinkedHashMap<String, Object> {
 	 * @return a {@link String String}.
 	 */
 	public String toJSON() {
-		int max = size() - 1;
-		if (max == -1)
+		int maxIndex = size() - 1;
+		if (maxIndex == -1)
 			return "{}";
-
-		StringBuilder sb = new StringBuilder();
+		// Clean Code: sb to keyValueStringBuilder, i to index,max to maxIndex
+		StringBuilder keyValueStringBuilder = new StringBuilder();
 		Iterator<Map.Entry<String, Object>> it = entrySet().iterator();
 
-		sb.append('{');
-		for (int i = 0;; i++) {
+		keyValueStringBuilder.append('{');
+		for (int index = 0;; index++) {
 			Map.Entry<String, Object> e = it.next();
 			String key = e.getKey();
 			Object value = e.getValue();
-			sb.append('"' + key.toString() + '"');
-			sb.append(':');
-			sb.append(value instanceof MyMap ? ((MyMap) value).toJSON() : ('"' + value.toString() + '"'));
+			keyValueStringBuilder.append('"' + key.toString() + '"');
+			keyValueStringBuilder.append(':');
+			keyValueStringBuilder.append(value instanceof MyMap ? ((MyMap) value).toJSON() : ('"' + value.toString() + '"'));
 
 //			if (value instanceof MyMap) {
 //				sb.append(((MyMap) value).toJSON());
 //			} else {
 //				sb.append('"' + value.toString() + '"');
 //			}
-			if (i == max)
-				return sb.append('}').toString();
-			sb.append(",");
+			if (index == maxIndex)
+				return keyValueStringBuilder.append('}').toString();
+			keyValueStringBuilder.append(",");
 		}
 		
 		// Data coupling, chỉ nhận vào đủ dữ liệu để xử lý

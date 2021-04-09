@@ -10,7 +10,7 @@ import utils.*;
 
 // Singleton: DB duoc coi nhu mot doi tuong lon, duy nhat, global(dung de tao connection) nen duoc dat la Singleton
 public class AIMSDB {
-
+    
     private static AIMSDB db;
     private AIMSDB(){}
     public static AIMSDB getInstance() {
@@ -22,11 +22,12 @@ public class AIMSDB {
 	private static Connection connect;
 	// TODO: refactor Utils -> limit connections
     public static Connection getConnection() { //communicational cohesion: các phương thức dùng dung thuộc tính() {
+        // Clean Code: change url to databaseURL
         if (connect != null) return connect;
         try {
 			Class.forName("org.sqlite.JDBC");
-            String url = "jdbc:sqlite:src/main/resources/assets/db/aims.db";
-            connect = DriverManager.getConnection(url);
+            String databaseURL = "jdbc:sqlite:src/main/resources/assets/db/aims.db";
+            connect = DriverManager.getConnection(databaseURL);
             LOGGER.info("Connect database successfully");
         } catch (Exception e) {
             LOGGER.info(e.getMessage());

@@ -51,33 +51,36 @@ public static Cart getCard(){
     }
 
     public int getTotalMedia(){
-        int total = 0;
-        for (Object obj : lstCartItem) {
-            CartItem cm = (CartItem) obj;
-            total += cm.getQuantity();
+        // Clean Code: change total to totalMediaQuantity, obj to cartItemObject, cm to cartItem
+        int totalMediaQuantity = 0;
+        for (Object cartItemObject : lstCartItem) {
+            CartItem cartItem = (CartItem) cartItemObject;
+            totalMediaQuantity += cartItem.getQuantity();
         }
-        return total;
+        return totalMediaQuantity;
     }
 
     public int calSubtotal(){
-        int total = 0;
-        for (Object obj : lstCartItem) {
-            CartItem cm = (CartItem) obj;
-            total += cm.getPrice()*cm.getQuantity();
+        // Clean Code: change total to totalMediaQuantity, obj to cartItemObject, cm to cartItem
+        int totalMediaQuantity = 0;
+        for (Object cartItemObject : lstCartItem) {
+            CartItem cartItem = (CartItem) cartItemObject;
+            totalMediaQuantity += cartItem.getPrice()*cartItem.getQuantity();
         }
-        return total;
+        return totalMediaQuantity;
     }
 
     //SRP: Phương thức này có thể chia ra một class khác
     public void checkAvailabilityOfProduct() throws SQLException{
-        boolean allAvailable = true;
-        for (Object object : lstCartItem) {
-            CartItem cartItem = (CartItem) object;
+        // Clean Code: change allAvailable to allProductAvailable, object to cartItemObject.availQuantity to availableQuantity
+        boolean allProductAvailable = true;
+        for (Object cartItemObject : lstCartItem) {
+            CartItem cartItem = (CartItem) cartItemObject;
             int requiredQuantity = cartItem.getQuantity();
-            int availQuantity = cartItem.getMedia().getQuantity();
-            if (requiredQuantity > availQuantity) allAvailable = false;
+            int availableQuantity = cartItem.getMedia().getQuantity();
+            if (requiredQuantity > availableQuantity) allProductAvailable = false;
         }
-        if (!allAvailable) throw new MediaNotAvailableException("Some media not available");
+        if (!allProductAvailable) throw new MediaNotAvailableException("Some media not available");
     }
 
     // stamp coupling

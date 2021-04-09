@@ -19,33 +19,34 @@ public class BookDAO extends MediaDAO {
     // Data coupling
     @Override
     public Media getMediaById(int id) throws SQLException {
-        String sql = "SELECT * FROM "+
+        // Clean Code: change sql to getBookByIdQuery,stm to bookStatement,res to bookResultSet
+        String getBookByIdQuery = "SELECT * FROM "+
                 "aims.Book " +
                 "INNER JOIN aims.Media " +
                 "ON Media.id = Book.id " +
                 "where Media.id = " + id + ";";
-        Statement stm = AIMSDB.getInstance().getConnection().createStatement();
-        ResultSet res = stm.executeQuery(sql);
-        if(res.next()) {
+        Statement bookStatement = AIMSDB.getInstance().getConnection().createStatement();
+        ResultSet bookResultSet = bookStatement.executeQuery(getBookByIdQuery);
+        if(bookResultSet.next()) {
 
-            // from Media table
-            String title = "";
-            String type = res.getString("type");
-            int price = res.getInt("price");
-            String category = res.getString("category");
-            int quantity = res.getInt("quantity");
+            // CleanCode : change title to mediaTitle, type to mediaType...
+            String bookTitle = "";
+            String bookType = bookResultSet.getString("type");
+            int bookPrice = bookResultSet.getInt("price");
+            String bookCategory = bookResultSet.getString("category");
+            int bookQuantity = bookResultSet.getInt("quantity");
 
             // from Book table
-            String author = res.getString("author");
-            String coverType = res.getString("coverType");
-            String publisher = res.getString("publisher");
-            Date publishDate = res.getDate("publishDate");
-            int numOfPages = res.getInt("numOfPages");
-            String language = res.getString("language");
-            String bookCategory = res.getString("bookCategory");
+            String bookAuthor = bookResultSet.getString("author");
+            String bookCoverType = bookResultSet.getString("coverType");
+            String bookPublisher = bookResultSet.getString("publisher");
+            Date bookPublishDate = bookResultSet.getDate("publishDate");
+            int bookNumOfPages = bookResultSet.getInt("numOfPages");
+            String bookLanguage = bookResultSet.getString("language");
+            String mediaBookCategory = bookResultSet.getString("bookCategory");
 
-           return BookFactory.getInstance().createMedia(id, title, category, price, quantity, type,
-                   author, coverType, publisher, publishDate, numOfPages, language, bookCategory);
+           return BookFactory.getInstance().createMedia(id, bookTitle, bookCategory, bookPrice, bookQuantity, bookType,
+                   bookAuthor, bookCoverType, bookPublisher, bookPublishDate, bookNumOfPages, bookLanguage, mediaBookCategory);
 
         } else {
             throw new SQLException();

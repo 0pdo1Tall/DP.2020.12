@@ -82,7 +82,7 @@ public class AuthenticationController extends BaseController {
     // SOLID: DIP do phu thuoc vao ham ma hoa khong phai la Abstract/Interface
     public void login(String email, String password) throws Exception {
         try {
-            User user = new UserDAO().authenticate(email, md5(password));
+            User user = new UserDAO().authenticate(email, md5Encryption(password));
             if (Objects.isNull(user)) throw new FailLoginException();
             SessionInformation.mainUser = user;
             SessionInformation.expiredTime = LocalDateTime.now().plusHours(24);
@@ -107,17 +107,21 @@ public class AuthenticationController extends BaseController {
      * @param message - plain text as {@link String String}.
      * @return cipher text as {@link String String}.
      */
-    private String md5(String message) {
+    
+    // Clean Code: change md5 to md5Encryption here
+    private String md5Encryption(String message) {
         String digest = null;
         try {
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] hash = md.digest(message.getBytes(StandardCharsets.UTF_8));
+            // Clean Code: change md to messageDigest here
+            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+            byte[] hash = messageDigest.digest(message.getBytes(StandardCharsets.UTF_8));
             // converting byte array to Hexadecimal String
-            StringBuilder sb = new StringBuilder(2 * hash.length);
+            // Clean Code: change sb to digestStringBuilder
+            StringBuilder digestStringBuilder = new StringBuilder(2 * hash.length);
             for (byte b : hash) {
-                sb.append(String.format("%02x", b & 0xff));
+                digestStringBuilder.append(String.format("%02x", b & 0xff));
             }
-            digest = sb.toString();
+            digest = digestStringBuilder.toString();
         } catch (NoSuchAlgorithmException ex) {
             Utils.getLogger(Utils.class.getName());
             digest = "";
