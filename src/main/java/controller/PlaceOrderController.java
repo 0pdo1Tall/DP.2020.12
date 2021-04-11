@@ -69,7 +69,9 @@ public class PlaceOrderController extends BaseController {
     public static PlaceOrderController getInstance() {
     	return placeOrderController;
     }
-    
+    // Clean Code: Create Constant PHONE_LENGTH = 10 and START_PHONE_NUMBER = 0
+    private final int PHONE_LENGTH = 10;
+    private final int START_PHONE_NUMBER = 0;
     
     /**
      * This method checks the availability of product when user click PlaceOrder button
@@ -150,8 +152,9 @@ public class PlaceOrderController extends BaseController {
     }
     
     public boolean validatePhoneNumber(String phoneNumber) {
-        if (phoneNumber.length() != 10) return false;
-        if (!phoneNumber.startsWith("0")) return false;
+        // Clean Code: Use Constant PHONE_LENGTH = 10 instead
+        if (phoneNumber.length() != PHONE_LENGTH) return false;
+        if (!phoneNumber.startsWith(String.valueOf(START_PHONE_NUMBER))) return false;
         try {
             Integer.parseInt(phoneNumber);
         } catch (NumberFormatException e) {
@@ -164,20 +167,22 @@ public class PlaceOrderController extends BaseController {
 
     public boolean validateName(String name) {
         if (Objects.isNull(name)) return false;
-        String patternString = "^[a-zA-Z\\s]*$";
-        Pattern pattern = Pattern.compile(patternString);
-        Matcher matcher = pattern.matcher(name);
-        return matcher.matches();
+        // Clean Code: change patternString to namePatternString,pattern to namePattern and matcher to nameMatcher
+        String namePatternString = "^[a-zA-Z\\s]*$";
+        Pattern namePattern = Pattern.compile(namePatternString);
+        Matcher nameMatcher = namePattern.matcher(name);
+        return nameMatcher.matches();
         
         // Data coupling, sử dụng vừa đủ dữ liệu để xử lý
     }
 
     public boolean validateAddress(String address) {
         if (Objects.isNull(address)) return false;
-        String patternString = "^[a-zA-Z\\s]*$";
-        Pattern pattern = Pattern.compile(patternString);
-        Matcher matcher = pattern.matcher(address);
-        return matcher.matches();
+        // Clean Code: change patternString to addressPatternString,pattern to addressPattern and matcher to addressMatcher
+        String addressPatternString = "^[a-zA-Z\\s]*$";
+        Pattern addressPattern = Pattern.compile(addressPatternString);
+        Matcher addressMatcher = addressPattern.matcher(address);
+        return addressMatcher.matches();
         
         // Data coupling, sử dụng vừa đủ dữ liệu để xử lý
     }

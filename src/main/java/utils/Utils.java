@@ -20,14 +20,14 @@ import java.util.logging.Logger;
 
  // vi Utils chi la duy nhat 
 public class Utils {
-	
-	public static Utils INSTANCE;
+	// Clean Code: change INSTANCE to utilsInstance;
+	public static Utils utilsInstance;
 	private Utils() { };
 	public static synchronized Utils getInstance(){
-		if(INSTANCE == null){
-			INSTANCE = new Utils();
+		if(utilsInstance == null){
+			utilsInstance = new Utils();
 		}
-		return INSTANCE;
+		return utilsInstance;
 	}	
 	
 	public static DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

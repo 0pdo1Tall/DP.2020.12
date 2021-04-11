@@ -17,31 +17,33 @@ public class DVDDAO extends MediaDAO {
     // Data Coupling
     @Override
     public Media getMediaById(int id) throws SQLException {
-        String sql = "SELECT * FROM "+
+        // Clean Code: change sql to getDVDByIdQuery, res to dvdResultSet
+        String getDVDByIdQuery = "SELECT * FROM "+
                 "aims.DVD " +
                 "INNER JOIN aims.Media " +
                 "ON Media.id = DVD.id " +
                 "where Media.id = " + id + ";";
-        ResultSet res = AIMSDB.getInstance().getConnection().createStatement().executeQuery(sql);
-        if(res.next()) {
+        ResultSet dvdResultSet = AIMSDB.getInstance().getConnection().createStatement().executeQuery(getDVDByIdQuery);
+        // Clean Code: change every tag to dvdTag
+        if(dvdResultSet.next()) {
 
             // from media table
-            String title = "";
-            String type = res.getString("type");
-            int price = res.getInt("price");
-            String category = res.getString("category");
-            int quantity = res.getInt("quantity");
+            String dvdTitle = "";
+            String dvdType = dvdResultSet.getString("type");
+            int dvdPrice = dvdResultSet.getInt("price");
+            String dvdCategory = dvdResultSet.getString("category");
+            int dvdQuantity = dvdResultSet.getInt("quantity");
 
             // from DVD table
-            String discType = res.getString("discType");
-            String director = res.getString("director");
-            int runtime = res.getInt("runtime");
-            String studio = res.getString("studio");
-            String subtitles = res.getString("subtitle");
-            Date releasedDate = res.getDate("releasedDate");
-            String filmType = res.getString("filmType");
+            String dvdDiscType = dvdResultSet.getString("discType");
+            String dvdDirector = dvdResultSet.getString("director");
+            int dvdRuntime = dvdResultSet.getInt("runtime");
+            String dvdStudio = dvdResultSet.getString("studio");
+            String dvdSubtitles = dvdResultSet.getString("subtitle");
+            Date dvdReleasedDate = dvdResultSet.getDate("releasedDate");
+            String dvdFilmType = dvdResultSet.getString("filmType");
 
-            return DVDFactory.getInstance().createMedia(id, title, category, price, quantity, type, discType, director, runtime, studio, subtitles, releasedDate, filmType);
+            return DVDFactory.getInstance().createMedia(id, dvdTitle, dvdCategory, dvdPrice, dvdQuantity, dvdType, dvdDiscType, dvdDirector, dvdRuntime, dvdStudio, dvdSubtitles, dvdReleasedDate, dvdFilmType);
 
         } else {
             throw new SQLException();

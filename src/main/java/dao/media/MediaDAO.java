@@ -17,18 +17,19 @@ public class MediaDAO {
 
     // None Coupling
     public List getAllMedia() throws SQLException {
-        Statement stm = AIMSDB.getInstance().getConnection().createStatement();
-        ResultSet res = stm.executeQuery("select * from Media");
+        // Clean Code: change stm to mediaStatement, res to mediaResultSet
+        Statement mediaStatement = AIMSDB.getInstance().getConnection().createStatement();
+        ResultSet mediaResultSet = mediaStatement.executeQuery("select * from Media");
         ArrayList medium = new ArrayList<>();
-        while (res.next()) {
+        while (mediaResultSet.next()) {
             Media media = new Media(
-                    res.getInt("id"),
-                    res.getString("title"),
-                    res.getInt("quantity"),
-                    res.getString("category"),
-                    res.getString("imageUrl"),
-                    res.getInt("price"),
-                    res.getString("type"));
+                    mediaResultSet.getInt("id"),
+                    mediaResultSet.getString("title"),
+                    mediaResultSet.getInt("quantity"),
+                    mediaResultSet.getString("category"),
+                    mediaResultSet.getString("imageUrl"),
+                    mediaResultSet.getInt("price"),
+                    mediaResultSet.getString("type"));
             medium.add(media);
         }
         return medium;
@@ -36,33 +37,36 @@ public class MediaDAO {
 
     // Data Coupling
     public Media getMediaById(int id) throws SQLException {
-        String sql = "SELECT * FROM Media ;";
-        Statement stm = AIMSDB.getInstance().getConnection().createStatement();
-        ResultSet res = stm.executeQuery(sql);
 
-        if (res.next()) {
+        // Clean Code: change sql to getMediaByIdQuery,stm to mediaStatement,res to MediaResultSet
+        String getMediaByIdQuery = "SELECT * FROM Media ;";
+        Statement mediaStatement = AIMSDB.getInstance().getConnection().createStatement();
+        ResultSet MediaResultSet = mediaStatement.executeQuery(getMediaByIdQuery);
+
+        if (MediaResultSet.next()) {
             return new Media(
-                    res.getInt("id"),
-                    res.getString("title"),
-                    res.getInt("quantity"),
-                    res.getString("category"),
-                    res.getString("imageUrl"),
-                    res.getInt("price"),
-                    res.getString("type"));
+                    MediaResultSet.getInt("id"),
+                    MediaResultSet.getString("title"),
+                    MediaResultSet.getInt("quantity"),
+                    MediaResultSet.getString("category"),
+                    MediaResultSet.getString("imageUrl"),
+                    MediaResultSet.getInt("price"),
+                    MediaResultSet.getString("type"));
         }
         return null;
     }
 
     // Control Coupling + Stamp Coupling
     public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
-        Statement stm = AIMSDB.getInstance().getConnection().createStatement();
+        // Clean Code: Change stm to updateMediaFieldByIdStatement
+        Statement updateMediaFieldByIdStatement = AIMSDB.getInstance().getConnection().createStatement();
         // Control Coupling Here(if value is a string -> update value, else do nothing)
         if (value instanceof String){
             value = "\"" + value + "\"";
         }
 
         // Stamp coupling here(not use of tbname but still passing it)
-        stm.executeUpdate(" update Media set" + " "
+        updateMediaFieldByIdStatement.executeUpdate(" update Media set" + " "
                 + field + "=" + value + " "
                 + "where id=" + id + ";");
     }

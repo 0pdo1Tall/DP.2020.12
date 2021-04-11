@@ -40,8 +40,9 @@ public class ViewCartController extends BaseController{
      * @return subtotal
      */
     public int getCartSubtotal(){
-        int subtotal = Cart.getCard().calSubtotal();
-        return subtotal;
+        // Clean Code: Change subtotal to cartSubtotal
+        int cartSubtotal = Cart.getCard().calSubtotal();
+        return cartSubtotal;
         
         // Data coupling, lấy dữ liệu cần thiết thông qua phương thức được cung cấp
     }

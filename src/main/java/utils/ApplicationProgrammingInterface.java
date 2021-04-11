@@ -40,6 +40,7 @@ public class ApplicationProgrammingInterface {
 		conn.setRequestProperty("Authorization", "Bearer " + token);
 		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		String inputLine;
+		// Clean Code: respon to response
 		StringBuilder response = new StringBuilder(); // ising StringBuilder for the sake of memory and performance
 		while ((inputLine = in.readLine()) != null)
 			System.out.println(inputLine);

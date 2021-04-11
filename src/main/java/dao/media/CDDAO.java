@@ -17,30 +17,32 @@ public class CDDAO extends MediaDAO {
     // Data Coupling
     @Override
     public Media getMediaById(int id) throws SQLException {
-        String sql = "SELECT * FROM "+
+        // Clean Code: Change sql to getCDByIdQuery, res to CDResultSet
+        String getCDByIdQuery = "SELECT * FROM "+
                 "aims.CD " +
                 "INNER JOIN aims.Media " +
                 "ON Media.id = CD.id " +
                 "where Media.id = " + id + ";";
 
-        ResultSet res = AIMSDB.getInstance().getConnection().createStatement().executeQuery(sql);
-        if(res.next()) {
+        ResultSet CDResultSet = AIMSDB.getInstance().getConnection().createStatement().executeQuery(getCDByIdQuery);
+        // Clean Code: change every tag to cd Tag
+        if(CDResultSet.next()) {
 
             // from media table
-            String title = "";
-            String type = res.getString("type");
-            int price = res.getInt("price");
-            String category = res.getString("category");
-            int quantity = res.getInt("quantity");
+            String cdTitle = "";
+            String cdType = CDResultSet.getString("type");
+            int cdPrice = CDResultSet.getInt("price");
+            String cdCategory = CDResultSet.getString("category");
+            int cdQuantity = CDResultSet.getInt("quantity");
 
             // from CD table
-            String artist = res.getString("artist");
-            String recordLabel = res.getString("recordLabel");
-            String musicType = res.getString("musicType");
-            Date releasedDate = res.getDate("releasedDate");
+            String cdArtist = CDResultSet.getString("artist");
+            String cdRecordLabel = CDResultSet.getString("recordLabel");
+            String cdMusicType = CDResultSet.getString("musicType");
+            Date cdReleasedDate = CDResultSet.getDate("releasedDate");
 
-            return CDFactory.getInstance().createMedia(id, title, category, price, quantity, type,
-                    artist, recordLabel, musicType, releasedDate);
+            return CDFactory.getInstance().createMedia(id, cdTitle, cdCategory, cdPrice, cdQuantity, cdType,
+                    cdArtist, cdRecordLabel, cdMusicType, cdReleasedDate);
 
         } else {
             throw new SQLException();

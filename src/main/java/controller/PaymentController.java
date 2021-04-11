@@ -96,8 +96,10 @@ public class PaymentController extends BaseController {
 	 * Clean code: Cần thay đổi strs => dateSplit
 	 */
 	private String getExpirationDate(String date) throws InvalidCardException {
-		String[] dateSplit = date.split("/");
-		if (dateSplit.length != 2) {
+
+		// Clean Code: change strs to dateString
+		String[] dateString = date.split("/");
+		if (dateString.length != 2) {
 			throw new InvalidCardException();
 		}
 
@@ -106,13 +108,12 @@ public class PaymentController extends BaseController {
 		int year = -1;
 
 		try {
-			month = Integer.parseInt(dateSplit[0]);
-			year = Integer.parseInt(dateSplit[1]);
+			month = Integer.parseInt(dateString[0]);
+			year = Integer.parseInt(dateString[1]);
 			if (month < 1 || month > 12 || year < Calendar.getInstance().get(Calendar.YEAR) % 100 || year > 100) {
 				throw new InvalidCardException();
 			}
-			expirationDate = dateSplit[0] + dateSplit[1];
-
+			expirationDate = dateString[0] + dateString[1];
 		} catch (Exception ex) {
 			throw new InvalidCardException();
 		}
