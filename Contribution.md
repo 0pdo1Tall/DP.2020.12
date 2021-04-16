@@ -19,3 +19,7 @@ Tạo lớp cha PaymentMethod của CreditCard trong payment,tạo lớp cha Pay
 Áp dụng Meaningful Names trong các class sau: AuthenticationController, PaymentController, PlaceOrderController, ViewCartController,
  BookDAO, CDDAO, DVDDAO, MediaDAO, UserDAO, Cart, AIMSDB, ApplicationProgrammigInterface, MyMap, Utils
 
+
+### Bài 6: Clean Code - Method Refactoring
+- Subteam 1: Lê Anh Thành, Phạm Văn Thành:
+Áp dụng Method Refactoring cho các class: PaymentController, PlaceOrderController, ViewCartController (package controller); UserDAO (package dao.user); Cart (package entity.cart); AIMSDB (package entity.db); Order (package entity.order); DeliveryInfo (package entity.shipping); User (package entity.user).

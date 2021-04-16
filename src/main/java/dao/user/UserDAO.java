@@ -13,24 +13,38 @@ import java.util.Date;
  * @author
  */
 public class UserDAO {
-
+	
+	
+	/**
+	 * Clean code: Many level of Abstraction in method
+	 * Need to separate code to get query, code to create result to other methods
+	 * Create two methods: getUserAndEmailAndPasswordQuery and getUserResult
+	 */
     // Data Coupling
     // Coincidental Cohesion: authenticate function must be in its own module
     public User authenticate(String email, String encryptedPassword) throws SQLException {
         // Clean Code: change sql to getUserAndEmailAndPasswordQuery, res userResultSet
-        String getUserAndEmailAndPasswordQuery = "SELECT * FROM User " +
-                "where email = '" + email + "' and encrypted_password = '" + encryptedPassword + "'";
+        String getUserAndEmailAndPasswordQuery = getUserAndEmailAndPasswordQuery(email, encryptedPassword);
         ResultSet userResultSet =  AIMSDB.getInstance().getConnection().createStatement().executeQuery(getUserAndEmailAndPasswordQuery);
         if(userResultSet.next()) {
-            return new User(
-                    userResultSet.getInt("id"),
-                    userResultSet.getString("name"),
-                    userResultSet.getString("email"),
-                    userResultSet.getString("address"),
-                    userResultSet.getString("phone")
-            );
+            return getUserResult(userResultSet);
         } else {
             throw new SQLException();
         }
+    }
+    
+    public String getUserAndEmailAndPasswordQuery(String email, String encryptedPassword) {
+    	return "SELECT * FROM User " +
+                "where email = '" + email + "' and encrypted_password = '" + encryptedPassword + "'";
+    }
+    
+    public User getUserResult(ResultSet userResultSet) throws SQLException {
+    	return new User(
+                userResultSet.getInt("id"),
+                userResultSet.getString("name"),
+                userResultSet.getString("email"),
+                userResultSet.getString("address"),
+                userResultSet.getString("phone")
+        );
     }
 }

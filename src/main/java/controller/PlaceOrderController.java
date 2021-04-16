@@ -53,6 +53,13 @@ public class PlaceOrderController extends BaseController {
 	 * chúng nên nằm trong một module khác xử lý về kiểm tra tính hợp lệ của dữ liệu
 	 */
 	
+	// Clean Code: Create Constant PHONE_LENGTH = 10 and START_PHONE_NUMBER = 0
+    private static final int PHONE_LENGTH = 10;
+    private static final int START_PHONE_NUMBER = 0;
+    // Clean Code: Create Constant NAME_PATTERN and ADDRESS_PATTERN for check pattern of string in
+    // method validateName and validateAddress
+    private static final String NAME_PATTERN = "^[a-zA-Z\\s]*$";
+    private static final String ADDRESS_PATTERN = "^[a-zA-Z\\s]*$";
 	
     /**
      * Just for logging purpose
@@ -69,9 +76,6 @@ public class PlaceOrderController extends BaseController {
     public static PlaceOrderController getInstance() {
     	return placeOrderController;
     }
-    // Clean Code: Create Constant PHONE_LENGTH = 10 and START_PHONE_NUMBER = 0
-    private final int PHONE_LENGTH = 10;
-    private final int START_PHONE_NUMBER = 0;
     
     /**
      * This method checks the availability of product when user click PlaceOrder button
@@ -168,7 +172,7 @@ public class PlaceOrderController extends BaseController {
     public boolean validateName(String name) {
         if (Objects.isNull(name)) return false;
         // Clean Code: change patternString to namePatternString,pattern to namePattern and matcher to nameMatcher
-        String namePatternString = "^[a-zA-Z\\s]*$";
+        String namePatternString = NAME_PATTERN;
         Pattern namePattern = Pattern.compile(namePatternString);
         Matcher nameMatcher = namePattern.matcher(name);
         return nameMatcher.matches();
@@ -179,7 +183,7 @@ public class PlaceOrderController extends BaseController {
     public boolean validateAddress(String address) {
         if (Objects.isNull(address)) return false;
         // Clean Code: change patternString to addressPatternString,pattern to addressPattern and matcher to addressMatcher
-        String addressPatternString = "^[a-zA-Z\\s]*$";
+        String addressPatternString = ADDRESS_PATTERN;
         Pattern addressPattern = Pattern.compile(addressPatternString);
         Matcher addressMatcher = addressPattern.matcher(address);
         return addressMatcher.matches();
