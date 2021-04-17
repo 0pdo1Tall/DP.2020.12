@@ -65,6 +65,7 @@ public class InterbankPayloadConverter {
                 (String) transaction.get("dateExpired"),
                 Integer.parseInt((String) transaction.get("cvvCode")));
 
+        // Change PaymentTransaction Constructor to throws Exception instead of errorCode
         PaymentTransaction trans = new PaymentTransaction(
                 (String) response.get("errorCode"),
                 card,
@@ -72,27 +73,11 @@ public class InterbankPayloadConverter {
                 (String) transaction.get("transactionContent"),
                 Integer.parseInt((String) transaction.get("amount")),
                 (String) transaction.get("createdAt"));
-
-        switch (trans.getErrorCode()) {
-            case "00":
-                break;
-            case "01":
-                throw new InvalidCardException();
-            case "02":
-                throw new NotEnoughBalanceException();
-            case "03":
-                throw new InternalServerErrorException();
-            case "04":
-                throw new SuspiciousTransactionException();
-            case "05":
-                throw new NotEnoughTransactionInfoException();
-            case "06":
-                throw new InvalidVersionException();
-            case "07":
-                throw new InvalidTransactionAmountException();
-            default:
-                throw new UnrecognizedException();
-        }
+        // Clean Code: Method Refactoring - Change getError to checkValidTransaction And throws Exception
+        try
+        {
+            trans.checkValidTransaction();
+        }catch(Exception e){}
 
         return trans;
     }

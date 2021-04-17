@@ -14,12 +14,15 @@ import java.util.Date;
  */
 public class UserDAO {
 
+    // Clean Code: Method Factoring - Change query string to string with placeholder
+    private String getUserAndEmailAndPasswordQuery = "SELECT * FROM User " +
+            "where email = '" + "%s" + "' and encrypted_password = '" + "%s" + "'";
+
     // Data Coupling
     // Coincidental Cohesion: authenticate function must be in its own module
     public User authenticate(String email, String encryptedPassword) throws SQLException {
         // Clean Code: change sql to getUserAndEmailAndPasswordQuery, res userResultSet
-        String getUserAndEmailAndPasswordQuery = "SELECT * FROM User " +
-                "where email = '" + email + "' and encrypted_password = '" + encryptedPassword + "'";
+        getUserAndEmailAndPasswordQuery = String.format(getUserAndEmailAndPasswordQuery,email,encryptedPassword);
         ResultSet userResultSet =  AIMSDB.getInstance().getConnection().createStatement().executeQuery(getUserAndEmailAndPasswordQuery);
         if(userResultSet.next()) {
             return new User(

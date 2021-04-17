@@ -13,16 +13,18 @@ import java.util.Date;
  * @author
  */
 public class CDDAO extends MediaDAO {
+    // Clean Code: Method Refactoring - change query String to string with place holder
+    private String getCDByIdQuery = "SELECT * FROM "+
+            "aims.CD " +
+            "INNER JOIN aims.Media " +
+            "ON Media.id = CD.id " +
+            "where Media.id = %s;";
 
     // Data Coupling
     @Override
     public Media getMediaById(int id) throws SQLException {
         // Clean Code: Change sql to getCDByIdQuery, res to CDResultSet
-        String getCDByIdQuery = "SELECT * FROM "+
-                "aims.CD " +
-                "INNER JOIN aims.Media " +
-                "ON Media.id = CD.id " +
-                "where Media.id = " + id + ";";
+        getCDByIdQuery = String.format(getCDByIdQuery,id);
 
         ResultSet CDResultSet = AIMSDB.getInstance().getConnection().createStatement().executeQuery(getCDByIdQuery);
         // Clean Code: change every tag to cd Tag

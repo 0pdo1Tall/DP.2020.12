@@ -13,16 +13,18 @@ import java.util.Date;
  * @author
  */
 public class DVDDAO extends MediaDAO {
+    // Clean Code: Method Refactoring - Change query String to string with place holder
+    private String getDVDByIdQuery = "SELECT * FROM "+
+            "aims.DVD " +
+            "INNER JOIN aims.Media " +
+            "ON Media.id = DVD.id " +
+            "where Media.id = %s;";
 
     // Data Coupling
     @Override
     public Media getMediaById(int id) throws SQLException {
         // Clean Code: change sql to getDVDByIdQuery, res to dvdResultSet
-        String getDVDByIdQuery = "SELECT * FROM "+
-                "aims.DVD " +
-                "INNER JOIN aims.Media " +
-                "ON Media.id = DVD.id " +
-                "where Media.id = " + id + ";";
+        getDVDByIdQuery = String.format(getDVDByIdQuery,id);
         ResultSet dvdResultSet = AIMSDB.getInstance().getConnection().createStatement().executeQuery(getDVDByIdQuery);
         // Clean Code: change every tag to dvdTag
         if(dvdResultSet.next()) {

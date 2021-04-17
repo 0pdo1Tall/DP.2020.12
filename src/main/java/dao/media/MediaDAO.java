@@ -14,13 +14,18 @@ import java.util.List;
  */
 // Singleton: MediaDAO quan ly cac products,va cac nghiep vu lien quan, do vay no len dc dat la Singleton
 public class MediaDAO {
+    // Clean Code: Method Refactoring - Change query string to constant
+    private String getAllMediaQuery = "select * from Media";
+    private String updateMediaFieldByIDQuery = " update Media set" + " %field "
+            + "=" + " %value "
+            + "where id=" + "%s;";
 
     // None Coupling
     public List getAllMedia() throws SQLException {
         // Clean Code: change stm to mediaStatement, res to mediaResultSet
         Statement mediaStatement = AIMSDB.getInstance().getConnection().createStatement();
-        ResultSet mediaResultSet = mediaStatement.executeQuery("select * from Media");
-        ArrayList medium = new ArrayList<>();
+        ResultSet mediaResultSet = mediaStatement.executeQuery(getAllMediaQuery);
+        ArrayList mediaList = new ArrayList<>();
         while (mediaResultSet.next()) {
             Media media = new Media(
                     mediaResultSet.getInt("id"),
@@ -30,18 +35,17 @@ public class MediaDAO {
                     mediaResultSet.getString("imageUrl"),
                     mediaResultSet.getInt("price"),
                     mediaResultSet.getString("type"));
-            medium.add(media);
+            mediaList.add(media);
         }
-        return medium;
+        return mediaList;
     }
 
     // Data Coupling
     public Media getMediaById(int id) throws SQLException {
 
         // Clean Code: change sql to getMediaByIdQuery,stm to mediaStatement,res to MediaResultSet
-        String getMediaByIdQuery = "SELECT * FROM Media ;";
         Statement mediaStatement = AIMSDB.getInstance().getConnection().createStatement();
-        ResultSet MediaResultSet = mediaStatement.executeQuery(getMediaByIdQuery);
+        ResultSet MediaResultSet = mediaStatement.executeQuery(getAllMediaQuery);
 
         if (MediaResultSet.next()) {
             return new Media(
@@ -57,7 +61,8 @@ public class MediaDAO {
     }
 
     // Control Coupling + Stamp Coupling
-    public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
+    // Clean Code: Method Refactoring - Remove tbname arguments because of none usage
+    public void updateMediaFieldById(int id, String field, Object value) throws SQLException {
         // Clean Code: Change stm to updateMediaFieldByIdStatement
         Statement updateMediaFieldByIdStatement = AIMSDB.getInstance().getConnection().createStatement();
         // Control Coupling Here(if value is a string -> update value, else do nothing)
@@ -66,8 +71,7 @@ public class MediaDAO {
         }
 
         // Stamp coupling here(not use of tbname but still passing it)
-        updateMediaFieldByIdStatement.executeUpdate(" update Media set" + " "
-                + field + "=" + value + " "
-                + "where id=" + id + ";");
+        updateMediaFieldByIDQuery = String.format(updateMediaFieldByIDQuery,field,value,id);
+        updateMediaFieldByIdStatement.executeUpdate(updateMediaFieldByIDQuery);
     }
 }

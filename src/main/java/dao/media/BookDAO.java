@@ -15,16 +15,18 @@ import java.util.Date;
  * @author
  */
 public class BookDAO extends MediaDAO {
+    // Clean Code: Method Refactoring - Change query String to string with place holder
+    private String getBookByIdQuery = "SELECT * FROM "+
+            "aims.Book " +
+            "INNER JOIN aims.Media " +
+            "ON Media.id = Book.id " +
+            "where Media.id = %s;";
 
     // Data coupling
     @Override
     public Media getMediaById(int id) throws SQLException {
         // Clean Code: change sql to getBookByIdQuery,stm to bookStatement,res to bookResultSet
-        String getBookByIdQuery = "SELECT * FROM "+
-                "aims.Book " +
-                "INNER JOIN aims.Media " +
-                "ON Media.id = Book.id " +
-                "where Media.id = " + id + ";";
+        getBookByIdQuery = String.format(getBookByIdQuery,id);
         Statement bookStatement = AIMSDB.getInstance().getConnection().createStatement();
         ResultSet bookResultSet = bookStatement.executeQuery(getBookByIdQuery);
         if(bookResultSet.next()) {
