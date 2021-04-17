@@ -14,7 +14,11 @@ import java.util.List;
  */
 // Singleton: MediaDAO quan ly cac products,va cac nghiep vu lien quan, do vay no len dc dat la Singleton
 public class MediaDAO {
-
+	
+	/**
+	 * Clean code: Source code to create new media is duplicated --> create new method: getMediaResult to return media
+	 */
+	
     // None Coupling
     public List getAllMedia() throws SQLException {
         // Clean Code: change stm to mediaStatement, res to mediaResultSet
@@ -22,15 +26,7 @@ public class MediaDAO {
         ResultSet mediaResultSet = mediaStatement.executeQuery("select * from Media");
         ArrayList medium = new ArrayList<>();
         while (mediaResultSet.next()) {
-            Media media = new Media(
-                    mediaResultSet.getInt("id"),
-                    mediaResultSet.getString("title"),
-                    mediaResultSet.getInt("quantity"),
-                    mediaResultSet.getString("category"),
-                    mediaResultSet.getString("imageUrl"),
-                    mediaResultSet.getInt("price"),
-                    mediaResultSet.getString("type"));
-            medium.add(media);
+            medium.add(getMediaResult(mediaResultSet));
         }
         return medium;
     }
@@ -44,14 +40,7 @@ public class MediaDAO {
         ResultSet MediaResultSet = mediaStatement.executeQuery(getMediaByIdQuery);
 
         if (MediaResultSet.next()) {
-            return new Media(
-                    MediaResultSet.getInt("id"),
-                    MediaResultSet.getString("title"),
-                    MediaResultSet.getInt("quantity"),
-                    MediaResultSet.getString("category"),
-                    MediaResultSet.getString("imageUrl"),
-                    MediaResultSet.getInt("price"),
-                    MediaResultSet.getString("type"));
+            return getMediaResult(MediaResultSet);
         }
         return null;
     }
@@ -69,5 +58,16 @@ public class MediaDAO {
         updateMediaFieldByIdStatement.executeUpdate(" update Media set" + " "
                 + field + "=" + value + " "
                 + "where id=" + id + ";");
+    }
+    
+    private Media getMediaResult(ResultSet MediaResultSet) throws SQLException {
+    	return new Media(
+                MediaResultSet.getInt("id"),
+                MediaResultSet.getString("title"),
+                MediaResultSet.getInt("quantity"),
+                MediaResultSet.getString("category"),
+                MediaResultSet.getString("imageUrl"),
+                MediaResultSet.getInt("price"),
+                MediaResultSet.getString("type"));
     }
 }

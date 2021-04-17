@@ -14,39 +14,51 @@ import java.util.Date;
  */
 public class DVDDAO extends MediaDAO {
 
+	/**
+	 * Clean code: one method do many things in many level of abstraction: get String query, get statement, get result, change to object
+	 * --> separate to two more method: getDVDByIdQuery(int id) to get String query, getDVDResult() to change result from query
+	 */
+	
     // Data Coupling
     @Override
     public Media getMediaById(int id) throws SQLException {
         // Clean Code: change sql to getDVDByIdQuery, res to dvdResultSet
-        String getDVDByIdQuery = "SELECT * FROM "+
+        String getDVDByIdQuery = getDVDByIdQuery(id);
+        ResultSet dvdResultSet = AIMSDB.getInstance().getConnection().createStatement().executeQuery(getDVDByIdQuery);
+        // Clean Code: change every tag to dvdTag
+        if(dvdResultSet.next()) {
+            return getDVDResult(id, dvdResultSet);
+        } else {
+            throw new SQLException();
+        }
+    }
+    
+    private String getDVDByIdQuery(int id) {
+    	return "SELECT * FROM "+
                 "aims.DVD " +
                 "INNER JOIN aims.Media " +
                 "ON Media.id = DVD.id " +
                 "where Media.id = " + id + ";";
-        ResultSet dvdResultSet = AIMSDB.getInstance().getConnection().createStatement().executeQuery(getDVDByIdQuery);
-        // Clean Code: change every tag to dvdTag
-        if(dvdResultSet.next()) {
+    }
+    
+    private DVD getDVDResult(int id, ResultSet dvdResultSet) throws SQLException {
+    	 // from media table
+        String dvdTitle = "";
+        String dvdType = dvdResultSet.getString("type");
+        int dvdPrice = dvdResultSet.getInt("price");
+        String dvdCategory = dvdResultSet.getString("category");
+        int dvdQuantity = dvdResultSet.getInt("quantity");
 
-            // from media table
-            String dvdTitle = "";
-            String dvdType = dvdResultSet.getString("type");
-            int dvdPrice = dvdResultSet.getInt("price");
-            String dvdCategory = dvdResultSet.getString("category");
-            int dvdQuantity = dvdResultSet.getInt("quantity");
+        // from DVD table
+        String dvdDiscType = dvdResultSet.getString("discType");
+        String dvdDirector = dvdResultSet.getString("director");
+        int dvdRuntime = dvdResultSet.getInt("runtime");
+        String dvdStudio = dvdResultSet.getString("studio");
+        String dvdSubtitles = dvdResultSet.getString("subtitle");
+        Date dvdReleasedDate = dvdResultSet.getDate("releasedDate");
+        String dvdFilmType = dvdResultSet.getString("filmType");
 
-            // from DVD table
-            String dvdDiscType = dvdResultSet.getString("discType");
-            String dvdDirector = dvdResultSet.getString("director");
-            int dvdRuntime = dvdResultSet.getInt("runtime");
-            String dvdStudio = dvdResultSet.getString("studio");
-            String dvdSubtitles = dvdResultSet.getString("subtitle");
-            Date dvdReleasedDate = dvdResultSet.getDate("releasedDate");
-            String dvdFilmType = dvdResultSet.getString("filmType");
+        return DVDFactory.getInstance().createMedia(id, dvdTitle, dvdCategory, dvdPrice, dvdQuantity, dvdType, dvdDiscType, dvdDirector, dvdRuntime, dvdStudio, dvdSubtitles, dvdReleasedDate, dvdFilmType);
 
-            return DVDFactory.getInstance().createMedia(id, dvdTitle, dvdCategory, dvdPrice, dvdQuantity, dvdType, dvdDiscType, dvdDirector, dvdRuntime, dvdStudio, dvdSubtitles, dvdReleasedDate, dvdFilmType);
-
-        } else {
-            throw new SQLException();
-        }
     }
 }
