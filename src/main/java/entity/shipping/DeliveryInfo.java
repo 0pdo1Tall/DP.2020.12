@@ -30,12 +30,15 @@ public class DeliveryInfo {
         this.shippingInstructions = shippingInstructions;
         this.distanceCalculator = distanceCalculator;
     }
-
+    
+    /**
+     * Clean Code: Method Refactoring - Data-Level: Move an expression inline
+     * remove variable distance, return directly from distanceCalculator.calculateDistance(...)
+     */
     // Stamp coupling: DÃ™ng Order lÃ m tham sá»‘ truyá»�n vÃ o nhÆ°ng khÃ´ng sá»­ dá»¥ng (háº¿t) thuá»™c tÃ­nh
     public int calculateShippingFee(Order order) {
     	
-        int distance = distanceCalculator.calculateDistance(address, province);
-        return (int) (distance * MULTIPLIER);
+        return (int) (distanceCalculator.calculateDistance(address, province) * MULTIPLIER);
     }
 
     public String getName() {

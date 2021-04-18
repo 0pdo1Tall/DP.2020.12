@@ -28,19 +28,27 @@ public class Order {
 
     // Stamp coupling: chỉ lấy subtottal nhưng dùng tham số là cart
 
-
+    /**
+     * Clean code: Multi abstract level --> separate code to get all item from cart to another method
+     * Create a new method getAllItemsFromCart
+     */
     public Order(Cart cart) {
-        List<OrderItem> orderItems = new ArrayList<>();
-        for (Object object : Cart.getCard().getListMedia()) {
+        List<OrderItem> orderItems = getAllItemsFromCart(cart);
+        this.orderMediaList = Collections.unmodifiableList(orderItems);
+        this.subtotal = cart.calSubtotal();
+        this.tax = (int) (ViewsConfig.PERCENT_VAT/100) * subtotal;
+    }
+    
+    public List<OrderItem> getAllItemsFromCart(Cart cart) {
+    	List<OrderItem> orderItems = new ArrayList<>();
+    	for (Object object : Cart.getCard().getListMedia()) {
             CartItem cartItem = (CartItem) object;
             OrderItem orderItem = new OrderItem(cartItem.getMedia(),
                     cartItem.getQuantity(),
                     cartItem.getPrice());
             orderItems.add(orderItem);
         }
-        this.orderMediaList = Collections.unmodifiableList(orderItems);
-        this.subtotal = cart.calSubtotal();
-        this.tax = (int) (ViewsConfig.PERCENT_VAT/100) * subtotal;
+    	return orderItems;
     }
 
     public List getListOrderMedia() {

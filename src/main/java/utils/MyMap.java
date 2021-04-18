@@ -152,10 +152,17 @@ public class MyMap extends LinkedHashMap<String, Object> {
 	 * @return the term as {@link MyMap MyMap}
 	 * @throws IllegalArgumentException
 	 */
+	
+	/*
+	 * Clean code: Method Refactoring - Statement Level
+	 * Vì: sử dụng else không cần thiết vì throw new đã thoát khỏi hàm
+	 */
+	
 	public static MyMap toMyMap(String str, int idx) throws IllegalArgumentException {
 		if (str == null || str.length() < 2 || str.charAt(idx) != '{') {
 			throw new IllegalArgumentException("Cannot resolve the input.");
-		} else if (idx >= str.length()) {
+		} 
+		if (idx >= str.length()) {
 			return null;
 		}
 

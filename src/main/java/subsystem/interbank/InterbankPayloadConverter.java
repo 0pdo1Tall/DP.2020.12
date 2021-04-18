@@ -53,11 +53,39 @@ public class InterbankPayloadConverter {
      * @return
      */
     // coincidental cohesion: read the response from interbank server do not relate to InterbankConverter module
+    
+    /* 
+     * Clean code: Method Refactoring - Method Level. Vì: errorCode được lấy từ response nên cần kiểm tra luôn, nếu có lỗi các câu lệnh sau đó
+     * không cần khởi tạo không cần thiết
+     */
+    
     PaymentTransaction extractPaymentTransaction(String responseText) {
         MyMap response = convertJSONResponse(responseText);
 
         if (response == null)
             return null;
+        
+        switch ( (String) response.get("errorCode")) {
+	        case "00":
+	            break;
+	        case "01":
+	            throw new InvalidCardException();
+	        case "02":
+	            throw new NotEnoughBalanceException();
+	        case "03":
+	            throw new InternalServerErrorException();
+	        case "04":
+	            throw new SuspiciousTransactionException();
+	        case "05":
+	            throw new NotEnoughTransactionInfoException();
+	        case "06":
+	            throw new InvalidVersionException();
+	        case "07":
+	            throw new InvalidTransactionAmountException();
+	        default:
+	            throw new UnrecognizedException();
+	    }
+        
         MyMap transaction = (MyMap) response.get("transaction");
         PaymentMethod card = CreditCardFactory.getInstance().creatMethod(
                 (String) transaction.get("cardCode"),
@@ -65,7 +93,6 @@ public class InterbankPayloadConverter {
                 (String) transaction.get("dateExpired"),
                 Integer.parseInt((String) transaction.get("cvvCode")));
 
-        // Change PaymentTransaction Constructor to throws Exception instead of errorCode
         PaymentTransaction trans = new PaymentTransaction(
                 (String) response.get("errorCode"),
                 card,
@@ -107,9 +134,13 @@ public class InterbankPayloadConverter {
      */
 
     // Coincidental Cohesion: getToday do not relate to InterbankConverter module
+    
+    /* 
+     * Clean code: Method Refactoring - Statement Level. Vì: khởi tạo thêm biến date = new Date() không cần thiết, mất thời gian compile
+     */
+    
     private String getToday() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = new Date();
-        return dateFormat.format(date);
+        return dateFormat.format(new Date());
     }
 }

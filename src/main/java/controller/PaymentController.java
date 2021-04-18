@@ -110,7 +110,15 @@ public class PaymentController extends BaseController {
 		try {
 			month = Integer.parseInt(dateString[0]);
 			year = Integer.parseInt(dateString[1]);
-			if (month < 1 || month > 12 || year < Calendar.getInstance().get(Calendar.YEAR) % 100 || year > 100) {
+			
+			/**
+			 * Clean Code: Method Refactoring - Data-Level Refactoring --> Introduce an intermediate variable
+			 * Create intermediate variable month_invalid and year_invalid to increase readability
+			 */
+			boolean month_invalid = (month < 1) || (month > 12);
+			boolean year_invalid = (year < Calendar.getInstance().get(Calendar.YEAR) % 100) || (year > 100);
+			
+			if (month_invalid || year_invalid) {
 				throw new InvalidCardException();
 			}
 			expirationDate = dateString[0] + dateString[1];

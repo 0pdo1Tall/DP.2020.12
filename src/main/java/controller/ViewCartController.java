@@ -34,15 +34,18 @@ public class ViewCartController extends BaseController{
         // Data coupling, gọi đến phương thức cần thiết để thực hiện
         Cart.getCard().checkAvailabilityOfProduct();
     }
-
+    
     /**
      * This method calculates the cart subtotal
      * @return subtotal
      */
     public int getCartSubtotal(){
+        /**
+         * Clean Code: Method Refactoring - Data-Level Refactoring --> Move an expression inline
+         * remove local variable cartSubtotal
+         */
         // Clean Code: Change subtotal to cartSubtotal
-        int cartSubtotal = Cart.getCard().calSubtotal();
-        return cartSubtotal;
+        return Cart.getCard().calSubtotal();
         
         // Data coupling, lấy dữ liệu cần thiết thông qua phương thức được cung cấp
     }

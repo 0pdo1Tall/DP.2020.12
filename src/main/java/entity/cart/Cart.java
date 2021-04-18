@@ -74,18 +74,22 @@ public class Cart {
         }
         return totalMediaQuantity;
     }
-
+    
+    /**
+     * Clean Code: Method Factoring - Statement-Level:
+     * Return as soon as you know the answer instead of assigning a return value
+     * When requiredQuantity > availableQuantity for an item --> throw Exception immediately
+     * remove variable allProductAvailable (not use after refactor)
+     */
     //SRP: PhÆ°Æ¡ng thá»©c nÃ y cÃ³ thá»ƒ chia ra má»™t class khÃ¡c
     public void checkAvailabilityOfProduct() throws SQLException{
         // Clean Code: change allAvailable to allProductAvailable, object to cartItemObject.availQuantity to availableQuantity
-        boolean allProductAvailable = true;
         for (Object cartItemObject : lstCartItem) {
             CartItem cartItem = (CartItem) cartItemObject;
             int requiredQuantity = cartItem.getQuantity();
             int availableQuantity = cartItem.getMedia().getQuantity();
-            if (requiredQuantity > availableQuantity) allProductAvailable = false;
+            if (requiredQuantity > availableQuantity) throw new MediaNotAvailableException("Some media not available");
         }
-        if (!allProductAvailable) throw new MediaNotAvailableException("Some media not available");
     }
 
     // stamp coupling

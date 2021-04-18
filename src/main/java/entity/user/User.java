@@ -37,8 +37,11 @@ public class User {
         return this.name;
     }
 
+    /**
+     * Clean Code: Rename method to match the property, setusername --> setName
+     */
     // data coupling
-    public void setusername(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 

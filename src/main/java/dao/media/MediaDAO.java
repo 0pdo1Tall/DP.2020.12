@@ -19,6 +19,10 @@ public class MediaDAO {
     private String updateMediaFieldByIDQuery = " update Media set" + " %field "
             + "=" + " %value "
             + "where id=" + "%s;";
+	
+	/**
+	 * Clean code: Source code to create new media is duplicated --> create new method: getMediaResult to return media
+	 */
 
     // None Coupling
     public List getAllMedia() throws SQLException {
@@ -36,6 +40,7 @@ public class MediaDAO {
                     mediaResultSet.getInt("price"),
                     mediaResultSet.getString("type"));
             mediaList.add(media);
+
         }
         return mediaList;
     }
@@ -48,14 +53,7 @@ public class MediaDAO {
         ResultSet MediaResultSet = mediaStatement.executeQuery(getAllMediaQuery);
 
         if (MediaResultSet.next()) {
-            return new Media(
-                    MediaResultSet.getInt("id"),
-                    MediaResultSet.getString("title"),
-                    MediaResultSet.getInt("quantity"),
-                    MediaResultSet.getString("category"),
-                    MediaResultSet.getString("imageUrl"),
-                    MediaResultSet.getInt("price"),
-                    MediaResultSet.getString("type"));
+            return getMediaResult(MediaResultSet);
         }
         return null;
     }
@@ -73,5 +71,16 @@ public class MediaDAO {
         // Stamp coupling here(not use of tbname but still passing it)
         updateMediaFieldByIDQuery = String.format(updateMediaFieldByIDQuery,field,value,id);
         updateMediaFieldByIdStatement.executeUpdate(updateMediaFieldByIDQuery);
+    }
+    
+    private Media getMediaResult(ResultSet MediaResultSet) throws SQLException {
+    	return new Media(
+                MediaResultSet.getInt("id"),
+                MediaResultSet.getString("title"),
+                MediaResultSet.getInt("quantity"),
+                MediaResultSet.getString("category"),
+                MediaResultSet.getString("imageUrl"),
+                MediaResultSet.getInt("price"),
+                MediaResultSet.getString("type"));
     }
 }
