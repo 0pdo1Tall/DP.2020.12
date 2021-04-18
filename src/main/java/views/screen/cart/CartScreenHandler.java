@@ -101,6 +101,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 		show();
 	}
 
+	// clean method: should split several method.
 	public void requestToPlaceOrder() throws SQLException, IOException {
 		try {
 			// create placeOrderController and process the order

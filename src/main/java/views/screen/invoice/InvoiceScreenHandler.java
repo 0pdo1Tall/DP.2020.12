@@ -66,6 +66,8 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 	 * Clean code: rename MediaInvoiceScreenHandler object: mis --> mediaInvoiceScreenHandler
 	 */
 	// stamp coupling
+	
+	// clean method: should split into several method. setInfoUser, setInfoInvoice.
 	protected void setupData(Object dto) throws Exception {
 		this.invoice = (Invoice) dto;
 		Order order = invoice.getOrder();

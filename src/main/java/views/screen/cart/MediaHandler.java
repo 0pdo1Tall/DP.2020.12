@@ -72,6 +72,7 @@ public class MediaHandler extends FXMLScreenHandler {
 		setMediaInfo();
 	}
 
+	// clean method: function should do one thing, setInfo, not add delete button
 	private void setMediaInfo() {
 		title.setText(cartItem.getMedia().getTitle());
 		price.setText(ViewsConfig.getCurrencyFormat(cartItem.getPrice()));
