@@ -100,6 +100,17 @@ public class CartScreenHandler extends BaseScreenHandler {
 		displayCartWithMediaAvailability();
 		show();
 	}
+	
+	public void displayShippingForm(){
+	
+		ShippingScreenHandler shippingScreenHandler = new ShippingScreenHandler(
+					this.stage, ViewsConfig.SHIPPING_SCREEN_PATH, order);
+		shippingScreenHandler.setPreviousScreen(this);
+		shippingScreenHandler.setHomeScreenHandler(homeScreenHandler);
+		shippingScreenHandler.setScreenTitle("Shipping Screen");
+		shippingScreenHandler.setBController(placeOrderController);
+		shippingScreenHandler.show();
+	}
 
 	// clean method: should split several method.
 	public void requestToPlaceOrder() throws SQLException, IOException {
@@ -120,13 +131,15 @@ public class CartScreenHandler extends BaseScreenHandler {
 			Order order = placeOrderController.createOrder();
 
 			// display shipping form
-			ShippingScreenHandler shippingScreenHandler = new ShippingScreenHandler(
+			/*ShippingScreenHandler shippingScreenHandler = new ShippingScreenHandler(
 					this.stage, ViewsConfig.SHIPPING_SCREEN_PATH, order);
 			shippingScreenHandler.setPreviousScreen(this);
 			shippingScreenHandler.setHomeScreenHandler(homeScreenHandler);
 			shippingScreenHandler.setScreenTitle("Shipping Screen");
 			shippingScreenHandler.setBController(placeOrderController);
-			shippingScreenHandler.show();
+			shippingScreenHandler.show();*/
+			
+			displayShippingForm();
 
 		} catch (MediaNotAvailableException e) {
 			// if some media are not available then display cart and break usecase Place Order

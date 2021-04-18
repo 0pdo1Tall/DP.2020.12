@@ -73,17 +73,9 @@ public class MediaHandler extends FXMLScreenHandler {
 	}
 
 	// clean method: function should do one thing, setInfo, not add delete button
-	private void setMediaInfo() {
-		title.setText(cartItem.getMedia().getTitle());
-		price.setText(ViewsConfig.getCurrencyFormat(cartItem.getPrice()));
-		File file = new File(cartItem.getMedia().getImageURL());
-		Image im = new Image(file.toURI().toString());
-		image.setImage(im);
-		image.setPreserveRatio(false);
-		image.setFitHeight(110);
-		image.setFitWidth(92);
-
-		// add delete button
+	
+	private void addDeleteButton(){
+	
 		btnDelete.setFont(ViewsConfig.REGULAR_FONT);
 		btnDelete.setOnMouseClicked(e -> {
 			try {
@@ -95,7 +87,30 @@ public class MediaHandler extends FXMLScreenHandler {
 				throw new ViewCartException();
 			}
 		});
+	}
+	private void setMediaInfo() {
+		title.setText(cartItem.getMedia().getTitle());
+		price.setText(ViewsConfig.getCurrencyFormat(cartItem.getPrice()));
+		File file = new File(cartItem.getMedia().getImageURL());
+		Image im = new Image(file.toURI().toString());
+		image.setImage(im);
+		image.setPreserveRatio(false);
+		image.setFitHeight(110);
+		image.setFitWidth(92);
 
+		// add delete button
+		/*btnDelete.setFont(ViewsConfig.REGULAR_FONT);
+		btnDelete.setOnMouseClicked(e -> {
+			try {
+				Cart.getCard().removeCartMedia(cartItem); // update user cart
+				cartScreen.updateCart(); // re-display user cart
+				LOGGER.info("Deleted " + cartItem.getMedia().getTitle() + " from the cart");
+			} catch (SQLException exp) {
+				exp.printStackTrace();
+				throw new ViewCartException();
+			}
+		});*/
+		addDeleteButton();
 		initializeSpinner();
 	}
 

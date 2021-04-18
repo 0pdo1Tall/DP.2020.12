@@ -68,20 +68,36 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 	// stamp coupling
 	
 	// clean method: should split into several method. setInfoUser, setInfoInvoice.
-	protected void setupData(Object dto) throws Exception {
-		this.invoice = (Invoice) dto;
-		Order order = invoice.getOrder();
-		DeliveryInfo deliveryInfo = order.getDeliveryInfo();
-
+	
+	protected void setupInfoUser(DeliveryInfo deliveryInfo){
 		name.setText(deliveryInfo.getName());
 		phone.setText(deliveryInfo.getPhone());
 		province.setText(deliveryInfo.getProvince());
 		instructions.setText(deliveryInfo.getShippingInstructions());
 		address.setText(deliveryInfo.getAddress());
-
+	}
+	
+	protected void setupInfoInvoice(Order order){
 		subtotal.setText(ViewsConfig.getCurrencyFormat(order.getSubtotal()));
 		shippingFees.setText(ViewsConfig.getCurrencyFormat(order.getShippingFees()));
 		total.setText(ViewsConfig.getCurrencyFormat(order.getTotal()));
+	}
+	protected void setupData(Object dto) throws Exception {
+		this.invoice = (Invoice) dto;
+		Order order = invoice.getOrder();
+		DeliveryInfo deliveryInfo = order.getDeliveryInfo();
+
+		/*name.setText(deliveryInfo.getName());
+		phone.setText(deliveryInfo.getPhone());
+		province.setText(deliveryInfo.getProvince());
+		instructions.setText(deliveryInfo.getShippingInstructions());
+		address.setText(deliveryInfo.getAddress());*/
+		setupInfoUser(deliveryInfo);
+
+		/*subtotal.setText(ViewsConfig.getCurrencyFormat(order.getSubtotal()));
+		shippingFees.setText(ViewsConfig.getCurrencyFormat(order.getShippingFees()));
+		total.setText(ViewsConfig.getCurrencyFormat(order.getTotal()));*/
+		setupInfoInvoice(order);
 
 		invoice.getOrder().getListOrderMedia().forEach(orderMedia -> {
 			try {
