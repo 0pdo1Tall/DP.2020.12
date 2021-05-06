@@ -56,14 +56,14 @@ public class CartScreenHandler extends BaseScreenHandler {
 	@FXML
 	private Button btnPlaceOrder;
 
-	
+
 	public CartScreenHandler(Stage stage, String screenPath) throws IOException {
 		super(stage, screenPath);
 		setupScreen(null);
 	}
 
 	protected void setupData(Object object) throws Exception{}
-	
+
 	protected void setupFunctionality() throws Exception {
 		// fix relative image path caused by fxml
 		File file = new File(ViewsConfig.IMAGE_PATH + "/Logo.png");
@@ -88,7 +88,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 
 		});
 	}
-	
+
 	public ViewCartController getBController(){
 		return (ViewCartController) super.getBController();
 	}
@@ -100,19 +100,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 		displayCartWithMediaAvailability();
 		show();
 	}
-	
-	public void displayShippingForm(){
-	
-		ShippingScreenHandler shippingScreenHandler = new ShippingScreenHandler(
-					this.stage, ViewsConfig.SHIPPING_SCREEN_PATH, order);
-		shippingScreenHandler.setPreviousScreen(this);
-		shippingScreenHandler.setHomeScreenHandler(homeScreenHandler);
-		shippingScreenHandler.setScreenTitle("Shipping Screen");
-		shippingScreenHandler.setBController(placeOrderController);
-		shippingScreenHandler.show();
-	}
 
-	// clean method: should split several method.
 	public void requestToPlaceOrder() throws SQLException, IOException {
 		try {
 			// create placeOrderController and process the order
@@ -123,7 +111,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 			}
 
 			placeOrderController.placeOrder();
-			
+
 			// display available media
 			displayCartWithMediaAvailability();
 
@@ -131,22 +119,20 @@ public class CartScreenHandler extends BaseScreenHandler {
 			Order order = placeOrderController.createOrder();
 
 			// display shipping form
-			/*ShippingScreenHandler shippingScreenHandler = new ShippingScreenHandler(
+			ShippingScreenHandler shippingScreenHandler = new ShippingScreenHandler(
 					this.stage, ViewsConfig.SHIPPING_SCREEN_PATH, order);
 			shippingScreenHandler.setPreviousScreen(this);
 			shippingScreenHandler.setHomeScreenHandler(homeScreenHandler);
 			shippingScreenHandler.setScreenTitle("Shipping Screen");
 			shippingScreenHandler.setBController(placeOrderController);
-			shippingScreenHandler.show();*/
-			
-			displayShippingForm();
+			shippingScreenHandler.show();
 
 		} catch (MediaNotAvailableException e) {
 			// if some media are not available then display cart and break usecase Place Order
 			displayCartWithMediaAvailability();
 		}
 	}
-	
+
 	public void updateCart() throws SQLException{
 		getBController().checkAvailabilityOfProduct();
 		displayCartWithMediaAvailability();
@@ -164,7 +150,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 		labelVAT.setText(ViewsConfig.getCurrencyFormat(vat));
 		labelAmount.setText(ViewsConfig.getCurrencyFormat(amount));
 	}
-	
+
 	/*
 	 * Clean Code: rename Object cm --> Object object
 	 */

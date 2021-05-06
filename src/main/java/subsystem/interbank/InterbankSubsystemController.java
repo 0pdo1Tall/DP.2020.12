@@ -9,6 +9,7 @@ public class InterbankSubsystemController {
 	private static InterbankBoundary interbankBoundary = new InterbankBoundary();
 
 	// Stamp Coupling
+	// Clean Class: if we have another payment method: ie: domestic card ==> we have to change refund and payOrder to handle PaymentMethod instead of CreditCard
 	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
 		return null;
 	}
