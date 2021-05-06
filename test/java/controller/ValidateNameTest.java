@@ -3,7 +3,7 @@ package controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
+import utils.Validation;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ValidateNameTest {
@@ -24,7 +24,7 @@ public class ValidateNameTest {
             "true, null"
     })
     void test(boolean expected, String name) {
-        boolean isValid = placeOrderController.validateName(name);
+        boolean isValid = Validation.validateName(name);
         assertEquals(expected, isValid);
     }
 }

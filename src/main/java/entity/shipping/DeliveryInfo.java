@@ -37,7 +37,6 @@ public class DeliveryInfo {
      */
     // Stamp coupling: DÃ™ng Order lÃ m tham sá»‘ truyá»�n vÃ o nhÆ°ng khÃ´ng sá»­ dá»¥ng (háº¿t) thuá»™c tÃ­nh
     public int calculateShippingFee(Order order) {
-    	
         return (int) (distanceCalculator.calculateDistance(address, province) * MULTIPLIER);
     }
 

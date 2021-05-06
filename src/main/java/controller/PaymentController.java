@@ -3,6 +3,7 @@ package controller;
 import java.util.Calendar;
 import java.util.Hashtable;
 import java.util.Map;
+import utils.Date;
 
 import common.exception.InvalidCardException;
 import common.exception.PaymentException;
@@ -20,6 +21,11 @@ import subsystem.InterbankSubsystem;
  * 
  * @author hieud
  *
+ */
+
+ /**
+ * Clean code: large class. Do class chứa hàm getExpirationDate không phù hợp với chức năng
+ * Solution: Di chuyển sang utils package  
  */
 
 
@@ -89,47 +95,6 @@ public class PaymentController extends BaseController {
 	 * @throws InvalidCardException - if the string does not represent a valid date
 	 *                              in the expected format
 	 */
-	// Coincidental cohension. Nên tách riêng ra class riêng
-	// SOLID: SRP ko lien quan den chuc nang cua Payment Controller
-	
-	/*
-	 * Clean code: Cần thay đổi strs => dateSplit
-	 */
-	private String getExpirationDate(String date) throws InvalidCardException {
-
-		// Clean Code: change strs to dateString
-		String[] dateString = date.split("/");
-		if (dateString.length != 2) {
-			throw new InvalidCardException();
-		}
-
-		String expirationDate = null;
-		int month = -1;
-		int year = -1;
-
-		try {
-			month = Integer.parseInt(dateString[0]);
-			year = Integer.parseInt(dateString[1]);
-			
-			/**
-			 * Clean Code: Method Refactoring - Data-Level Refactoring --> Introduce an intermediate variable
-			 * Create intermediate variable month_invalid and year_invalid to increase readability
-			 */
-			boolean month_invalid = (month < 1) || (month > 12);
-			boolean year_invalid = (year < Calendar.getInstance().get(Calendar.YEAR) % 100) || (year > 100);
-			
-			if (month_invalid || year_invalid) {
-				throw new InvalidCardException();
-			}
-			expirationDate = dateString[0] + dateString[1];
-		} catch (Exception ex) {
-			throw new InvalidCardException();
-		}
-
-		return expirationDate;
-		
-		// Data coupling, chỉ sử dụng dữ liệu vừa đủ để xử lý kết quả
-	}
 
 	/**
 	 * Pay order, and then return the result with a message.
@@ -154,8 +119,8 @@ public class PaymentController extends BaseController {
 		try {
 			this.card = new CreditCard(
 					cardNumber,
-					cardHolderName,
-					getExpirationDate(expirationDate),
+					cardHolderName,	
+					Date.getExpirationDate(expirationDate),
 					Integer.parseInt(securityCode));
 
 			this.interbank = new InterbankSubsystem();
@@ -172,8 +137,8 @@ public class PaymentController extends BaseController {
 	}
 
 	public void emptyCart(){
-        //SessionInformation.cartInstance.emptyCart();
-        // Data coupling, sử dụng một phương thức khác để yêu cầu
-        Cart.getCard().emptyCart();
-    }
+			//SessionInformation.cartInstance.emptyCart();
+			// Data coupling, sử dụng một phương thức khác để yêu cầu
+			Cart.getCard().emptyCart();
+	}
 }

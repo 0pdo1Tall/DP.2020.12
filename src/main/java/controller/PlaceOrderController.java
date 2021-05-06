@@ -14,13 +14,17 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import utils.Validation;
 /**
  * This class controls the flow of place order usecase in our AIMS project
  * @author nguyenlm
  */
+
+ /**
+ * Clean code: large class. Do class chứa các hàm validate không phù hợp với chức năng
+ * Solution: Di chuyển sang utils package  
+ */
+
     // COINCIDENTAL COHESION phan xac thuc thong tin dia chi nen de o lop khac
 
 public class PlaceOrderController extends BaseController {
@@ -121,7 +125,7 @@ public class PlaceOrderController extends BaseController {
     public DeliveryInfo processDeliveryInfo(HashMap info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         LOGGER.info("Process Delivery Info");
         LOGGER.info(info.toString());
-        validateDeliveryInfo(info);
+        Validation.validateDeliveryInfo(info);
         DeliveryInfo deliveryInfo = new DeliveryInfo(
                 String.valueOf(info.get("name")),
                 String.valueOf(info.get("phone")),
@@ -146,49 +150,6 @@ public class PlaceOrderController extends BaseController {
     // Coincidental Cohesion. Do các hàm validate đang được đặt trong class không liên quan đến validate, nên để trong class ở utils
     // SOLID: SRP do validate khong phai nhiem vu cua PlaceOrderController
 
-    public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
-        if (validatePhoneNumber(info.get("phone"))
-        || validateName(info.get("name"))
-        || validateAddress(info.get("address"))) return;
-        else throw new InvalidDeliveryInfoException();
-     
-        //stamp coupling: do info có nhiều hơn 3 trường dl mà trong hàm chỉ sử dụng 3 trường name, phone, address
-    }
     
-    public boolean validatePhoneNumber(String phoneNumber) {
-        // Clean Code: Use Constant PHONE_LENGTH = 10 instead
-        if (phoneNumber.length() != PHONE_LENGTH) return false;
-        if (!phoneNumber.startsWith(String.valueOf(START_PHONE_NUMBER))) return false;
-        try {
-            Integer.parseInt(phoneNumber);
-        } catch (NumberFormatException e) {
-            return false;
-        }
-        return true;
-        
-        // Data coupling, sử dụng vừa đủ dữ liệu để xử lý
-    }
-
-    public boolean validateName(String name) {
-        if (Objects.isNull(name)) return false;
-        // Clean Code: change patternString to namePatternString,pattern to namePattern and matcher to nameMatcher
-        String namePatternString = NAME_PATTERN;
-        Pattern namePattern = Pattern.compile(namePatternString);
-        Matcher nameMatcher = namePattern.matcher(name);
-        return nameMatcher.matches();
-        
-        // Data coupling, sử dụng vừa đủ dữ liệu để xử lý
-    }
-
-    public boolean validateAddress(String address) {
-        if (Objects.isNull(address)) return false;
-        // Clean Code: change patternString to addressPatternString,pattern to addressPattern and matcher to addressMatcher
-        String addressPatternString = ADDRESS_PATTERN;
-        Pattern addressPattern = Pattern.compile(addressPatternString);
-        Matcher addressMatcher = addressPattern.matcher(address);
-        return addressMatcher.matches();
-        
-        // Data coupling, sử dụng vừa đủ dữ liệu để xử lý
-    }
 
 }

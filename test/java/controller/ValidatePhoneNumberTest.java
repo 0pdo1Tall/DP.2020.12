@@ -3,7 +3,7 @@ package controller;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-
+import utils.Validation;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ValidatePhoneNumberTest {
@@ -23,7 +23,7 @@ public class ValidatePhoneNumberTest {
             "false, 1234567890"
     })
     void test(boolean expected, String phoneNumber) {
-        boolean isValid = placeOrderController.validatePhoneNumber(phoneNumber);
+        boolean isValid = Validation.validatePhoneNumber(phoneNumber);
         assertEquals(expected, isValid);
     }
 }

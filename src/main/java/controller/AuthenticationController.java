@@ -5,6 +5,7 @@ import common.exception.FailLoginException;
 import dao.user.UserDAO;
 import entity.user.User;
 import utils.Utils;
+import utils.Encryption;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -17,6 +18,10 @@ import java.util.Objects;
  * @author
  */
 
+/*
+* clean code: Large class. Do: class chứa chức năng khác, không cần thiết.
+* Solution: di chuyển encryptMd5 sang utils package
+*/ 
 // SOLID: SRP do chua cac chuc nang lien quan den ca authentication, login/logout va md5
 // Singleton: AuthenticationController la lop xu ly den cac dang xac thuc, nen duoc tao 1 Single Instance duy nhat va dc xu dung nhu 1 global object
 public class AuthenticationController extends BaseController {
@@ -82,7 +87,7 @@ public class AuthenticationController extends BaseController {
     // SOLID: DIP do phu thuoc vao ham ma hoa khong phai la Abstract/Interface
     public void login(String email, String password) throws Exception {
         try {
-            User user = new UserDAO().authenticate(email, encryptMd5(password));
+            User user = new UserDAO().authenticate(email, Encryption.encryptMd5(password));
 
             if (Objects.isNull(user)) throw new FailLoginException();
             SessionInformation.mainUser = user;
@@ -109,29 +114,4 @@ public class AuthenticationController extends BaseController {
      * @return cipher text as {@link String String}.
      */
     
-    /**
-     *  Clean Code: Cần thay đổi tên md5 => encryptMd5 
-     */
-    private String encryptMd5(String message) {
-        String digest = null;
-        try {
-            // Clean Code: change md to messageDigest here
-            MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-            byte[] hash = messageDigest.digest(message.getBytes(StandardCharsets.UTF_8));
-            // converting byte array to Hexadecimal String
-            // Clean Code: change sb to digestStringBuilder
-            StringBuilder digestStringBuilder = new StringBuilder(2 * hash.length);
-            for (byte b : hash) {
-                digestStringBuilder.append(String.format("%02x", b & 0xff));
-            }
-            digest = digestStringBuilder.toString();
-        } catch (NoSuchAlgorithmException ex) {
-            Utils.getLogger(Utils.class.getName());
-            digest = "";
-        }
-        return digest;
-        
-        // Data coupling, chỉ truyền đủ dữ liệu vào để xử lý và trả về kết quả
-    }
-
 }
