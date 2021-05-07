@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public class SessionInformation {
 
     public static User mainUser;
-    public static Cart cartInstance = Cart.getCard();
+    public static Cart cartInstance = Cart.getCart();
     public static LocalDateTime expiredTime;
 
 }

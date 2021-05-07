@@ -23,3 +23,8 @@ Tạo lớp cha PaymentMethod của CreditCard trong payment,tạo lớp cha Pay
 ### Bài 6: Clean Code - Method Refactoring
 - Subteam 1: Lê Anh Thành, Phạm Văn Thành:
 Áp dụng Method Refactoring cho các class: PaymentController, PlaceOrderController, ViewCartController (package controller); BookDAO, CDDAO, DVDDAO, MediaDAO (package dao.media); UserDAO (package dao.user); Cart (package entity.cart); AIMSDB (package entity.db); Order (package entity.order); DeliveryInfo (package entity.shipping); User (package entity.user); App (default package).
+
+
+### Bài 6: Clean Code - Clean Class, Clean Test
+- Subteam 1: Lê Anh Thành, Phạm Văn Thành:
+Áp dụng Clean Class cho các class: AuthenticationController, BaseController, PaymentController, PlaceOrderController, ViewCartController (package controller); Book (package entity.media). Áp dụng Clean code cho các class: MediaHandler(Searchable names) (package views.screen.home).

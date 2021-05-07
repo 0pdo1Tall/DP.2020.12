@@ -106,12 +106,4 @@ public class AuthenticationController extends BaseController {
         // Content coupling, sửa trực tiếp vào dữ liệu của module khác
     }
 
-    /**
-     * Return a {@link String String} that represents the cipher text
-     * encrypted by md5 algorithm.
-     *
-     * @param message - plain text as {@link String String}.
-     * @return cipher text as {@link String String}.
-     */
-    
 }

@@ -139,6 +139,6 @@ public class PaymentController extends BaseController {
 	public void emptyCart(){
 			//SessionInformation.cartInstance.emptyCart();
 			// Data coupling, sử dụng một phương thức khác để yêu cầu
-			Cart.getCard().emptyCart();
+			Cart.getCart().emptyCart();
 	}
 }

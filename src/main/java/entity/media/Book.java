@@ -37,11 +37,11 @@ public class Book extends Media {
         this.language = language;
         this.bookCategory = bookCategory;
     }
-
-    // getter and setter
-    public int getId() {
-        return this.id;
-    }
+    
+    /**
+     * Clean code: Clean class
+     * Method getId() is duplicated method getId() in superclass (Media) --> remove method
+     */
 
     public String getAuthor() {
         return this.author;

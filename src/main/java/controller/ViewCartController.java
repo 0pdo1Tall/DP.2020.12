@@ -29,10 +29,19 @@ public class ViewCartController extends BaseController{
     	return viewCartController;
     }
     
+    /**
+     * Clean code: Clean class - Restruct class: Pull up method
+     * This method (checkAvailabilityOfProduct()) and method placeOrder() in class PlaceOrderController do the same thing
+     * and has different names
+     * Move it into superclass (BaseController)
+     * 
+     * And refactor all class use this method
+     */
+    
     public void checkAvailabilityOfProduct() throws SQLException{
         //SessionInformation.cartInstance.checkAvailabilityOfProduct();     
         // Data coupling, gọi đến phương thức cần thiết để thực hiện
-        Cart.getCard().checkAvailabilityOfProduct();
+        Cart.getCart().checkAvailabilityOfProduct();
     }
     
     /**
@@ -45,7 +54,7 @@ public class ViewCartController extends BaseController{
          * remove local variable cartSubtotal
          */
         // Clean Code: Change subtotal to cartSubtotal
-        return Cart.getCard().calSubtotal();
+        return Cart.getCart().calSubtotal();
         
         // Data coupling, lấy dữ liệu cần thiết thông qua phương thức được cung cấp
     }

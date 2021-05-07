@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 
 import common.exception.MediaNotAvailableException;
 import common.exception.PlaceOrderException;
+import controller.BaseController;
 import controller.PlaceOrderController;
 import controller.ViewCartController;
 import entity.cart.CartItem;
@@ -101,7 +102,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 		show();
 	}
 	
-	public void displayShippingForm(){
+	public void displayShippingForm(Order order, BaseController placeOrderController) throws IOException {
 	
 		ShippingScreenHandler shippingScreenHandler = new ShippingScreenHandler(
 					this.stage, ViewsConfig.SHIPPING_SCREEN_PATH, order);
@@ -121,8 +122,9 @@ public class CartScreenHandler extends BaseScreenHandler {
 				PopupScreen.error("You don't have anything to place");
 				return;
 			}
-
-			placeOrderController.placeOrder();
+			
+			// Clean code: Update method names after refactor
+			placeOrderController.checkAvailabilityOfProduct();
 			
 			// display available media
 			displayCartWithMediaAvailability();
@@ -139,7 +141,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 			shippingScreenHandler.setBController(placeOrderController);
 			shippingScreenHandler.show();*/
 			
-			displayShippingForm();
+			displayShippingForm(order, placeOrderController);
 
 		} catch (MediaNotAvailableException e) {
 			// if some media are not available then display cart and break usecase Place Order

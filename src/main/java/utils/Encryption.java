@@ -1,9 +1,21 @@
 package utils;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class Encryption {
+	
   /**
   *  Clean Code: Cần thay đổi tên md5 => encryptMd5 
   */
+	/**
+     * Return a {@link String String} that represents the cipher text
+     * encrypted by md5 algorithm.
+     *
+     * @param message - plain text as {@link String String}.
+     * @return cipher text as {@link String String}.
+     */
   public static String encryptMd5(String message) {
       String digest = null;
       try {

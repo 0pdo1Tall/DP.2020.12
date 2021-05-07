@@ -19,7 +19,7 @@ public class Cart {
 	    lstCartItem = new ArrayList<>();
 	};
 	
-	public static Cart getCard(){
+	public static Cart getCart(){
 	    if(instance == null){
 	        instance = new Cart();
 	    }

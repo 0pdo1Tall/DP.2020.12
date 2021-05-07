@@ -60,7 +60,9 @@ public class MediaHandler extends FXMLScreenHandler {
 	private Spinner<Integer> spinner;
 	private CartScreenHandler cartScreen;
 
-
+	private static final int MEDIA_HEIGHT = 110;
+	private static final int MEDIA_WIDTH = 92;
+	
 	public MediaHandler(String screenPath, CartScreenHandler cartScreen) throws IOException {
 		super(screenPath);
 		this.cartScreen = cartScreen;
@@ -79,7 +81,7 @@ public class MediaHandler extends FXMLScreenHandler {
 		btnDelete.setFont(ViewsConfig.REGULAR_FONT);
 		btnDelete.setOnMouseClicked(e -> {
 			try {
-				Cart.getCard().removeCartMedia(cartItem); // update user cart
+				Cart.getCart().removeCartMedia(cartItem); // update user cart
 				cartScreen.updateCart(); // re-display user cart
 				LOGGER.info("Deleted " + cartItem.getMedia().getTitle() + " from the cart");
 			} catch (SQLException exp) {
@@ -95,8 +97,8 @@ public class MediaHandler extends FXMLScreenHandler {
 		Image im = new Image(file.toURI().toString());
 		image.setImage(im);
 		image.setPreserveRatio(false);
-		image.setFitHeight(110);
-		image.setFitWidth(92);
+		image.setFitHeight(MEDIA_HEIGHT);
+		image.setFitWidth(MEDIA_WIDTH);
 
 		// add delete button
 		/*btnDelete.setFont(ViewsConfig.REGULAR_FONT);

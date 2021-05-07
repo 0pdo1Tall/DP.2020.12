@@ -41,7 +41,7 @@ public class Order {
     
     public List<OrderItem> getAllItemsFromCart(Cart cart) {
     	List<OrderItem> orderItems = new ArrayList<>();
-    	for (Object object : Cart.getCard().getListMedia()) {
+    	for (Object object : Cart.getCart().getListMedia()) {
             CartItem cartItem = (CartItem) object;
             OrderItem orderItem = new OrderItem(cartItem.getMedia(),
                     cartItem.getQuantity(),

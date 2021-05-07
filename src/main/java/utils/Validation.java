@@ -4,12 +4,19 @@ import common.exception.InvalidDeliveryInfoException;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Validation {
-  public static void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
+	// Clean Code: Create Constant PHONE_LENGTH = 10 and START_PHONE_NUMBER = 0
+    private static final int PHONE_LENGTH = 10;
+    private static final int START_PHONE_NUMBER = 0;
+    // Clean Code: Create Constant NAME_PATTERN and ADDRESS_PATTERN for check pattern of string in
+    // method validateName and validateAddress
+    private static final String NAME_PATTERN = "^[a-zA-Z\\s]*$";
+    private static final String ADDRESS_PATTERN = "^[a-zA-Z\\s]*$";
+
+    public static void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
     if (validatePhoneNumber(info.get("phone"))
     || validateName(info.get("name"))
     || validateAddress(info.get("address"))) return;

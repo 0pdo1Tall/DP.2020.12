@@ -57,13 +57,6 @@ public class PlaceOrderController extends BaseController {
 	 * chúng nên nằm trong một module khác xử lý về kiểm tra tính hợp lệ của dữ liệu
 	 */
 	
-	// Clean Code: Create Constant PHONE_LENGTH = 10 and START_PHONE_NUMBER = 0
-    private static final int PHONE_LENGTH = 10;
-    private static final int START_PHONE_NUMBER = 0;
-    // Clean Code: Create Constant NAME_PATTERN and ADDRESS_PATTERN for check pattern of string in
-    // method validateName and validateAddress
-    private static final String NAME_PATTERN = "^[a-zA-Z\\s]*$";
-    private static final String ADDRESS_PATTERN = "^[a-zA-Z\\s]*$";
 	
     /**
      * Just for logging purpose
@@ -82,12 +75,21 @@ public class PlaceOrderController extends BaseController {
     }
     
     /**
+     * Clean code: Clean class - Restruct class: Pull up method
+     * This method (placeOrder()) and method checkAvailabilityOfProduct() in class ViewCartController do the same thing
+     * and has different names
+     * Move it into superclass (BaseController)
+     * 
+     * And refactor all class use this method
+     */
+    
+    /**
      * This method checks the availability of product when user click PlaceOrder button
      * @throws SQLException
      */
     
     public void placeOrder() throws SQLException {
-        Cart.getCard().checkAvailabilityOfProduct();
+        Cart.getCart().checkAvailabilityOfProduct();
         
         // Data coupling, gọi đến phương thức để lấy dữ liệu cần thiết
     }
@@ -98,7 +100,7 @@ public class PlaceOrderController extends BaseController {
      * @throws SQLException
      */
     public Order createOrder() throws SQLException {
-        return new Order(Cart.getCard());
+        return new Order(Cart.getCart());
         
         // Data coupling, gọi đến phương thức để lấy dữ liệu
     }
