@@ -1,6 +1,6 @@
 package entity.payment;
 
-public class PaymentMethod {
+public abstract class PaymentMethod {
 
     private String type;
     private String cardCode;

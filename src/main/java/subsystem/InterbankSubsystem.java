@@ -1,6 +1,7 @@
 package subsystem;
 
-import entity.payment.CreditCard;
+import entity.payment.PaymentMethod;
+import entity.payment.PaymentMethodFactory;
 import entity.payment.PaymentTransaction;
 import subsystem.interbank.InterbankSubsystemController;
 
@@ -29,6 +30,13 @@ public class InterbankSubsystem implements InterbankInterface {
 		this.interbankSubsystemController = new InterbankSubsystemController();
 	}
 
+	
+	/**
+	 * Clean code: remove dependancy from concrete class (CreditCard)
+	 * and change dependancy to superclass (PaymentMethod)
+	 * is a abstract class
+	 */
+	
 	/**
 	 * @see InterbankInterface#payOrder(CreditCard, int,
 	 *      String)
@@ -36,8 +44,8 @@ public class InterbankSubsystem implements InterbankInterface {
 	// Data Coupling
 	// SOLID: DIP do phu thuoc vao Credit Card
 	// SOLID: OCP do phai modify khi thay doi phuong thuc thuc thanh toan
-	public PaymentTransaction payOrder(CreditCard card, int amount, String contents) {
-		PaymentTransaction transaction = interbankSubsystemController.payOrder(card, amount, contents);
+	public PaymentTransaction payOrder(PaymentMethod card, int amount, String contents, PaymentMethodFactory paymentMethodFactory) {
+		PaymentTransaction transaction = interbankSubsystemController.payOrder(card, amount, contents, paymentMethodFactory);
 		return transaction;
 	}
 
@@ -46,7 +54,7 @@ public class InterbankSubsystem implements InterbankInterface {
 	 *      String)
 	 */
 	// Data Coupling
-	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
+	public PaymentTransaction refund(PaymentMethod card, int amount, String contents) {
 		PaymentTransaction transaction = interbankSubsystemController.refund(card, amount, contents);
 		return transaction;
 	}

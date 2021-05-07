@@ -9,7 +9,8 @@ import common.exception.InvalidCardException;
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;
 import entity.cart.Cart;
-import entity.payment.CreditCard;
+import entity.payment.PaymentMethod;
+import entity.payment.PaymentMethodFactory;
 import entity.payment.PaymentTransaction;
 import subsystem.InterbankInterface;
 import subsystem.InterbankSubsystem;
@@ -77,7 +78,7 @@ public class PaymentController extends BaseController {
 	/**
 	 * Represent the card used for payment
 	 */
-	private CreditCard card;
+	private PaymentMethod card;
 
 	/**
 	 * Represent the Interbank subsystem
@@ -112,19 +113,22 @@ public class PaymentController extends BaseController {
 	// SOLID: Vi phạm nguyên lí OCP. Vì nếu thêm 1 phương thức thanh toán sẽ phải modify lại mã nguồn
 	// SOLID: Vi phạm nguyên lí DIP. Vì nó phụ thuộc vào lớp chi tiết InterbankSubsystem
 	// SOLID: DIP do phu thuoc vaf CreditCard ko phai la Abstract/Interface
+	/**
+	 * Clean code: remove dependancy from concrete class (CreditCard)
+	 * and change dependancy to superclass (PaymentMethod)
+	 * is a abstract class
+	 * 
+	 * And use FactoryMethod to create new object instead of use construtor directly
+	 */
 	public Map<String, String> payOrder(int amount, String contents, String cardNumber, String cardHolderName,
-			String expirationDate, String securityCode) {
+			String expirationDate, String securityCode, PaymentMethodFactory paymentMethodFactory) {
 		Map<String, String> result = new Hashtable<String, String>();
 		result.put("RESULT", "PAYMENT FAILED!");
 		try {
-			this.card = new CreditCard(
-					cardNumber,
-					cardHolderName,	
-					Date.getExpirationDate(expirationDate),
-					Integer.parseInt(securityCode));
+			this.card = paymentMethodFactory.createMethod(cardNumber, cardHolderName, Date.getExpirationDate(expirationDate), Integer.parseInt(securityCode));
 
 			this.interbank = new InterbankSubsystem();
-			PaymentTransaction transaction = interbank.payOrder(card, amount, contents);
+			PaymentTransaction transaction = interbank.payOrder(card, amount, contents, paymentMethodFactory);
 
 			result.put("RESULT", "PAYMENT SUCCESSFUL!");
 			result.put("MESSAGE", "You have successfully paid the order!");

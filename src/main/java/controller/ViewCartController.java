@@ -38,11 +38,6 @@ public class ViewCartController extends BaseController{
      * And refactor all class use this method
      */
     
-    public void checkAvailabilityOfProduct() throws SQLException{
-        //SessionInformation.cartInstance.checkAvailabilityOfProduct();     
-        // Data coupling, gọi đến phương thức cần thiết để thực hiện
-        Cart.getCart().checkAvailabilityOfProduct();
-    }
     
     /**
      * This method calculates the cart subtotal

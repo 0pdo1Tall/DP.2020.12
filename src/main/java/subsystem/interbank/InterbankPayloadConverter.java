@@ -1,9 +1,8 @@
 package subsystem.interbank;
 
 import common.exception.*;
-import entity.payment.CreditCard;
-import entity.payment.CreditCardFactory;
 import entity.payment.PaymentMethod;
+import entity.payment.PaymentMethodFactory;
 import entity.payment.PaymentTransaction;
 import utils.MyMap;
 
@@ -24,9 +23,15 @@ public class InterbankPayloadConverter {
      * @param contents
      * @return
      */
+	
+	/**
+	 * Clean code: remove dependancy from concrete class (CreditCard)
+	 * and change dependancy to superclass (PaymentMethod)
+	 * is a abstract class
+	 */
 
     // Content Coupling
-    String convertToRequestPayload(CreditCard card, int amount, String contents) {
+    String convertToRequestPayload(PaymentMethod card, int amount, String contents) {
         Map<String, Object> transaction = new MyMap();
 
         try {
@@ -59,7 +64,7 @@ public class InterbankPayloadConverter {
      * không cần khởi tạo không cần thiết
      */
     
-    PaymentTransaction extractPaymentTransaction(String responseText) {
+    PaymentTransaction extractPaymentTransaction(String responseText, PaymentMethodFactory paymentMethodFactory) {
         MyMap response = convertJSONResponse(responseText);
 
         if (response == null)
@@ -87,7 +92,7 @@ public class InterbankPayloadConverter {
 	    }
         
         MyMap transaction = (MyMap) response.get("transaction");
-        PaymentMethod card = CreditCardFactory.getInstance().creatMethod(
+        PaymentMethod card = paymentMethodFactory.createMethod(
                 (String) transaction.get("cardCode"),
                 (String) transaction.get("owner"),
                 (String) transaction.get("dateExpired"),

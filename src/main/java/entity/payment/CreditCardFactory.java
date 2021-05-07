@@ -11,10 +11,11 @@ public class CreditCardFactory extends PaymentMethodFactory{
         return creditCardFactory;
     }
 
-    public CreditCard creatMethod(String cardCode, String owner, String dateExpired, int cvvCode)
-    {
-        return new CreditCard(cardCode,owner, dateExpired,cvvCode);
-    }
+	@Override
+	public PaymentMethod createMethod(String cardCode, String owner, String dateExpired, int cvvCode) {
+		// TODO Auto-generated method stub
+		return new CreditCard(cardCode,owner, dateExpired,cvvCode);
+	}
 
     // Credit Card Method Here
 }

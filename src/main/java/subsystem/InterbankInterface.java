@@ -2,7 +2,8 @@ package subsystem;
 
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;
-import entity.payment.CreditCard;
+import entity.payment.PaymentMethod;
+import entity.payment.PaymentMethodFactory;
 import entity.payment.PaymentTransaction;
 
 /**
@@ -13,6 +14,12 @@ import entity.payment.PaymentTransaction;
  * 
  */
 public interface InterbankInterface {
+	
+	/**
+	 * Clean code: remove dependancy from concrete class (CreditCard)
+	 * and change dependancy to superclass (PaymentMethod)
+	 * is a abstract class
+	 */
 
 	/**
 	 * Pay order, and then return the payment transaction
@@ -26,7 +33,7 @@ public interface InterbankInterface {
 	 * @throws UnrecognizedException if responded with an unknown error code or
 	 *                               something goes wrong
 	 */
-	public abstract PaymentTransaction payOrder(CreditCard card, int amount, String contents)
+	public abstract PaymentTransaction payOrder(PaymentMethod card, int amount, String contents, PaymentMethodFactory paymentMethodFactory)
 			throws PaymentException, UnrecognizedException;
 
 	/**
@@ -41,7 +48,7 @@ public interface InterbankInterface {
 	 * @throws UnrecognizedException if responded with an unknown error code or
 	 *                               something goes wrong
 	 */
-	public abstract PaymentTransaction refund(CreditCard card, int amount, String contents)
+	public abstract PaymentTransaction refund(PaymentMethod card, int amount, String contents)
 			throws PaymentException, UnrecognizedException;
 
 }

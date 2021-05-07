@@ -1,6 +1,6 @@
 package entity.payment;
 
-class PaymentMethodFactory {
+public abstract class PaymentMethodFactory {
 
-    public PaymentMethod createMethod() {return new PaymentMethod();}
+    public abstract PaymentMethod createMethod(String cardCode, String owner, String dateExpired, int cvvCode);
 }

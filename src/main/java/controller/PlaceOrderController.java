@@ -83,16 +83,6 @@ public class PlaceOrderController extends BaseController {
      * And refactor all class use this method
      */
     
-    /**
-     * This method checks the availability of product when user click PlaceOrder button
-     * @throws SQLException
-     */
-    
-    public void placeOrder() throws SQLException {
-        Cart.getCart().checkAvailabilityOfProduct();
-        
-        // Data coupling, gọi đến phương thức để lấy dữ liệu cần thiết
-    }
 
     /**
      * This method creates the new Order based on the Cart
