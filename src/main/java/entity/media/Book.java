@@ -37,11 +37,11 @@ public class Book extends Media {
         this.language = language;
         this.bookCategory = bookCategory;
     }
-
-    // getter and setter
-    public int getId() {
-        return this.id;
-    }
+    
+    /**
+     * Clean code: Clean class
+     * Xóa phương thức getId do trùng với phương thức getId() trong superclass (Media)
+     */
 
     public String getAuthor() {
         return this.author;
