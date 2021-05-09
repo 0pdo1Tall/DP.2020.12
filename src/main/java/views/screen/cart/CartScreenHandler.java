@@ -28,7 +28,7 @@ import views.screen.shipping.ShippingScreenHandler;
 
 
 // SRP class hien thi, update san pham trong cart
-
+// clean_class : large class vi hien thi san pham trong gio hang, hien thi hoa don, hien thi shipping,...
 public class CartScreenHandler extends BaseScreenHandler {
 	private static Logger LOGGER = Utils.getLogger(CartScreenHandler.class.getName());
 
