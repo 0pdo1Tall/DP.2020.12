@@ -25,22 +25,16 @@ public class MediaDAO {
 	 */
 
     // None Coupling
+    // Clean Class: Divergent Change here: if media has a new field, we must get result in getAllMedia, getMediaById
+    // Solution: create function getMediaResult and add to these above fucntion, and we have to change only getMediaResult
     public List getAllMedia() throws SQLException {
         // Clean Code: change stm to mediaStatement, res to mediaResultSet
         Statement mediaStatement = AIMSDB.getInstance().getConnection().createStatement();
         ResultSet mediaResultSet = mediaStatement.executeQuery(getAllMediaQuery);
         ArrayList mediaList = new ArrayList<>();
         while (mediaResultSet.next()) {
-            Media media = new Media(
-                    mediaResultSet.getInt("id"),
-                    mediaResultSet.getString("title"),
-                    mediaResultSet.getInt("quantity"),
-                    mediaResultSet.getString("category"),
-                    mediaResultSet.getString("imageUrl"),
-                    mediaResultSet.getInt("price"),
-                    mediaResultSet.getString("type"));
+            Media media = getMediaResult(mediaResultSet);
             mediaList.add(media);
-
         }
         return mediaList;
     }

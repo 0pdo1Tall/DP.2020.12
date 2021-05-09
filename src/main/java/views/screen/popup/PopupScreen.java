@@ -12,6 +12,7 @@ import views.screen.ViewsConfig;
 
 import java.io.IOException;
 
+// clean_class : refused bequest: PopupScreen not use setUpData() and setUpFunctionality() method
 
 public class PopupScreen extends BaseScreenHandler {
 

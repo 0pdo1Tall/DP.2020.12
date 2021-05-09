@@ -26,21 +26,14 @@ public class DVDDAO extends MediaDAO {
 	 */
 	
     // Data Coupling
+    // Clean Class: Divergent Change here: if media has a new field, we must get result in getAllMedia, getMediaById
+    // Solution: create function getMediaResult and add to these above fucntion, and we have to change only getMediaResult
     @Override
     public Media getMediaById(int id) throws SQLException {
         // Clean Code: change sql to getDVDByIdQuery, res to dvdResultSet
         ResultSet dvdResultSet = AIMSDB.getInstance().getConnection().createStatement().executeQuery(getDVDByIdQuery);
         // Clean Code: change every tag to dvdTag
         if (dvdResultSet.next()) {
-
-            // from media table
-            String dvdTitle = "";
-            String dvdType = dvdResultSet.getString("type");
-            int dvdPrice = dvdResultSet.getInt("price");
-            String dvdCategory = dvdResultSet.getString("category");
-            int dvdQuantity = dvdResultSet.getInt("quantity");
-            String getDVDByIdQuery = getDVDByIdQuery(id);
-            // Clean Code: change every tag to dvdTag
             if (dvdResultSet.next()) {
                 return getDVDResult(id, dvdResultSet);
             } else {

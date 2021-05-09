@@ -31,7 +31,9 @@ public class InterbankPayloadConverter {
 	 */
 
     // Content Coupling
+     // Clean Class: if we have another payment method: ie: domestic card ==> we have to change convertToRequestPayload,extractPaymentTransaction to handle PaymentMethod instead of CreditCard
     String convertToRequestPayload(PaymentMethod card, int amount, String contents) {
+
         Map<String, Object> transaction = new MyMap();
 
         try {
