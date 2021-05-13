@@ -111,7 +111,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 			// TODO: implement pop up screen
 			throw new InvalidDeliveryInfoException(e.getMessage());
 		}
-
+		deliveryInfo.setCalculateMethod(new OldCalculateMethod());
 		order.setDeliveryInfo(deliveryInfo);
 	}
 
