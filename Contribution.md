@@ -28,3 +28,7 @@ Tạo lớp cha PaymentMethod của CreditCard trong payment,tạo lớp cha Pay
 ### Bài 6: Clean Code - Clean Class, Clean Test
 - Subteam 1: Lê Anh Thành, Phạm Văn Thành:
 Áp dụng Clean Class cho các class: AuthenticationController, BaseController, PaymentController, PlaceOrderController, ViewCartController (package controller); Book (package entity.media). Áp dụng Clean code cho các class: MediaHandler(Searchable names) (package views.screen.home). Áp dụng Clean code để loại bỏ sự phụ thuộc trực tiếp vào ConcreteClass (cụ thể là CreditCard) để phụ thuộc vào AbstractClass (cụ thể là PaymentMethod - superclass của CreditCard) và ứng dụng cả FactoryMethod trong các class: PaymentController (package controller); InterbankInterface, InterbankSubsystem (package subsystem); InterbankPayloadConverter, InterbankSubsystemController (package subsystem.interbank); PaymentScreenHandler (package views.screen.payment).
+
+### Bài 7: Design Pattern - Strategy Pattern
+- Subteam 1: Lê Anh Thành, Phạm Văn Thành:
+Áp dụng Strategy Method cho các class: DeliveryInfo (package entity.shipping), tạo interface CalculateMethod (package entity.shipping) để ứng dụng Strategy Method cho class trên phần tính chi phí vận chuyển (method calculateShippingFee).

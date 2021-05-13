@@ -113,7 +113,6 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 			throw new InvalidDeliveryInfoException(e.getMessage());
 		}
 		deliveryInfo.setCalculateMethod(new OldCalculateMethod());
-
 		order.setDeliveryInfo(deliveryInfo);
 	}
 
