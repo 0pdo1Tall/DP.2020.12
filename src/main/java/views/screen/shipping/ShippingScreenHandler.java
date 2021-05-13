@@ -5,6 +5,7 @@ import controller.PlaceOrderController;
 import entity.invoice.Invoice;
 import entity.order.Order;
 import entity.shipping.DeliveryInfo;
+import entity.shipping.OldCalculateMethod;
 import entity.shipping.ShippingConfigs;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -111,6 +112,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 			// TODO: implement pop up screen
 			throw new InvalidDeliveryInfoException(e.getMessage());
 		}
+		deliveryInfo.setCalculateMethod(new OldCalculateMethod());
 
 		order.setDeliveryInfo(deliveryInfo);
 	}

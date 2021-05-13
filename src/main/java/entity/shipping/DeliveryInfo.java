@@ -16,6 +16,7 @@ public class DeliveryInfo {
     protected String address;
     protected String shippingInstructions;
     protected DistanceCalculator distanceCalculator;  
+    protected CalculateMethod calculateMethod;
 
 
     // data coupling
@@ -37,7 +38,11 @@ public class DeliveryInfo {
      */
     // Stamp coupling: DÃ™ng Order lÃ m tham sá»‘ truyá»�n vÃ o nhÆ°ng khÃ´ng sá»­ dá»¥ng (háº¿t) thuá»™c tÃ­nh
     public int calculateShippingFee(Order order) {
-        return (int) (distanceCalculator.calculateDistance(address, province) * MULTIPLIER);
+        return calculateMethod.calculateShippingFee(distanceCalculator.calculateDistance(address, province), order);
+    }
+    
+    public void setCalculateMethod(CalculateMethod calculateMethod) {
+    	this.calculateMethod = calculateMethod;
     }
 
     public String getName() {
