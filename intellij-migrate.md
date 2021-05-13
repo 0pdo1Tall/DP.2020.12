@@ -3,6 +3,8 @@
     ```
     File > Project Structure > Libraries > Add /path/to/javafx/lib
     File > Project Structure > Libraries > Add /path/to/lib
+    File > Project Structure > Libraries > Add /path/to/lib
+    ```
 2. Add VM options 
     ```
     Run > Edit configurations > Add the following argument:

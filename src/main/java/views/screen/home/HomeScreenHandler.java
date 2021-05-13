@@ -105,7 +105,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
                 this.homeItems.add(m);
             }
         } catch (SQLException | IOException e){
-            LOGGER.info("Errors occured: " + e.getMessage());
+            LOGGER.info("Errors occurred: " + e.getMessage());
             e.printStackTrace();
         }
     }

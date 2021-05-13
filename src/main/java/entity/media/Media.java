@@ -28,7 +28,6 @@ public class Media {
     protected boolean rushSupported;
 
     public Media() throws SQLException{
-
         stm = AIMSDB.getConnection().createStatement();
     }
 

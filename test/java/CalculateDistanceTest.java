@@ -1,8 +1,12 @@
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import org.example.AlternativeDistanceCalculator;
 >>>>>>> f445a51d84082968e524745b0d5ac5d8b6523101
+=======
+import org.example.AlternativeDistanceCalculator;
+>>>>>>> fca94e62ec35cb6e7bb39685def6a652abeef538
 import org.example.DistanceCalculator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,17 +21,25 @@ public class CalculateDistanceTest {
 
     private DistanceCalculator distanceCalculator;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     private AlternativeDistanceCalculator altDistanceCalculator;
 >>>>>>> f445a51d84082968e524745b0d5ac5d8b6523101
+=======
+    private AlternativeDistanceCalculator altDistanceCalculator;
+>>>>>>> fca94e62ec35cb6e7bb39685def6a652abeef538
 
     @BeforeEach
     void setup() throws Exception {
         distanceCalculator = new DistanceCalculator();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         altDistanceCalculator = new AlternativeDistanceCalculator();
 >>>>>>> f445a51d84082968e524745b0d5ac5d8b6523101
+=======
+        altDistanceCalculator = new AlternativeDistanceCalculator();
+>>>>>>> fca94e62ec35cb6e7bb39685def6a652abeef538
     }
 
     @ParameterizedTest
@@ -40,9 +52,13 @@ public class CalculateDistanceTest {
         try {
             distanceCalculator.calculateDistance(address, province);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             altDistanceCalculator.calculateDistance(province + address);
 >>>>>>> f445a51d84082968e524745b0d5ac5d8b6523101
+=======
+            altDistanceCalculator.calculateDistance(province, address);
+>>>>>>> fca94e62ec35cb6e7bb39685def6a652abeef538
             result = true;
         } catch (Exception ex) {
             result = false;
