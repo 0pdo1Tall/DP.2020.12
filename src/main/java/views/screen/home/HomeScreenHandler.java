@@ -99,7 +99,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
                 this.homeItems.add(m);
             }
         } catch (SQLException | IOException e){
-            LOGGER.info("Errors occured: " + e.getMessage());
+            LOGGER.info("Errors occurred: " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -230,12 +230,13 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             //content coupling 
             media.setQuantity(media.getQuantity() - requestQuantity);
             numMediaInCart.setText(cart.getTotalMedia() + " media");
-            PopupScreen.success("The media " + media.getTitle() + " added to Cart");
+//            PopupScreen.success("The media " + media.getTitle() + " added to Cart");
+            getNotification().showSuccess("The media " + media.getTitle() + " added to Cart");
         } catch (MediaNotAvailableException exp) {
             try {
                 String message = "Not enough media:\nRequired: " + requestQuantity + "\nAvail: " + media.getQuantity();
                 LOGGER.severe(message);
-                PopupScreen.error(message);
+                getNotification().showError("The media " + media.getTitle() + " added to Cart");
             } catch (Exception e) {
                 LOGGER.severe("Cannot add media to cart: ");
             }
@@ -255,7 +256,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             loginScreen.show();
         } catch (Exception ex) {
             try {
-                PopupScreen.error("Cant trigger Login");
+//                PopupScreen.error("Cant trigger Login");
+                getNotification().showError("Cant trigger Login");
             } catch (Exception ex1) {
                 LOGGER.severe("Cannot login");
                 ex.printStackTrace();

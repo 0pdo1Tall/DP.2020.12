@@ -13,13 +13,14 @@ import javafx.stage.Stage;
 import utils.Utils;
 import views.screen.home.HomeScreenHandler;
 import views.screen.popup.PopupScreen;
+import views.screen.Notification;
 
 
 
 public abstract class BaseScreenHandler extends FXMLScreenHandler {
 
 	private static final Logger LOGGER = Utils.getLogger(BaseScreenHandler.class.getName());
-
+	private Notification notification = new PopupNotification();
 
 	private Scene scene;
 	private BaseScreenHandler prev;
@@ -32,6 +33,12 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
 		super(screenPath);
 		this.stage = stage;
 	}
+
+	public void setNotification(Notification notification) {
+		this.notification = notification;
+	}
+
+	public Notification getNotification(){return notification;}
 	
 	/**
 	 * Design Pattern: Template Method
@@ -42,10 +49,12 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
             setupFunctionality();
         } catch (IOException ex) {
             LOGGER.info(ex.getMessage());
-            PopupScreen.error("Error when loading resources.");
+//            PopupScreen.error("Error when loading resources.");
+            notification.showError("Error when loading resources.");
         } catch (Exception ex) {
             LOGGER.info(ex.getMessage());
-            PopupScreen.error(ex.getMessage());
+//            PopupScreen.error(ex.getMessage());
+			notification.showError("Error when loading resources.");
         }
 	}
 	

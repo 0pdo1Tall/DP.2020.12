@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ### Bài 5: Design Pattern - Singleton
 - Subteam 1: Lê Anh Thành, Phạm Văn Thành:
 Áp dụng Singleton cho các class: AuthenticationController, HomeController, PaymentController, PlaceOrderController, ViewCartController (package controller)
