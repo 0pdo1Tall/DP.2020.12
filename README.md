@@ -1,8 +1,11 @@
+<<<<<<< HEAD
 # DP.2020.12
-=======
 #  An Internet Media Store
 <p align="center">
   <img src="assets/images/aims_cover_image.png" />
+#  An Internet Media Store
+<p align="center">
+  <img src="src/main/resources/assets/images/aims_cover_image.png" />
 </p>
 
 ## Getting Started
@@ -45,3 +48,4 @@ Click on `Run` -> `Run Configurations...`  -> `Java Application`, create a new l
 - nguyenlm - Software Engeneering Student - k61
 - manhvd   - Software Engeneering Student - k61
 - hieudm   - ICT - k61
+- thanhld  - ICT - k62
