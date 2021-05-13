@@ -27,7 +27,7 @@ public class Media {
     protected String imageURL;
     protected boolean rushSupported;
 
-    public Media() throws SQLException{
+    public Media() throws SQLException {
         stm = AIMSDB.getConnection().createStatement();
     }
 

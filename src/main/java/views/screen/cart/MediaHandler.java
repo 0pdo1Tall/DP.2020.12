@@ -93,7 +93,6 @@ public class MediaHandler extends FXMLScreenHandler {
 				throw new ViewCartException();
 			}
 		});
-
 		initializeSpinner();
 	}
 
