@@ -8,7 +8,6 @@ public class DeliveryInfo {
 	/*
 	 * Clean code. Định nghĩa hệ số nhân MULTIPLIER
 	 */
-	static final double MULTIPLIER = 1.2;
     //Common coupling
     protected String name;
     protected String phone;
@@ -16,6 +15,8 @@ public class DeliveryInfo {
     protected String address;
     protected String shippingInstructions;
     protected DistanceCalculator distanceCalculator;  
+
+    private CalculateMethod calculateMethod; 
 
 
     // data coupling
@@ -31,13 +32,18 @@ public class DeliveryInfo {
         this.distanceCalculator = distanceCalculator;
     }
     
+    public void setCalculateMethod(CalculateMethod _calculateMethod){
+        this.calculateMethod = _calculateMethod;
+    }
     /**
      * Clean Code: Method Refactoring - Data-Level: Move an expression inline
      * remove variable distance, return directly from distanceCalculator.calculateDistance(...)
      */
     // Stamp coupling: DÃ™ng Order lÃ m tham sá»‘ truyá»�n vÃ o nhÆ°ng khÃ´ng sá»­ dá»¥ng (háº¿t) thuá»™c tÃ­nh
+   
     public int calculateShippingFee(Order order) {
-        return (int) (distanceCalculator.calculateDistance(address, province) * MULTIPLIER);
+        int distance = distanceCalculator.calculateDistance(address, province);
+        return this.calculateMethod.calculateShippingFee(distance, order);
     }
 
     public String getName() {

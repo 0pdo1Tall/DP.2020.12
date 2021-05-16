@@ -24,8 +24,17 @@ Tạo lớp cha PaymentMethod của CreditCard trong payment,tạo lớp cha Pay
 ### Bài 6: Clean Code - Method Refactoring
 - Subteam 1: Lê Anh Thành, Phạm Văn Thành:
 Áp dụng Method Refactoring cho các class: PaymentController, PlaceOrderController, ViewCartController (package controller); BookDAO, CDDAO, DVDDAO, MediaDAO (package dao.media); UserDAO (package dao.user); Cart (package entity.cart); AIMSDB (package entity.db); Order (package entity.order); DeliveryInfo (package entity.shipping); User (package entity.user); App (default package).
-
+- Subteam 2: Hoàng Minh Tiến, Đặng Đình Thọ, Ngô Huy Thao
+Áp dụng Method Refactoring cho các class: BookDAO,DVDDAO,MediaDAO,UserDAO,PaymentTransaction,InterbankPayloadConverter
 
 ### Bài 6: Clean Code - Clean Class, Clean Test
 - Subteam 1: Lê Anh Thành, Phạm Văn Thành:
 Áp dụng Clean Class cho các class: AuthenticationController, BaseController, PaymentController, PlaceOrderController, ViewCartController (package controller); Book (package entity.media). Áp dụng Clean code cho các class: MediaHandler(Searchable names) (package views.screen.home). Áp dụng Clean code để loại bỏ sự phụ thuộc trực tiếp vào ConcreteClass (cụ thể là CreditCard) để phụ thuộc vào AbstractClass (cụ thể là PaymentMethod - superclass của CreditCard) và ứng dụng cả FactoryMethod trong các class: PaymentController (package controller); InterbankInterface, InterbankSubsystem (package subsystem); InterbankPayloadConverter, InterbankSubsystemController (package subsystem.interbank); PaymentScreenHandler (package views.screen.payment).
+- Subteam 2: Hoàng Minh Tiến, Đặng Đình Thọ, Ngô Huy Thao
+Áp dụng Clean Class cho các class: DVDDao,MediaDao,InterbankPayloadConverter,InterbankSubsystemController
+
+### Bài 7: Design Pattern - Strategy Pattern
+- Subteam 1: Lê Anh Thành, Phạm Văn Thành:
+Áp dụng Strategy Method cho các class: DeliveryInfo (package entity.shipping), tạo interface CalculateMethod (package entity.shipping) để ứng dụng Strategy Method cho class trên phần tính chi phí vận chuyển (method calculateShippingFee).
+- Subteam 2: Hoàng Minh Tiến, Đặng Đình Thọ, Ngô Huy Thao
+Áp dụng Strategy Method cho các class: BaseScreenHandler, tạo interface Notification với 2 implementation OnScreenNotification(sử dụng thông báo trong màn hiện tại),PopupNotification(sử dụng thông báo trong cửa sổ Popup)
