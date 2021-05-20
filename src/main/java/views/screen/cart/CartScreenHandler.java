@@ -9,10 +9,14 @@ import java.util.logging.Logger;
 
 import common.exception.MediaNotAvailableException;
 import common.exception.PlaceOrderException;
+import common.interfaces.Observable;
+import common.interfaces.Observer;
 import controller.BaseController;
 import controller.PlaceOrderController;
 import controller.ViewCartController;
+import entity.cart.Cart;
 import entity.cart.CartItem;
+import entity.media.Media;
 import entity.order.Order;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -24,13 +28,14 @@ import javafx.stage.Stage;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
+import views.screen.cart.MediaHandler;
 import views.screen.popup.PopupScreen;
 import views.screen.shipping.ShippingScreenHandler;
 
 
 // SRP class hien thi, update san pham trong cart
 
-public class CartScreenHandler extends BaseScreenHandler {
+public class CartScreenHandler extends BaseScreenHandler implements Observer {
 	private static Logger LOGGER = Utils.getLogger(CartScreenHandler.class.getName());
 
 	@FXML
@@ -185,6 +190,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 				// display the attribute of vboxCart media
 				CartItem cartItem = (CartItem) object;
 				MediaHandler mediaCartScreen = new MediaHandler(ViewsConfig.CART_MEDIA_PATH, this);
+				mediaCartScreen.attach(this);
 				mediaCartScreen.setCartItem(cartItem);
 
 				// add spinner
@@ -195,6 +201,57 @@ public class CartScreenHandler extends BaseScreenHandler {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void update(Observable observable) {
+		if (observable instanceof MediaHandler) update((MediaHandler) observable);
+	}
+	
+	private void update(MediaHandler mediaHandler) {
+		int requestQuantity = mediaHandler.getRequestQuantity();
+        Media media = mediaHandler.getCartItem().getMedia();
+
+        try {
+        	int remainQuantity = media.getQuantity();
+        	LOGGER.info("NumOfProd: " + requestQuantity + " -- remainOfProd: " + remainQuantity);
+            if (requestQuantity > remainQuantity) {
+            	LOGGER.info("product " + media.getTitle() + " only remains " + remainQuantity + " (required " + requestQuantity + ")");
+				mediaHandler.labelOutOfStock.setText("Sorry, Only " + remainQuantity + " remain in stock");
+				mediaHandler.setSpinnerQuantity(remainQuantity);
+				requestQuantity = remainQuantity;
+            	throw new MediaNotAvailableException();
+            }
+            Cart cart = Cart.getCart();
+            // if media already in cart then we will increase the quantity by 1 instead of create the new cartMedia
+            CartItem mediaInCart = getBController().checkMediaInCart(media);
+            if (mediaInCart != null) {
+                mediaInCart.setQuantity(requestQuantity);
+            } else {
+                CartItem cartItem = new CartItem(media, cart, requestQuantity, media.getPrice());
+                cart.addCartMedia(cartItem);
+                LOGGER.info("Added " + cartItem.getQuantity() + " " + media.getTitle() + " to cart");
+            }
+
+            // subtract the quantity and redisplay
+            media.setQuantity(media.getQuantity() - requestQuantity);
+            
+            updateCartAmount();
+            //PopupScreen.success("The media " + media.getTitle() + " added to Cart");
+            getNotification().showSuccess("The media " + media.getTitle() + " had been changed quantity");
+        } catch (MediaNotAvailableException exp) {
+            try {
+                String message = "Not enough media:\nRequired: " + requestQuantity + "\nAvail: " + media.getQuantity();
+                LOGGER.severe(message);
+                getNotification().showError("The media " + media.getTitle() + " not available");
+            } catch (Exception e) {
+                LOGGER.severe("Cannot add media to cart: ");
+            }
+
+        } catch (Exception exp) {
+            LOGGER.severe("Cannot add media to cart: ");
+            exp.printStackTrace();
+        }
 	}
 }
 //Sequential Cohesion vi 1 so method su dung du lieu dau ra cua getBController();

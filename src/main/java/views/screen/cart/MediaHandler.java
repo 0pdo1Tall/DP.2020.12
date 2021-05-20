@@ -3,11 +3,15 @@ package views.screen.cart;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 
 import common.exception.MediaUpdateException;
 import common.exception.ViewCartException;
+import common.interfaces.Observable;
+import common.interfaces.Observer;
 import controller.SessionInformation;
 import entity.cart.Cart;
 import entity.cart.CartItem;
@@ -25,7 +29,7 @@ import utils.Utils;
 import views.screen.FXMLScreenHandler;
 import views.screen.ViewsConfig;
 
-public class MediaHandler extends FXMLScreenHandler {
+public class MediaHandler extends FXMLScreenHandler implements Observable {
 
 	private static Logger LOGGER = Utils.getLogger(MediaHandler.class.getName());
 
@@ -59,6 +63,7 @@ public class MediaHandler extends FXMLScreenHandler {
 	private CartItem cartItem;
 	private Spinner<Integer> spinner;
 	private CartScreenHandler cartScreen;
+	private List<Observer> observerList;
 
 	private static final int MEDIA_HEIGHT = 110;
 	private static final int MEDIA_WIDTH = 92;
@@ -66,6 +71,7 @@ public class MediaHandler extends FXMLScreenHandler {
 	public MediaHandler(String screenPath, CartScreenHandler cartScreen) throws IOException {
 		super(screenPath);
 		this.cartScreen = cartScreen;
+		this.observerList = new ArrayList<>();
 		hboxMedia.setAlignment(Pos.CENTER);
 	}
 	// data coupling 
@@ -74,6 +80,17 @@ public class MediaHandler extends FXMLScreenHandler {
 		setMediaInfo();
 	}
 
+	public int getRequestQuantity() {
+		return spinner.getValue();
+	}
+	
+	public void setSpinnerQuantity(int requestQuantity) {
+		spinner.getValueFactory().setValue(requestQuantity);
+	}
+	
+	public CartItem getCartItem() {
+		return cartItem;
+	}
 	// clean method: function should do one thing, setInfo, not add delete button
 	
 	private void addDeleteButton(){
@@ -91,8 +108,10 @@ public class MediaHandler extends FXMLScreenHandler {
 		});
 	}
 	private void setMediaInfo() {
+		addDeleteButton();
+		initializeSpinner();
 		title.setText(cartItem.getMedia().getTitle());
-		price.setText(ViewsConfig.getCurrencyFormat(cartItem.getPrice()));
+		price.setText(ViewsConfig.getCurrencyFormat(spinner.getValue() * cartItem.getPrice()));
 		File file = new File(cartItem.getMedia().getImageURL());
 		Image im = new Image(file.toURI().toString());
 		image.setImage(im);
@@ -112,8 +131,6 @@ public class MediaHandler extends FXMLScreenHandler {
 				throw new ViewCartException();
 			}
 		});*/
-		addDeleteButton();
-		initializeSpinner();
 	}
 
 	private void initializeSpinner(){
@@ -121,7 +138,8 @@ public class MediaHandler extends FXMLScreenHandler {
 			new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, cartItem.getQuantity());
 		spinner = new Spinner<Integer>(valueFactory);
 		spinner.setOnMouseClicked( e -> {
-			try {
+			//try {
+				/*
 				// content coupling
 				int numOfProd = this.spinner.getValue();
 				int remainQuantity = cartItem.getMedia().getQuantity();
@@ -142,13 +160,28 @@ public class MediaHandler extends FXMLScreenHandler {
 
 				// update subtotal and amount of Cart
 				cartScreen.updateCartAmount();
-
-			} catch (SQLException e1) {
-				throw new MediaUpdateException(Arrays.toString(e1.getStackTrace()).replaceAll(", ", "\n"));
-			}
+				*/
+				
+				notifyObservers();
+				price.setText(ViewsConfig.getCurrencyFormat(spinner.getValue() * cartItem.getPrice()));
+			//} catch (SQLException e1) {
+			//	throw new MediaUpdateException(Arrays.toString(e1.getStackTrace()).replaceAll(", ", "\n"));
+			//}
 			
 		});
 		spinnerFX.setAlignment(Pos.CENTER);
 		spinnerFX.getChildren().add(this.spinner);
+	}
+	@Override
+	public void attach(Observer observer) {
+		observerList.add(observer);
+	}
+	@Override
+	public void remove(Observer observer) {
+		observerList.remove(observer);
+	}
+	@Override
+	public void notifyObservers() {
+		observerList.forEach(observer -> observer.update(this));
 	}
 }

@@ -38,3 +38,7 @@ Tạo lớp cha PaymentMethod của CreditCard trong payment,tạo lớp cha Pay
 Áp dụng Strategy Method cho các class: DeliveryInfo (package entity.shipping), tạo interface CalculateMethod (package entity.shipping) để ứng dụng Strategy Method cho class trên phần tính chi phí vận chuyển (method calculateShippingFee).
 - Subteam 2: Hoàng Minh Tiến, Đặng Đình Thọ, Ngô Huy Thao
 Áp dụng Strategy Method cho các class: BaseScreenHandler, tạo interface Notification với 2 implementation OnScreenNotification(sử dụng thông báo trong màn hiện tại),PopupNotification(sử dụng thông báo trong cửa sổ Popup)
+
+### Bài 7: Design Patter - Observer Pattern
+- Subteam 1: Lê Anh Thành, Phạm Văn Thành:
+Áp dụng Observer Pattern cho class MediaHandler - sử dụng Interface Observable, class CartScreenHandler - sử dụng Interface Observer (package views.screen.cart).
