@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 
 import common.exception.MediaNotAvailableException;
 import common.exception.PlaceOrderException;
+import common.interfaces.Observable;
+import common.interfaces.Observer;
 import controller.BaseController;
 import controller.PlaceOrderController;
 import controller.ViewCartController;
@@ -30,7 +32,7 @@ import views.screen.shipping.ShippingScreenHandler;
 
 // SRP class hien thi, update san pham trong cart
 
-public class CartScreenHandler extends BaseScreenHandler {
+public class CartScreenHandler extends BaseScreenHandler implements Observer {
 	private static Logger LOGGER = Utils.getLogger(CartScreenHandler.class.getName());
 
 	@FXML
@@ -186,6 +188,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 				CartItem cartItem = (CartItem) object;
 				MediaHandler mediaCartScreen = new MediaHandler(ViewsConfig.CART_MEDIA_PATH, this);
 				mediaCartScreen.setCartItem(cartItem);
+				mediaCartScreen.attach(this);
 
 				// add spinner
 				vboxCart.getChildren().add(mediaCartScreen.getContent());
@@ -195,6 +198,11 @@ public class CartScreenHandler extends BaseScreenHandler {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void update(Observable observable) {
+		// Do Something
 	}
 }
 //Sequential Cohesion vi 1 so method su dung du lieu dau ra cua getBController();
