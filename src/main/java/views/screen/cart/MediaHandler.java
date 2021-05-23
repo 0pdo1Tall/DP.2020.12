@@ -63,6 +63,7 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
 	private CartItem cartItem;
 	private Spinner<Integer> spinner;
 	private CartScreenHandler cartScreen;
+	private List<Observer> observerList;
 
 	private static final int MEDIA_HEIGHT = 110;
 	private static final int MEDIA_WIDTH = 92;
@@ -70,6 +71,7 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
 	public MediaHandler(String screenPath, CartScreenHandler cartScreen) throws IOException {
 		super(screenPath);
 		this.cartScreen = cartScreen;
+		this.observerList = new ArrayList<>();
 		hboxMedia.setAlignment(Pos.CENTER);
 		this.observerList = new ArrayList();
 	}
@@ -79,6 +81,17 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
 		setMediaInfo();
 	}
 
+	public int getRequestQuantity() {
+		return spinner.getValue();
+	}
+	
+	public void setSpinnerQuantity(int requestQuantity) {
+		spinner.getValueFactory().setValue(requestQuantity);
+	}
+	
+	public CartItem getCartItem() {
+		return cartItem;
+	}
 	// clean method: function should do one thing, setInfo, not add delete button
 	
 	private void addDeleteButton(){
@@ -98,8 +111,10 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
 		});
 	}
 	private void setMediaInfo() {
+		addDeleteButton();
+		initializeSpinner();
 		title.setText(cartItem.getMedia().getTitle());
-		price.setText(ViewsConfig.getCurrencyFormat(cartItem.getPrice()));
+		price.setText(ViewsConfig.getCurrencyFormat(spinner.getValue() * cartItem.getPrice()));
 		File file = new File(cartItem.getMedia().getImageURL());
 		Image im = new Image(file.toURI().toString());
 		image.setImage(im);
@@ -119,8 +134,6 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
 				throw new ViewCartException();
 			}
 		});*/
-		addDeleteButton();
-		initializeSpinner();
 	}
 
 	private void initializeSpinner(){
@@ -128,7 +141,8 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
 			new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, cartItem.getQuantity());
 		spinner = new Spinner<Integer>(valueFactory);
 		spinner.setOnMouseClicked( e -> {
-			try {
+			//try {
+				/*
 				// content coupling
 				int numOfProd = this.spinner.getValue();
 				int remainQuantity = cartItem.getMedia().getQuantity();
@@ -149,17 +163,19 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
 
 				// update subtotal and amount of Cart
 				cartScreen.updateCartAmount();
-
-			} catch (SQLException e1) {
-				throw new MediaUpdateException(Arrays.toString(e1.getStackTrace()).replaceAll(", ", "\n"));
-			}
+				*/
+				
+				notifyObservers();
+				price.setText(ViewsConfig.getCurrencyFormat(spinner.getValue() * cartItem.getPrice()));
+			//} catch (SQLException e1) {
+			//	throw new MediaUpdateException(Arrays.toString(e1.getStackTrace()).replaceAll(", ", "\n"));
+			//}
 			
 		});
 		spinnerFX.setAlignment(Pos.CENTER);
 		spinnerFX.getChildren().add(this.spinner);
 	}
-	
-	private List<Observer> observerList;
+
 	@Override
 	public void attach(Observer observer) {
 		observerList.add(observer);
@@ -169,7 +185,6 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
 	public void remove(Observer observer) {
 		observerList.remove(observer);
 	}
-
 	@Override
 	public void notifyObservers() {
 		observerList.forEach(observer -> observer.update(this));
