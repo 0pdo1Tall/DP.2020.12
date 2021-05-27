@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class Order {
-
+    private State state;
     private int shippingFees;
     private int subtotal;
     private int tax;
@@ -20,9 +20,18 @@ public class Order {
     protected DeliveryInfo deliveryInfo;     // common coupling
 
     public Order() {
+        this.state = new DefaultState();
         this.shippingFees = 0;
         this.subtotal = 0;
         this.tax = 0;
+    }
+
+    public void setState(State state){
+        this.state = state;
+    }
+
+    public void applyChange(){
+        this.state.handlingState();
     }
 
 
@@ -33,6 +42,7 @@ public class Order {
      * Create a new method getAllItemsFromCart
      */
     public Order(Cart cart) {
+        this.state = new DefaultState();
         List<OrderItem> orderItems = getAllItemsFromCart(cart);
         this.orderMediaList = Collections.unmodifiableList(orderItems);
         this.subtotal = cart.calSubtotal();

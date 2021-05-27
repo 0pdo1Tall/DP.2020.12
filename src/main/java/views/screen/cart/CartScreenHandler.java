@@ -49,7 +49,7 @@ public class CartScreenHandler extends BaseScreenHandler implements Observer {
 
 	@FXML
 	private Label shippingFees;
-
+	
 	@FXML
 	private Label labelAmount;
 
