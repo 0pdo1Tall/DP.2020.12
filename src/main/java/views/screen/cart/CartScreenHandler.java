@@ -222,6 +222,12 @@ public class CartScreenHandler extends BaseScreenHandler implements Observer {
 				mediaHandler.setSpinnerQuantity(remainQuantity);
 				requestQuantity = remainQuantity;
             	throw new MediaNotAvailableException();
+            } else if (requestQuantity == 0) {
+            	LOGGER.info("Deleted " + mediaHandler.getCartItem().getMedia().getTitle() + " from the cart");
+            	Cart.getCart().removeCartMedia(mediaHandler.getCartItem());
+            	this.updateCart();
+            	getNotification().showSuccess("The media " + media.getTitle() + " had been remove from cart");
+            	return;
             }
             Cart cart = Cart.getCart();
             // if media already in cart then we will increase the quantity by 1 instead of create the new cartMedia

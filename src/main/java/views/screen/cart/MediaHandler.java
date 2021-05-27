@@ -98,16 +98,17 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
 	
 		btnDelete.setFont(ViewsConfig.REGULAR_FONT);
 		btnDelete.setOnMouseClicked(e -> {
-			try {
-				Cart.getCart().removeCartMedia(cartItem); // update user cart
+			//try {
+				// Cart.getCart().removeCartMedia(cartItem); // update user cart
 				//  update cart
+				spinner.getValueFactory().setValue(0);
 				notifyObservers();
-				cartScreen.updateCart(); // re-display user cart
-				LOGGER.info("Deleted " + cartItem.getMedia().getTitle() + " from the cart");
-			} catch (SQLException exp) {
-				exp.printStackTrace();
-				throw new ViewCartException();
-			}
+				// cartScreen.updateCart(); // re-display user cart
+				// LOGGER.info("Deleted " + cartItem.getMedia().getTitle() + " from the cart");
+			//} catch (SQLException exp) {
+				//exp.printStackTrace();
+				//throw new ViewCartException();
+			//}
 		});
 	}
 	private void setMediaInfo() {
@@ -138,7 +139,7 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
 
 	private void initializeSpinner(){
 		SpinnerValueFactory<Integer> valueFactory = //
-			new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, cartItem.getQuantity());
+			new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, cartItem.getQuantity());
 		spinner = new Spinner<Integer>(valueFactory);
 		spinner.setOnMouseClicked( e -> {
 			//try {
