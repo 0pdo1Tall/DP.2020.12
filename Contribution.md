@@ -39,8 +39,12 @@ Tạo lớp cha PaymentMethod của CreditCard trong payment,tạo lớp cha Pay
 - Subteam 2: Hoàng Minh Tiến, Đặng Đình Thọ, Ngô Huy Thao
 Áp dụng Strategy Method cho các class: BaseScreenHandler, tạo interface Notification với 2 implementation OnScreenNotification(sử dụng thông báo trong màn hiện tại),PopupNotification(sử dụng thông báo trong cửa sổ Popup)
 
-### Bài 7: Design Patter - Observer Pattern
+### Bài 7: Design Pattern - Observer Pattern
 - Subteam 1: Lê Anh Thành, Phạm Văn Thành:
 Áp dụng Observer Pattern cho class MediaHandler - sử dụng Interface Observable, class CartScreenHandler - sử dụng Interface Observer (package views.screen.cart).
 - Subteam 2: Hoàng Minh Tiến, Đặng Đình Thọ,Ngô Huy Thao 
   Áp dụng Observer Pattern cho class MediaHandler - sử dụng Interface Observable, class CartScreenHandler - sử dụng Interface Observer
+  
+### Bài 7: Design Pattern - Adapter Pattern, State Pattern
+- Subteam 1: Lê Anh Thành, Phạm Văn Thành:
+Áp dụng Adapter Pattern giải quyết yêu cầu số 4. Cho class DeliveryInfo (package entity.shipping) liên quan tới sự thay đổi thư viện tính toán khoảng cách. Tạo mới một interface DistanceCalculatorInterface, ba class OldDistanceCalculator, AlternativeCalculatorAdapter, NewDistanceCalculator (package entity.shipping).

@@ -14,7 +14,7 @@ public class DeliveryInfo {
     protected String province;
     protected String address;
     protected String shippingInstructions;
-    protected DistanceCalculator distanceCalculator;  
+    protected DistanceCalculatorInterface distanceCalculator;  
 
     private CalculateMethod calculateMethod; 
 
@@ -23,7 +23,7 @@ public class DeliveryInfo {
     //SOLID: Vi pháº¡m nguyÃªn lÃ­ OCP: vÃ¬ náº¿u má»Ÿ rá»™ng theo yÃªu cáº§u, ta sáº½ pháº£i Ä‘á»•i phÆ°Æ¡ng thá»©c tÃ­nh khoáº£ng cÃ¡ch khÃ¡c, vÃ  nhÆ° tháº¿ pháº£i modify láº¡i pháº§n mÃ£ nguá»“n cá»§a class nÃ y
 	//SOLID: Vi pháº¡m nguyÃªn lÃ­ DIP: Phá»¥ thuá»™c vÃ o DistanceCalculator
 
-    public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions, DistanceCalculator distanceCalculator) {
+    public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions, DistanceCalculatorInterface distanceCalculator) {
         this.name = name;
         this.phone = phone;
         this.province = province;
