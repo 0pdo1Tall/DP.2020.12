@@ -1,8 +1,18 @@
 package entity.order;
 
-public class CanceledState implements State{
+public class CanceledState extends State{
+
+    CanceledState(Order order) {
+        super(order);
+    }
+
     @Override
-    public void handlingState() {
-        // Cancel Order
+    void changeState() {
+        // Change to Default State
+    }
+
+    @Override
+    void cancelOrder() {
+        // Handling cancelOrder include: clear order info + refund
     }
 }

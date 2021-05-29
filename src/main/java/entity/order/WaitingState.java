@@ -1,9 +1,19 @@
 package entity.order;
 
-public class WaitingState implements State{
+public class WaitingState extends State{
+
+    WaitingState(Order order) {
+        super(order);
+    }
+
     @Override
-    public void handlingState() {
+    void changeState() {
+        // Change to ApprovedState or CanceledState
+    }
+
+    @Override
+    void cancelOrder() {
         // Do something
-        // Waiting until Admin approved and canceled order and change state
     }
 }
+

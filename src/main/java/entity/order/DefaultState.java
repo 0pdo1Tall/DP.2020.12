@@ -1,9 +1,18 @@
 package entity.order;
 
-public class DefaultState implements State{
+public class DefaultState extends State{
+
+    DefaultState(Order order) {
+        super(order);
+    }
+
     @Override
-    public void handlingState() {
-        // Do something
+    void changeState() {
         // change to waiting state
+    }
+
+    @Override
+    void cancelOrder() {
+        // Do something
     }
 }

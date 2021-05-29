@@ -20,18 +20,18 @@ public class Order {
     protected DeliveryInfo deliveryInfo;     // common coupling
 
     public Order() {
-        this.state = new DefaultState();
+        this.state = new DefaultState(this);
         this.shippingFees = 0;
         this.subtotal = 0;
         this.tax = 0;
     }
 
-    public void setState(State state){
-        this.state = state;
+    public void changeState(State state){
+        state.changeState();
     }
 
-    public void applyChange(){
-        this.state.handlingState();
+    public void cancelOrder(){
+        state.cancelOrder();
     }
 
 
@@ -42,7 +42,7 @@ public class Order {
      * Create a new method getAllItemsFromCart
      */
     public Order(Cart cart) {
-        this.state = new DefaultState();
+        this.state = new DefaultState(this);
         List<OrderItem> orderItems = getAllItemsFromCart(cart);
         this.orderMediaList = Collections.unmodifiableList(orderItems);
         this.subtotal = cart.calSubtotal();

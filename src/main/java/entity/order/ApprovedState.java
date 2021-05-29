@@ -1,8 +1,18 @@
 package entity.order;
 
-public class ApprovedState implements State{
+public class ApprovedState extends State{
+
+    ApprovedState(Order order) {
+        super(order);
+    }
+
     @Override
-    public void handlingState() {
+    void changeState() {
+        // Change to Delivery State
+    }
+
+    @Override
+    void cancelOrder() {
         // Do something
     }
 }
