@@ -1,4 +1,4 @@
-### Design Pattern - Coupling
+﻿### Design Pattern - Coupling
 - Subteam 1: Lê Anh Thành, Phạm Văn Thành: Tìm Coupling trên các package : controller,dao,entity,subsystem,utils,views.screen,class App
 -  Subteam 2: Ngô Huy Thao, Đặng Đình Thọ, Hoàng Minh Tiến: Tìm Coupling trên các package controller, dao, entity, subsystem, utils, views.screen, class App
 
@@ -77,3 +77,4 @@ Tạo lớp cha PaymentMethod của CreditCard trong payment,tạo lớp cha Pay
 
 ### Link thuyết trình mini-project
 - Link Microsoft Stream: https://web.microsoftstream.com/video/b6085397-3284-49ee-9911-e68bf10156be
+- Link Google Drive: https://drive.google.com/file/d/1M33nVGqIQG3OX8sluzF207WqTh7Movwz/view?usp=sharing
